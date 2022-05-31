@@ -1,4 +1,3 @@
-DS_Store/
 
 # Logs
 logs
@@ -104,3 +103,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# misc
+.DS_Store
