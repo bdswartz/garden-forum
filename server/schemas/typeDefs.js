@@ -75,6 +75,11 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addPost(postText: String!): Post
     addComment(postId: ID!, commentBody: String!): Post
+    addPlant(
+      scientific_name: String!
+      common_name: String!
+      image_path: String!
+    ): Plant
   }
 `;
 
@@ -85,7 +90,6 @@ module.exports = typeDefs;
 // plants(username: String): [Plant]
 
 // need to add mutations to
-// create plant
 // update plant
 // delete plant
 // create plantHistory(notes)

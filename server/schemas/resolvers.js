@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Post } = require('../models');
+const { User, Post, Plant } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -107,6 +107,24 @@ const resolvers = {
         );
 
         return updatedPost;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addPlant: async (parent, args, context) => {
+      if (context.user) {
+        const plant = await Plant.create({
+          ...args,
+          username: context.user.username,
+        });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { plants: plant._id } },
+          { new: true }
+        );
+
+        return plant;
       }
 
       throw new AuthenticationError('You need to be logged in!');
