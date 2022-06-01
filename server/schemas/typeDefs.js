@@ -56,8 +56,6 @@ const typeDefs = gql`
     user(username: String!): User
     posts(username: String): [Post]
     post(_id: ID!): Post
-    plant(_id: ID!): Plant
-    plants(username: String): [Plant]
   }
 
   type Mutation {
@@ -81,3 +79,9 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+
+// need to add these for Query
+// plant(_id: ID!): Plant
+// plants(username: String): [Plant]
+
+// need to add mutations to create plant, update plant, delete plant, create plantHistory(notes), and delete plant history(notes)
