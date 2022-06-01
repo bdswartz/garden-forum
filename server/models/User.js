@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
-const postSchema = require('./Post');
-const plantSchema = require('./Plant');
-
-const { Schema, model } = mongoose;
 const bcrypt = require('bcrypt');
+const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
   createdAt: {
