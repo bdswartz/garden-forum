@@ -46,7 +46,7 @@ const typeDefs = gql`
   }
 
   type Auth {
-    token: ID
+    token: ID!
     user: User
   }
 
@@ -66,6 +66,7 @@ const typeDefs = gql`
       lastName: String!
       email: String!
       password: String!
+      username: String!
     ): Auth
     updateUser(
       firstName: String
@@ -76,12 +77,6 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addPost(postText: String!): Post
     addComment(postId: ID!, commentBody: String!): Post
-    addPlant()
-    addPlantHistory()
-    updatePlant()
-    removePlantHistory()
-    removePlant()
-
   }
 `;
 

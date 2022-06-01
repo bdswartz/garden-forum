@@ -78,7 +78,7 @@ const resolvers = {
     },
     addPost: async (parent, args, context) => {
       if (context.user) {
-        const thought = await Post.create({
+        const post = await Post.create({
           ...args,
           username: context.user.username,
         });
@@ -94,9 +94,9 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
-    addComment: async (parent, { thoughtId, commentBody }, context) => {
+    addComment: async (parent, { postId, commentBody }, context) => {
       if (context.user) {
-        const updatedThought = await Post.findOneAndUpdate(
+        const updatedPost = await Post.findOneAndUpdate(
           { _id: postId },
           {
             $push: {
