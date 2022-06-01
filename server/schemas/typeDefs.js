@@ -84,4 +84,11 @@ module.exports = typeDefs;
 // plant(_id: ID!): Plant
 // plants(username: String): [Plant]
 
-// need to add mutations to create plant, update plant, delete plant, create plantHistory(notes), and delete plant history(notes)
+// need to add mutations to
+// create plant
+// update plant
+// delete plant
+// create plantHistory(notes)
+// delete plantHistory(notes)
+// add Friend
+// remove Friend
