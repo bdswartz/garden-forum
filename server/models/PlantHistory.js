@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
-const { Schema } = mongoose;
+const { Schema } = require('mongoose');
 
 const plantHistorySchema = new Schema(
   {

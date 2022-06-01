@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
 const plantHistorySchema = require('./PlantHistory');
-const { Schema, model } = mongoose;
+const { Schema, model } = require('mongoose');
 
 const plantSchema = new Schema({
   scientific_name: {
@@ -15,7 +14,6 @@ const plantSchema = new Schema({
     type: String,
     required: true,
   },
-  //   user added
   usda_zone: {
     type: String,
   },
@@ -31,6 +29,6 @@ const plantSchema = new Schema({
   plantHistory: [plantHistorySchema],
 });
 
-const Plant = mongoose.model('Plant', plantSchema);
+const Plant = model('Plant', plantSchema);
 
 module.exports = Plant;
