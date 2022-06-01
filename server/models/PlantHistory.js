@@ -10,6 +10,7 @@ const plantHistorySchema = new Schema({
   },
   note_body: {
     type: String,
+    maxlength: 280,
   },
 });
 

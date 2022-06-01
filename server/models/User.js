@@ -3,57 +3,64 @@ const dateFormat = require('../utils/dateFormat');
 const bcrypt = require('bcrypt');
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5,
-  },
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Comment',
+const userSchema = new Schema(
+  {
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (timestamp) => dateFormat(timestamp),
     },
-  ],
-  plants: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Plant',
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
     },
-  ],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
     },
-  ],
-});
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 5,
+    },
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
+    ],
+    plants: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Plant',
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
 
 // set up pre-save middleware to create password
 userSchema.pre('save', async function (next) {
