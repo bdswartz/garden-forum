@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,14 +6,11 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ADD_USER } from '../utils/mutations';
-
-import Auth from '../utils/auth';
 
 function Copyright(props) {
   return (
@@ -45,38 +41,14 @@ const theme = createTheme({
   },
 });
 
-export default function SignUp() {
-  const [formState, setFormState] = useState({
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
-  const [addUser, { error }] = useMutation(ADD_USER);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
-  // submit form
-  const handleFormSubmit = async (event) => {
+export default function Login() {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    try {
-      const { data } = await addUser({
-        variables: { ...formState },
-      });
-
-      Auth.login(data.addUser.token);
-    } catch (e) {
-      console.error(e);
-    }
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
   };
 
   return (
@@ -92,62 +64,20 @@ export default function SignUp() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: green[500] }}>
-            <PersonAddIcon />
+            <PersonIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign up
+            Log in
           </Typography>
-          {error && <div>Signup failed</div>}
-          {/* form container */}
           <Box
             component='form'
             noValidate
-            onSubmit={handleFormSubmit}
+            onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-            {/* input fields section */}
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  onChange={handleChange}
-                  value={formState.firstName}
-                  autoComplete='given-name'
-                  name='firstName'
-                  required
-                  fullWidth
-                  id='firstName'
-                  label='First Name'
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  onChange={handleChange}
-                  value={formState.lastName}
-                  required
-                  fullWidth
-                  id='lastName'
-                  label='Last Name'
-                  name='lastName'
-                  autoComplete='family-name'
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
-                  onChange={handleChange}
-                  value={formState.username}
-                  required
-                  fullWidth
-                  id='username'
-                  label='Username'
-                  name='username'
-                  autoComplete='username'
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  onChange={handleChange}
-                  value={formState.email}
                   required
                   fullWidth
                   id='email'
@@ -158,8 +88,6 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  onChange={handleChange}
-                  value={formState.password}
                   required
                   fullWidth
                   name='password'
@@ -170,7 +98,6 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            {/* submit button section */}
             <Button
               type='submit'
               fullWidth
@@ -185,13 +112,12 @@ export default function SignUp() {
                 },
               }}
             >
-              Sign Up
+              Log In
             </Button>
-            {/* already have an account? section */}
             <Grid container justifyContent='flex-end'>
               <Grid item>
                 <Link to='/login' variant='body2' sx={{ cursor: 'pointer' }}>
-                  Already have an account? Log in
+                  Don't have an account? Sign up
                 </Link>
               </Grid>
             </Grid>

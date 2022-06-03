@@ -1,15 +1,13 @@
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
-// import Auth from '../../utils/auth';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-import { green, white } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Auth from '../../utils/auth';
 
 const theme = createTheme({
   palette: {
@@ -20,63 +18,75 @@ const theme = createTheme({
       main: '#64dd20',
     },
   },
+  spacing: 8,
 });
 
 const Header = () => {
   return (
-    // <header className='bg-secondary mb-4 py-2 flex-row align-center'>
-    //   <div className='container flex-row justify-space-between-lg justify-center align-center'>
-    //     <Link to='/'>
-    //       <h1>Chirp</h1>
-    //     </Link>
-
-    //     <nav className='text-center'>
-    //       {Auth.loggedIn() ? (
-    //         <>
-    //           <Link to='/profile'>Me</Link>
-    //           <a href='/'>Logout</a>
-    //         </>
-    //       ) : (
-    //         <>
-    //           <Link to='/login'>Login</Link>
-    //           <Link to='/signup'>Signup</Link>
-    //         </>
-    //       )}
-    //     </nav>
-    //   </div>
-    // </header>
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1, bgcolor: green[500] }}>
         <AppBar position='static'>
           <Toolbar>
-            {/* <IconButton
-              size='large'
-              edge='start'
-              color='inherit'
-              aria-label='menu'
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton> */}
             <Typography
+              component={Link}
+              style={{ textDecoration: 'none' }}
+              to='/'
               variant='h6'
-              component='div'
               sx={{ flexGrow: 1, color: 'white', cursor: 'pointer' }}
             >
               Garden Forum
             </Typography>
-            <Button
-              sx={{
-                color: 'green',
-                bgcolor: 'white',
-                ':hover': {
-                  bgcolor: 'green',
-                  color: 'white',
-                },
-              }}
-            >
-              Login
-            </Button>
+            {Auth.loggedIn() ? (
+              <>
+                <Button
+                  component={Link}
+                  to='/login'
+                  sx={{
+                    color: 'green',
+                    bgcolor: 'white',
+                    m: 2,
+                    ':hover': {
+                      bgcolor: 'green',
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Login
+                </Button>
+                <Button
+                  component={Link}
+                  to='/signup'
+                  sx={{
+                    color: 'green',
+                    bgcolor: 'white',
+                    ':hover': {
+                      bgcolor: 'green',
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  component={Link}
+                  to='/'
+                  sx={{
+                    color: 'green',
+                    bgcolor: 'white',
+                    m: 2,
+                    ':hover': {
+                      bgcolor: 'green',
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
           </Toolbar>
         </AppBar>
       </Box>
