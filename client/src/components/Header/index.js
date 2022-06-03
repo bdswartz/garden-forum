@@ -66,10 +66,8 @@ const Header = () => {
               Garden Forum
             </Typography>
             <Typography
-              component={Link}
               style={{ textDecoration: 'none' }}
-              to='/forum'
-              sx={{ flexGrow: 1, color: 'white', cursor: 'pointer' }}
+              sx={{ color: 'white', cursor: 'pointer' }}
             >
               <Grid
                 onClick={handleClick}
@@ -116,63 +114,78 @@ const Header = () => {
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-              <MenuItem>Forum</MenuItem>
-              <MenuItem>Profiles</MenuItem>
-              <MenuItem>Plants</MenuItem>
+              <MenuItem component={Link} to='/forum'>
+                Forum
+              </MenuItem>
+              <MenuItem component={Link} to='/profiles'>
+                Profiles
+              </MenuItem>
+              <MenuItem component={Link} to='/plants'>
+                Plants
+              </MenuItem>
               <Divider />
             </Menu>
-            {Auth.loggedIn() ? (
-              <>
-                <Button
-                  onClick={logout}
-                  component={Link}
-                  to='/'
-                  sx={{
-                    color: 'green',
-                    bgcolor: 'white',
-                    m: 2,
-                    ':hover': {
-                      bgcolor: 'green',
-                      color: 'white',
-                    },
-                  }}
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  component={Link}
-                  to='/login'
-                  sx={{
-                    color: 'green',
-                    bgcolor: 'white',
-                    m: 2,
-                    ':hover': {
-                      bgcolor: 'green',
-                      color: 'white',
-                    },
-                  }}
-                >
-                  Login
-                </Button>
-                <Button
-                  component={Link}
-                  to='/signup'
-                  sx={{
-                    color: 'green',
-                    bgcolor: 'white',
-                    ':hover': {
-                      bgcolor: 'green',
-                      color: 'white',
-                    },
-                  }}
-                >
-                  Sign Up
-                </Button>
-              </>
-            )}
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: 'flex',
+                flexDirection: 'row-reverse',
+              }}
+            >
+              {Auth.loggedIn() ? (
+                <>
+                  <Button
+                    onClick={logout}
+                    component={Link}
+                    to='/'
+                    sx={{
+                      color: 'green',
+                      bgcolor: 'white',
+                      m: 2,
+                      ':hover': {
+                        bgcolor: 'green',
+                        color: 'white',
+                      },
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    component={Link}
+                    to='/login'
+                    sx={{
+                      color: 'green',
+                      bgcolor: 'white',
+                      m: 1,
+                      ':hover': {
+                        bgcolor: 'green',
+                        color: 'white',
+                      },
+                    }}
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    component={Link}
+                    to='/signup'
+                    sx={{
+                      m: 1,
+                      color: 'green',
+                      bgcolor: 'white',
+                      ':hover': {
+                        bgcolor: 'green',
+                        color: 'white',
+                      },
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </>
+              )}
+            </Box>
           </Toolbar>
         </AppBar>
       </Box>
