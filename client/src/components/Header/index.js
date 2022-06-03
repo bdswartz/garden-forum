@@ -128,6 +128,7 @@ const Header = () => {
               </MenuItem>
             </Menu>
             <Box
+              alignItems='center'
               sx={{
                 flexGrow: 1,
                 display: 'flex',
@@ -152,6 +153,17 @@ const Header = () => {
                   >
                     Logout
                   </Button>
+                  <Typography sx={{ color: 'white', cursor: 'pointer' }}>
+                    <Grid
+                      style={{ textDecoration: 'none' }}
+                      component={Link}
+                      to='/profile'
+                      container
+                      spacing='1'
+                    >
+                      profile
+                    </Grid>
+                  </Typography>
                 </>
               ) : (
                 <>
