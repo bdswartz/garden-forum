@@ -81,7 +81,7 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component='main' minWidth='sm' maxWidth='md'>
+      <Container component='main' maxWidth='md'>
         <CssBaseline />
         <Box
           sx={{
@@ -103,7 +103,7 @@ export default function SignUp() {
             component='form'
             noValidate
             onSubmit={handleFormSubmit}
-            sx={{ mt: 3 }}
+            sx={{ mt: 3, minWidth: '280px' }}
           >
             {/* input fields section */}
             <Grid container spacing={2}>
@@ -190,7 +190,7 @@ export default function SignUp() {
             {/* already have an account? section */}
             <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link to='/login' variant='body2' sx={{ cursor: 'pointer' }}>
+                <Link href='/login' variant='body2' sx={{ cursor: 'pointer' }}>
                   Already have an account? Log in
                 </Link>
               </Grid>
