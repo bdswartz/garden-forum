@@ -22,6 +22,11 @@ const theme = createTheme({
 });
 
 const Header = () => {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1, bgcolor: green[500] }}>
@@ -37,6 +42,25 @@ const Header = () => {
               Garden Forum
             </Typography>
             {Auth.loggedIn() ? (
+              <>
+                <Button
+                  onClick={logout}
+                  component={Link}
+                  to='/'
+                  sx={{
+                    color: 'green',
+                    bgcolor: 'white',
+                    m: 2,
+                    ':hover': {
+                      bgcolor: 'green',
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
               <>
                 <Button
                   component={Link}
@@ -66,24 +90,6 @@ const Header = () => {
                   }}
                 >
                   Sign Up
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  component={Link}
-                  to='/'
-                  sx={{
-                    color: 'green',
-                    bgcolor: 'white',
-                    m: 2,
-                    ':hover': {
-                      bgcolor: 'green',
-                      color: 'white',
-                    },
-                  }}
-                >
-                  Logout
                 </Button>
               </>
             )}
