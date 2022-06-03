@@ -158,6 +158,44 @@ const resolvers = {
         );
         return updatedPlant;
     },
+    removePlantHistory: async (parent, { plantId, historyId }, context) => {
+      const updatedPlant = await Plant.findOneAndUpdate(
+        { _id: plantId },
+        {
+          $pull: {
+            plantHistory: {_id: historyId },
+          },
+        },
+        { new: true, runValidators: true }
+      );
+      return updatedPlant;
+   },
+    addFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { friends: friendId } },
+          { new: true }
+        ).populate('friends');
+    
+        return updatedUser;
+      }
+    
+      throw new AuthenticationError('You need to be logged in!');
+  },
+    removeFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { friends: friendId } },
+          { new: true }
+        ).populate('friends');
+    
+        return updatedUser;
+      }
+    
+      throw new AuthenticationError('You need to be logged in!');
+  },
   },
 };
 
