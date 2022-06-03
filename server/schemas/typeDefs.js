@@ -43,6 +43,7 @@ const typeDefs = gql`
   }
 
   type PlantHistory {
+    _id: ID
     createdAt: String
     note_body: String
   }
@@ -78,11 +79,15 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addPost(postText: String!): Post
     addComment(postId: ID!, commentBody: String!): Post
+    addPlantHistory(plantId: ID!, note_body:String): Plant
+    removePlantHistory(plantId:ID!, historyId:ID!): Plant
     addPlant(
       scientific_name: String!
       common_name: String!
       image_path: String!
     ): Plant
+    addFriend(friendId: ID!): User
+    removeFriend(friendId: ID!): User
   }
 `;
 
@@ -90,12 +95,8 @@ module.exports = typeDefs;
 
 // need to add these for Query
 // plant(_id: ID!): Plant
-// plants(username: String): [Plant]
 
 // need to add mutations to
 // update plant
 // delete plant
-// create plantHistory(notes)
-// delete plantHistory(notes)
-// add Friend
-// remove Friend
+
