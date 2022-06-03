@@ -124,6 +124,9 @@ const Header = () => {
                 Plants
               </MenuItem>
               <Divider />
+              <MenuItem component={Link} to='/about'>
+                About
+              </MenuItem>
             </Menu>
             <Box
               sx={{
