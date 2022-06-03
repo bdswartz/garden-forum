@@ -96,7 +96,7 @@ export default function Login() {
             component='form'
             noValidate
             onSubmit={handleFormSubmit}
-            sx={{ mt: 3 }}
+            sx={{ mt: 3, minWidth: '280px' }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -143,7 +143,7 @@ export default function Login() {
             </Button>
             <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link to='/login' variant='body2' sx={{ cursor: 'pointer' }}>
+                <Link href='/signup' variant='body2' sx={{ cursor: 'pointer' }}>
                   Don't have an account? Sign up
                 </Link>
               </Grid>
