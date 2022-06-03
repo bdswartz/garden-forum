@@ -147,8 +147,15 @@ const resolvers = {
     removePlant: async (parent, {plantId}, context) => {
       if (context.user) {
         const plant = await Plant.findByIdAndDelete(
-          {plantId}
-        );
+          plantId,
+          function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+              console.log("Deleted : ", docs);
+            }
+          });
         return plant;
       }
 
