@@ -59,7 +59,7 @@ const typeDefs = gql`
     user(username: String!): User
     posts(username: String): [Post]
     post(_id: ID!): Post
-    plants(username: String): [Plant]
+    plant(_id: ID!): Plant
   }
 
   type Mutation {
@@ -80,12 +80,27 @@ const typeDefs = gql`
     addPost(postText: String!): Post
     addComment(postId: ID!, commentBody: String!): Post
     addPlantHistory(plantId: ID!, note_body:String): Plant
-    removePlantHistory(plantId:ID!, historyId:ID!): Plant
+    removePlantHistory(plantId: ID!, historyId:ID!): Plant
     addPlant(
       scientific_name: String!
       common_name: String!
       image_path: String!
+      usda_zone: String
+      pruning: String
+      fertilization: String
+      water: String
     ): Plant
+    updatePlant(
+      plantID: ID!
+      scientific_name: String!
+      common_name: String!
+      image_path: String!
+      usda_zone: String
+      pruning: String
+      fertilization: String
+      water: String
+    ): Plant
+    removePlant(plantId:ID!): Plant
     addFriend(friendId: ID!): User
     removeFriend(friendId: ID!): User
   }

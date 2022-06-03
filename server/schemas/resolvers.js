@@ -42,6 +42,9 @@ const resolvers = {
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
     },
+    plant: async (parent, {_id}) => {
+      return Plant.findOne({_id});
+    }
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -124,6 +127,28 @@ const resolvers = {
           { new: true }
         );
 
+        return plant;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    updatePlant: async (parent, args, context) => {
+      if (context.user) {
+        const plant = await Plant.findByIdAndUpdate(
+          { _id: args.plantId },
+          {args},
+          { new: true }
+        );
+        return plant;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removePlant: async (parent, {plantId}, context) => {
+      if (context.user) {
+        const plant = await Plant.findByIdAndDelete(
+          {plantId}
+        );
         return plant;
       }
 
