@@ -1,4 +1,7 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -42,13 +45,32 @@ const theme = createTheme({
 });
 
 export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error }] = useMutation(LOGIN);
+
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
     });
+  };
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -69,10 +91,11 @@ export default function Login() {
           <Typography component='h1' variant='h5'>
             Log in
           </Typography>
+          {error && <div>Login failed</div>}
           <Box
             component='form'
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleFormSubmit}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
@@ -84,6 +107,8 @@ export default function Login() {
                   label='Email Address'
                   name='email'
                   autoComplete='email'
+                  value={formState.email}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -95,6 +120,8 @@ export default function Login() {
                   type='password'
                   id='password'
                   autoComplete='new-password'
+                  value={formState.password}
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
