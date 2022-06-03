@@ -43,18 +43,16 @@ function App() {
       <Router>
         <div className='flex-column justify-flex-start min-100-vh'>
           <Header />
-          <div className='container'>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              {/* <Route path='/profile' element={<Profile />} /> */}
-              {/* <Route path='/thought' element={<SingleThought />} /> */}
-              {/* <Route path='/profile/:username' element={<Profile />} /> */}
-              {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
-              <Route path='/signup' element={<Signup />} />
-              <Route path='*' element={<NoMatch />} />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            {/* <Route path='/profile' element={<Profile />} /> */}
+            {/* <Route path='/thought' element={<SingleThought />} /> */}
+            {/* <Route path='/profile/:username' element={<Profile />} /> */}
+            {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
+            <Route path='/signup' element={<Signup />} />
+            <Route path='*' element={<NoMatch />} />
+          </Routes>
           {/* <Footer /> */}
         </div>
       </Router>

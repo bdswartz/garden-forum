@@ -14,7 +14,6 @@ import Auth from '../../utils/auth';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-// import Tooltip from '@mui/material/Tooltip';
 
 const theme = createTheme({
   palette: {
