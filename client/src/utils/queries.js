@@ -21,3 +21,21 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const QUERY_POSTS = gql`
+{
+  posts {
+    _id
+    postText
+    createdAt
+    username
+    commentCount
+    comments {
+      _id
+      commentBody
+      createdAt
+      username
+    }
+  }
+}
+`
