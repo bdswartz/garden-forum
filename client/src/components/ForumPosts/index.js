@@ -20,18 +20,20 @@ const ForumPosts = ({ posts, postText }) => {
 
 
     return (
-      
-<Paper
-sx={{
-  p: 2,
-  margin: 'auto',
-  mt: 5,
-  maxWidth: 1200,
-  flexGrow: 1,
-  backgroundColor: (theme) =>
-    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-}}
->
+      <div>
+        {posts &&
+      posts.map(posts => (
+      <Paper
+      sx={{
+        p: 2,
+        margin: 'auto',
+        mt: 5,
+        maxWidth: 1200,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}
+      >
 <Grid container spacing={2}>
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 128 }}>
@@ -42,8 +44,6 @@ sx={{
         </Grid>
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>
-          {posts &&
-        posts.map(posts => (
             <Grid key={posts._id} item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
                 Title of the Forum Post That Would Show a Little of The Post
@@ -59,11 +59,12 @@ sx={{
               on {posts.createdAt}
               </Typography>
           </Grid>
-              ))}
         </Grid>
       </Grid>
       </Grid>
     </Paper>
+  ))}
+    </div>
   );
 }
 
