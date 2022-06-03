@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Post } = require('../models');
+const { User, Post, Plant } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -111,6 +111,91 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
+    addPlant: async (parent, args, context) => {
+      if (context.user) {
+        const plant = await Plant.create({
+          ...args,
+          username: context.user.username,
+        });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { plants: plant._id } },
+          { new: true }
+        );
+
+        return plant;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addComment: async (parent, { postId, commentBody }, context) => {
+      if (context.user) {
+        const updatedPost = await Post.findOneAndUpdate(
+          { _id: postId },
+          {
+            $push: {
+              comments: { commentBody, username: context.user.username },
+            },
+          },
+          { new: true, runValidators: true }
+        );
+
+        return updatedPost;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addPlantHistory: async (parent, { plantId, note_body }, context) => {
+        const updatedPlant = await Plant.findOneAndUpdate(
+          { _id: plantId },
+          {
+            $push: {
+              plantHistory: { note_body },
+            },
+          },
+          { new: true, runValidators: true }
+        );
+        return updatedPlant;
+    },
+    removePlantHistory: async (parent, { plantId, historyId }, context) => {
+      const updatedPlant = await Plant.findOneAndUpdate(
+        { _id: plantId },
+        {
+          $pull: {
+            plantHistory: {_id: historyId },
+          },
+        },
+        { new: true, runValidators: true }
+      );
+      return updatedPlant;
+   },
+    addFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { friends: friendId } },
+          { new: true }
+        ).populate('friends');
+    
+        return updatedUser;
+      }
+    
+      throw new AuthenticationError('You need to be logged in!');
+  },
+    removeFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { friends: friendId } },
+          { new: true }
+        ).populate('friends');
+    
+        return updatedUser;
+      }
+    
+      throw new AuthenticationError('You need to be logged in!');
+  },
   },
 };
 

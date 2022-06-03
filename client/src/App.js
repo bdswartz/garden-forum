@@ -1,15 +1,35 @@
+<<<<<<< HEAD
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+=======
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Header from './components/Header';
+// import Footer from './components/Footer';
+import Login from './pages/Login';
+import NoMatch from './pages/NoMatch';
+// import SingleThought from './pages/SingleThought';
+// import Profile from './pages/Profile';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+
+>>>>>>> main
 import {
+  ApolloProvider,
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
   createHttpLink,
+<<<<<<< HEAD
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 // import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
+=======
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+>>>>>>> main
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -34,11 +54,29 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+<<<<<<< HEAD
         <div>
           <Switch>
             {/* <Route component={NoMatch} /> */}
             <Route path="/profile" component={Profile} />
           </Switch>
+=======
+        <div className='flex-column justify-flex-start min-100-vh'>
+          <Header />
+          <div className='container'>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              {/* <Route path='/profile' element={<Profile />} /> */}
+              {/* <Route path='/thought' element={<SingleThought />} /> */}
+              {/* <Route path='/profile/:username' element={<Profile />} /> */}
+              {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
+              <Route path='/signup' element={<Signup />} />
+              <Route path='*' element={<NoMatch />} />
+            </Routes>
+          </div>
+          {/* <Footer /> */}
+>>>>>>> main
         </div>
       </Router>
     </ApolloProvider>
