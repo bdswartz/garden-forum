@@ -150,9 +150,10 @@ export const ADD_PLANT_HISTORY = gql`
 }`
 
 export const ADD_POST = gql`
-  mutation ADD_POST($postText: String!) {
-    addPost(postText: $postText) {
+  mutation ADD_POST($postTitle: String!, $postText: String!) {
+    addPost(postTitle: $postTitle, postText: $postText) {
       _id
+      postTitle
       postText
       createdAt
       username
