@@ -6,7 +6,17 @@ import Auth from '../utils/auth';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import img from '../assets/images/igor.jpg';
+// import img2 from '../assets/images/malvestida.jpg';
 import { Container, Grid, Box } from '@mui/material';
+import Garden from '../components/Garden';
+
+const styles = {
+  headerContainer: {
+    // backgroundColor: `url(${img2})`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+  },
+};
 
 const Profile = () => {
   const { username: userParam } = useParams();
@@ -37,23 +47,34 @@ const Profile = () => {
   return (
     <>
       <Container sx={{ width: '70%' }}>
-        <Grid container sx={{ mt: 7 }}>
-          <Grid sx={{ height: '11vw' }} item xs={2}>
-            <Avatar
-              alt='flower'
-              src={img}
-              sx={{ width: '100%', height: '100%' }}
-            />
+        {/* user top card start */}
+        <Paper
+          style={styles.headerContainer}
+          sx={{ p: 5, borderRadius: '0px' }}
+        >
+          <Grid container sx={{ mt: 3 }}>
+            {/* Profile Picture */}
+            <Grid item>
+              <Avatar alt='flower' src={img} sx={{ width: 156, height: 156 }} />
+            </Grid>
+            {/* User name and joined info */}
+            <Grid item xs={8} sx={{ mt: 1 }}>
+              <Container sx={{ ml: 1 }}>
+                <h4>
+                  <strong>{user.username}</strong>.
+                </h4>
+                <h6>
+                  <strong>Joined:</strong> {user.createdAt}
+                </h6>
+              </Container>
+            </Grid>
           </Grid>
-          <Grid item xs={10} sx={{ mt: 1 }}>
-            <h4>
-              <strong>{user.username}</strong>.
-            </h4>
-            <h6>
-              <strong>Joined:</strong> {user.createdAt}
-            </h6>
-          </Grid>
-        </Grid>
+        </Paper>
+        {/* user top card end */}
+
+        <Paper sx={{ p: 0, mt: 5, borderRadius: '0px' }}>
+          <Garden plants={user.plants}></Garden>
+        </Paper>
       </Container>
     </>
   );
