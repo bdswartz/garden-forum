@@ -3,10 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { QUERY_POSTS } from '../utils/queries'
 import {useQuery} from '@apollo/client';
 import ForumPosts from '../components/ForumPosts';
-import Jumbotron from "../components/Jumbotron";
 import Search from "../components/ForumPosts/Search";
-import Carousel from '../components/Carousel';
-import NewPost from '../components/NewPost';
 const theme = createTheme({
   palette: {
     primary: {
