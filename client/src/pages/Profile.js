@@ -1,76 +1,29 @@
 import React, { useState } from "react";
-import Jumbotron from "../components/Jumbotron";
-import { searchPlants } from "../utils/API";
+// import { searchPlants } from "../utils/API";
 // import { Navigate, useParams } from "react-router-dom";
+import Button from "@mui/material/Button";
 
-// import Auth from "../utils/auth";
-// import { useQuery } from "@apollo/client";
-// import { QUERY_USER, QUERY_ME } from "../utils/queries";
-// import { ADD_FRIEND } from "../utils/mutations";
-// import { useQuery, useMutation } from "@apollo/client";
+import AddPlantDialog from "../components/AddPlantDialog";
+import Header from "../components/Header";
 
 const Profile = () => {
-  const [searchedPlants, setSearchedPlants] = useState([]);
+  const [open, setOpen] = React.useState(false);
 
-  const [searchInput, setSearchInput] = useState("");
-
-  //   const [savedPlantIds, setSavedPlantIds] = useState(getSavedPlantIds());
-
-  //   useEffect(() => {
-  //     return () => savePlantIds(savedPlantIds);
-  //   });
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!searchInput) {
-      return false;
-    }
-    try {
-      const response = await searchPlants();
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-      const { suggestions } = await response.json();
-
-      const plantData = suggestions.map((plant_details) => ({
-        plantName: plant_details.common_names || ["No names to display!"],
-        scienceName: plant_details.scientific_name,
-        likeness: plant_details.probability,
-      }));
-      setSearchedPlants(plantData);
-      setSearchInput("");
-    } catch (err) {
-      console.error(err);
-    }
+  // //button open/close
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
     <div>
-      <Jumbotron>
-        <Button
-          onClick={() => handleFormSubmit(plant_details.plantName)}
-          onSubmit={handleFormSubmit}
-          name="searchInput"
-          value={searchInput}
-          placeholder="Identify a new plant!"
-        >
-          IDENTIFY A NEW PLANT
-          {/* <Button.Control
-          />
-          // <input type="file" multiple />
-          // <button type="button">OK</button> */}
-        </Button>
-        <CardColumns>
-          {searchedPlants.map((plant_details) => {
-            return (
-              <Card key={plant_details.plantName}>
-                <h1>A NEW PLANT</h1>
-              </Card>
-            );
-          })}
-        </CardColumns>
-      </Jumbotron>{" "}
+      {/* <Header /> */}
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Add your OWN plant!
+      </Button>{" "}
+      <AddPlantDialog open={open} handleClose={handleClose} />
     </div>
   );
 };

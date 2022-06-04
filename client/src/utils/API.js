@@ -50,8 +50,8 @@ export const deletePlant = (plantId, token) => {
 };
 
 //plant.id api info
-export const searchPlants = (query) => {
-  const files = [...document.querySelector("input[type=file]").files];
+export const searchPlants = (files) => {
+  // const files = [...document.querySelector("input[type=file]").files];
   const promises = files.map((file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -93,10 +93,10 @@ export const searchPlants = (query) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        return data;
       })
       .catch((error) => {
-        console.error("Error:", error);
+        return error;
       });
   });
 };
