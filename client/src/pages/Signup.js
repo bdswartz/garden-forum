@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ADD_USER } from '../utils/mutations';
@@ -97,7 +98,11 @@ export default function SignUp() {
           <Typography component='h1' variant='h5'>
             Sign up
           </Typography>
-          {error && <div>Signup failed</div>}
+          {error && (
+            <Alert sx={{ mt: 2 }} variant='outlined' severity='error'>
+              Signup Failed
+            </Alert>
+          )}
           {/* form container */}
           <Box
             component='form'
