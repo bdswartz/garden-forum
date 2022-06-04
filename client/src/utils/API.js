@@ -51,7 +51,6 @@ export const deletePlant = (plantId, token) => {
 
 //plant.id api info
 export const searchPlants = (files) => {
-  // const files = [...document.querySelector("input[type=file]").files];
   const promises = files.map((file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -64,7 +63,7 @@ export const searchPlants = (files) => {
     });
   });
 
-  Promise.all(promises).then((base64files) => {
+  return Promise.all(promises).then((base64files) => {
     console.log(base64files);
 
     const data = {
@@ -84,20 +83,24 @@ export const searchPlants = (files) => {
       ],
     };
 
-    fetch("https://api.plant.id/v2/identify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        return data;
+    return new Promise((resolve, reject) => {
+      fetch("https://api.plant.id/v2/identify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        return error;
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          resolve(data);
+        })
+        .catch((error) => {
+          console.log("Error:", data);
+          reject(error);
+        });
+    });
   });
 };
 

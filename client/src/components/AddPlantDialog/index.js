@@ -13,13 +13,20 @@ import { searchPlants } from "../../utils/API";
 export default function AddPlantDialog({ open, handleClose }) {
   // const [toggle, setToggle] = useState(false)
   const plantFile = useRef();
-  const [first, setFirst] = useState({});
+  const [plantImg, setPlantImg] = useState([]);
 
-  const handleSearch = () => {
-    //wait to console log AFTER uploading file - currently does on click
-    console.log(plantFile);
+  const onFileChange = (event) => {
+    setPlantImg(event.target.files);
   };
 
+  const handleSearch = () => {
+    const plantArr = Object.values(plantImg);
+    searchPlants(plantArr).then((res) => {
+      console.log(res);
+    });
+  };
+
+  //
   const handleFileInput = () => {
     // const temp =
     plantFile.current.click();
@@ -32,14 +39,11 @@ export default function AddPlantDialog({ open, handleClose }) {
         <DialogTitle>ADD YOUR OWN PLANT</DialogTitle>
 
         <DialogContent>
-          {/* click this btn to identify plant */}
-          <Button variant="outlined" onClick={handleFileInput}>
-            Identify a new plant
-          </Button>{" "}
           <input
             ref={plantFile}
             type="file"
-            style={{ display: "none" }}
+            // style={{ display: "none" }}
+            onChange={onFileChange}
             multiple
           />
         </DialogContent>
