@@ -25,7 +25,6 @@ const theme = createTheme({
       main: '#64dd20',
     },
   },
-  spacing: 8,
 });
 
 const Header = () => {
