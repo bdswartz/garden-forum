@@ -1,8 +1,6 @@
 import React from 'react';
-// import { green, white } from '@mui/material/colors';
+import Carousel from '../components/Carousel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 
 const theme = createTheme({
   palette: {
@@ -18,18 +16,7 @@ const theme = createTheme({
 const Home = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='md'>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          This is the HomePage!!
-        </Box>
-      </Container>
+      <Carousel></Carousel>
     </ThemeProvider>
   );
 };

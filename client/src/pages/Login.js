@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -91,7 +92,11 @@ export default function Login() {
           <Typography component='h1' variant='h5'>
             Log in
           </Typography>
-          {error && <div>Login failed</div>}
+          {error && (
+            <Alert sx={{ mt: 2 }} variant='outlined' severity='error'>
+              Login Failed
+            </Alert>
+          )}
           <Box
             component='form'
             noValidate

@@ -10,11 +10,11 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Auth from '../../utils/auth';
-
+import Avatar from '@mui/material/Avatar';
+import PersonIcon from '@mui/icons-material/Person';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-// import Tooltip from '@mui/material/Tooltip';
 
 const theme = createTheme({
   palette: {
@@ -25,7 +25,6 @@ const theme = createTheme({
       main: '#64dd20',
     },
   },
-  spacing: 8,
 });
 
 const Header = () => {
@@ -44,6 +43,18 @@ const Header = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const [anchorAvatarEl, setAnchorAvatarEl] = React.useState(null);
+
+  const avatarOpen = Boolean(anchorAvatarEl);
+
+  const handleAvatarClick = (event) => {
+    setAnchorAvatarEl(event.currentTarget);
+  };
+
+  const handleAvatarClose = () => {
+    setAnchorAvatarEl(null);
   };
 
   return (
@@ -118,7 +129,7 @@ const Header = () => {
                 Forum
               </MenuItem>
               <MenuItem component={Link} to='/profiles'>
-                Profiles
+                People
               </MenuItem>
               <MenuItem component={Link} to='/plants'>
                 Plants
@@ -129,6 +140,7 @@ const Header = () => {
               </MenuItem>
             </Menu>
             <Box
+              alignItems='center'
               sx={{
                 flexGrow: 1,
                 display: 'flex',
@@ -137,22 +149,62 @@ const Header = () => {
             >
               {Auth.loggedIn() ? (
                 <>
-                  <Button
-                    onClick={logout}
-                    component={Link}
-                    to='/'
+                  <Avatar
+                    onClick={handleAvatarClick}
                     sx={{
-                      color: 'green',
+                      m: 1,
                       bgcolor: 'white',
-                      m: 2,
-                      ':hover': {
-                        bgcolor: 'green',
-                        color: 'white',
-                      },
+                      color: 'green',
+                      cursor: 'pointer',
                     }}
                   >
-                    Logout
-                  </Button>
+                    <PersonIcon />
+                  </Avatar>
+                  <Menu
+                    anchorEl={anchorAvatarEl}
+                    id='account-menu'
+                    open={avatarOpen}
+                    onClose={handleAvatarClose}
+                    onClick={handleAvatarClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        '&:before': {
+                          content: '""',
+                          display: 'block',
+                          position: 'absolute',
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: 'background.paper',
+                          transform: 'translateY(-50%) rotate(45deg)',
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                  >
+                    <MenuItem component={Link} to='/profile'>
+                      Profile
+                    </MenuItem>
+                    <MenuItem component={Link} to='/settings'>
+                      Settings
+                    </MenuItem>
+                    <MenuItem onClick={logout} component={Link} to='/'>
+                      logout
+                    </MenuItem>
+                  </Menu>
                 </>
               ) : (
                 <>
