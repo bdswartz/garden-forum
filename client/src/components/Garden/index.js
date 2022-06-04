@@ -8,7 +8,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Chip from '@mui/material/Chip';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function Garden({ plants }) {
+export default function Garden({ plants, user }) {
   const handleClick = () => {
     console.log('You clicked Add Plant');
   };
@@ -16,8 +16,8 @@ export default function Garden({ plants }) {
   return (
     <ImageList>
       <ImageListItem key='Subheader' cols={2}>
-        <ListSubheader sx={{ fontSize: '40px' }} component='div'>
-          Your Garden
+        <ListSubheader sx={{ fontSize: '24px' }} component='div'>
+          {user}'s Garden
           <Chip
             sx={{
               fontSize: '11px',

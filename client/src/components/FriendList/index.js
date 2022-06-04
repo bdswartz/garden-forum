@@ -7,28 +7,42 @@ import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import { green } from '@mui/material/colors';
 
 const FriendList = ({ friendCount, username, friends }) => {
   if (!friends || !friends.length) {
     return (
       <>
-        <h4>Friends List</h4>
-        <p className='bg-dark text-light p-3'>{username}, make some friends!</p>
+        <Typography
+          varient='h4'
+          sx={{ p: 2, p: 1, bgcolor: green[500], color: 'white' }}
+        >
+          Friend List
+        </Typography>
+        <Typography align='center' sx={{ height: 60, pt: 2 }}>
+          {username} has 0 friends
+        </Typography>
       </>
     );
   }
 
+  if (friends.length > 10) {
+    const tenFriendsArray = friends.slice(0, 10);
+    console.log(tenFriendsArray);
+    friends = tenFriendsArray;
+  }
+
   return (
     <div>
-      <Typography varient='h4'>Friends List</Typography>
-      {/* <h5>
-        {username}'s {friendCount} {friendCount === 1 ? 'friend' : 'friends'}
-      </h5> */}
-      {/* {friends.map((friend) => (
-        <button className='btn w-100 display-block mb-2' key={friend._id}>
-          <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-        </button>
-      ))} */}
+      <Typography
+        varient='h4'
+        sx={{ p: 2, p: 1, bgcolor: green[500], color: 'white' }}
+      >
+        Friend List
+      </Typography>
+      <Divider />
       <List>
         {friends.map((friend) => (
           <ListItem
@@ -36,7 +50,7 @@ const FriendList = ({ friendCount, username, friends }) => {
             href={`/profile/${friend.username}`}
             to={`/profile/${friend.username}`}
             style={{ textDecoration: 'none' }}
-            sx={{ curser: 'pointer' }}
+            sx={{ curser: 'pointer', color: 'black' }}
           >
             <ListItemAvatar>
               <Avatar>
