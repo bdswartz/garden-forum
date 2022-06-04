@@ -1,26 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-<<<<<<< HEAD
 import Header from "./components/Header";
-// import Footer from "./components/Footer";
+// import Footer from './components/Footer';
 import Login from "./pages/Login";
 import NoMatch from "./pages/NoMatch";
-// import SingleThought from "./pages/SingleThought";
+// import SingleThought from './pages/SingleThought';
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-=======
-import Header from './components/Header';
-// import Footer from './components/Footer';
-import Login from './pages/Login';
-import NoMatch from './pages/NoMatch';
-// import SingleThought from './pages/SingleThought';
-import Profile from './pages/Profile';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
-import Forum from './pages/Forum';
->>>>>>> main
+import Forum from "./pages/Forum";
 
 import {
   ApolloProvider,
@@ -53,35 +42,20 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-<<<<<<< HEAD
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
-              {/* <Route path="/thought" element={<SingleThought />} /> */}
-              <Route path="/profile/:username" element={<Profile />} />
-              {/* <Route path="/thought/:id" element={<SingleThought />} /> */}
-              <Route path="/signup" element={<Signup />} />
-              <Route path="*" element={<NoMatch />} />
-=======
-          <Header />
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              {/* <Route path='/profile' element={<Profile />} /> */}
-              {/* <Route path='/thought' element={<SingleThought />} /> */}
-              {/* <Route path='/profile/:username' element={<Profile />} /> */}
-              {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
-              <Route path='/profile' element={<Profile />} />
-              <Route path='/forum' element={<Forum />} />
-              <Route path='/signup' element={<Signup />} />
-              <Route path='*' element={<NoMatch />} />
->>>>>>> main
-            </Routes>
-          {/* <Footer /> */}
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path='/profile' element={<Profile />} /> */}
+          {/* <Route path='/thought' element={<SingleThought />} /> */}
+          {/* <Route path='/profile/:username' element={<Profile />} /> */}
+          {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+        {/* <Footer /> */}
       </Router>
     </ApolloProvider>
   );

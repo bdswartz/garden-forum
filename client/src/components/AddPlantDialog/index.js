@@ -26,30 +26,26 @@ export default function AddPlantDialog({ open, handleClose }) {
     });
   };
 
-  //
-  const handleFileInput = () => {
-    // const temp =
-    plantFile.current.click();
-    // console.log(temp);
-  };
-
   return (
     <div>
       <Dialog align="center" open={open} onClose={handleClose}>
-        <DialogTitle>ADD YOUR OWN PLANT</DialogTitle>
+        <DialogTitle>Add a New Plant</DialogTitle>
 
         <DialogContent>
-          <input
-            ref={plantFile}
-            type="file"
-            // style={{ display: "none" }}
-            onChange={onFileChange}
-            multiple
-          />
+          <div>
+            <label>Upload an image to identify a new plant!</label>
+            <input
+              ref={plantFile}
+              type="file"
+              // style={{ display: "none" }}
+              onChange={onFileChange}
+              multiple
+            />
+            <DialogActions align="center">
+              <Button onClick={handleSearch}>Identify Plant</Button>
+            </DialogActions>
+          </div>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleSearch}>Test Button</Button>
-        </DialogActions>
         <DialogContent>
           <TextField
             autoFocus
