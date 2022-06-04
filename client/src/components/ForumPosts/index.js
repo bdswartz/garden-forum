@@ -1,71 +1,73 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import GotIt from './yougot_it.gif';
 
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFE7E2',
+  ...theme.typography.body1,
+  padding: theme.spacing(4),
+  textAlign: 'left',
+  border: 2,
+  overflow: 'hidden',
+  height: 300,
+  color: theme.palette.text.secondary,
+}));
 
 const ForumPosts = ({ posts, postText }) => {
     if (!posts.length) {
-        return <h1>Oops</h1>;
+        return (
+        <div>
+          <Grid 
+          container 
+          spacing={3}>
+            <Grid item xs>
+            <h1>Nobody has posted yet. Be first and start the party!</h1>
+            </Grid>
+            <Grid item xs>
+        <img src={GotIt} alt="Gif" height="100"/>
+        </Grid>
+        </Grid>
+        </div>
+        );
     }
 
 
     return (
-      <div>
-        {posts &&
-      posts.map(posts => (
-      <Paper
-      sx={{
-        p: 2,
-        margin: 'auto',
-        mt: 5,
-        maxWidth: 1200,
-        flexGrow: 1,
-        backgroundColor: (theme) =>
-        theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-      }}
-      >
-<Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase sx={{ width: 128, height: 128 }}>
-            <AccessibilityIcon sx={{ fontSize: 80 }} />
-          {/* <Img alt="complex" src="/src/ower_te.png" /> */}
-{/* Image relating to post goes above */}
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid key={posts._id} item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                Title of the Forum Post That Would Show a Little of The Post
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                {posts.postText}
-              </Typography>
+<Grid container direction='column' alignContent='center'>
+<Grid container 
+spacing={2}
+sx={{
+  width: 900,
+  pt: 8,
+}}
+>
+{posts && posts.map(posts => (
+  <Grid item zeroMinWidth key={posts._id} xs={12}>
+      <Item elevation={24}
+ sx={{
+        border: 2,
+        borderColor: '#4caf50', 
+      }}>
+<Typography noWrap variant="h3">Post Title</Typography>
+      <Typography noWrap variant="body1">
+               {posts.postText}
+           </Typography>
+           <Typography variant="body1">
+                 Created by: {posts.username}
+               </Typography>
+               <Typography variant='body1'>
+               on {posts.createdAt}
+               </Typography>
+      </Item>
+  </Grid>
+    ))}
+</Grid>
+</Grid>
 
-              <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                Created by: {posts.username}
-              </Typography>
-              <Typography variant='body2' color="text.secondary">
-              on {posts.createdAt}
-              </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-      </Grid>
-    </Paper>
-  ))}
-    </div>
-  );
-}
+   );
+ }
 
 export default ForumPosts;
