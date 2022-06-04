@@ -6,6 +6,7 @@ import ForumPosts from '../components/ForumPosts';
 import Jumbotron from "../components/Jumbotron";
 import Search from "../components/ForumPosts/Search";
 import Carousel from '../components/Carousel';
+import NewPost from '../components/NewPost';
 const theme = createTheme({
   palette: {
     primary: {
@@ -28,7 +29,8 @@ const Forum = () => {
           {loading ? (
           <div>Loading....</div>
           ) : (
-          <ForumPosts posts={posts}></ForumPosts>
+          <ForumPosts posts={posts}>
+          </ForumPosts>
           )}
   </ThemeProvider>
 

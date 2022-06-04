@@ -8,7 +8,18 @@ import Igor from '../../assets/images/igor.jpg';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import NewPost from '../NewPost';
 
+const RightItem = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
+ ...theme.typography.body1,
+padding: theme.spacing(2),
+textAlign: 'center',
+overflow: 'hidden',
+height: 200,
+width: 450,
+color: theme.palette.text.secondary,
+}));
 
 const Item = styled(Paper)(({ theme }) => ({
   // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFE7E2',
@@ -20,16 +31,7 @@ const Item = styled(Paper)(({ theme }) => ({
   height: 300,
   color: theme.palette.text.secondary,
 }));
-const RightItem = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
-   ...theme.typography.body1,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  overflow: 'hidden',
-  height: 200,
-  width: 450,
-  color: theme.palette.text.secondary,
-}));
+
 
 // Page that appears when no posts are present
 const ForumPosts = ({ posts, postText }) => {
@@ -109,33 +111,9 @@ sx={{
 {/* Begin Right Side of Page */}
 <Grid item xs={6}>
 <Grid container direction='column' alignContent='flex-end'>
-<Grid container component="form"
-
-sx={{
-  display: 'grid',
-  gap: 4,
-  width: 'auto',
-  '& .MuiTextField-root': { m: 1, width: '45ch' },
-    m: 7,
-  flexDirection: 'column',
-}}
-noValidate
-autoComplete="off">
-      <Button variant="contained" size="large" href="#contained-buttons">
-    Create New Post
-      </Button>
-
-  <RightItem elevation={2}>
-  <TextField
-          id="outlined-multiline-static"
-          label="New Post"
-          multiline
-          rows={4}
-          defaultValue=""
-        />
-  </RightItem>
-  </Grid>
-  </Grid>
+  
+<NewPost />
+</Grid>
 </Grid>
 </Grid>
 </Box>
