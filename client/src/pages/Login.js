@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -91,12 +92,16 @@ export default function Login() {
           <Typography component='h1' variant='h5'>
             Log in
           </Typography>
-          {error && <div>Login failed</div>}
+          {error && (
+            <Alert sx={{ mt: 2 }} variant='outlined' severity='error'>
+              Login Failed
+            </Alert>
+          )}
           <Box
             component='form'
             noValidate
             onSubmit={handleFormSubmit}
-            sx={{ mt: 3 }}
+            sx={{ mt: 3, minWidth: '280px' }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -143,7 +148,7 @@ export default function Login() {
             </Button>
             <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link to='/login' variant='body2' sx={{ cursor: 'pointer' }}>
+                <Link href='/signup' variant='body2' sx={{ cursor: 'pointer' }}>
                   Don't have an account? Sign up
                 </Link>
               </Grid>

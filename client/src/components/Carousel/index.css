@@ -1,0 +1,9 @@
+
+.img-container {
+    height: 82%;
+}
+
+.img-container img {
+    object-fit: cover;
+    width: 100vw;
+}

@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ADD_USER } from '../utils/mutations';
@@ -97,13 +98,17 @@ export default function SignUp() {
           <Typography component='h1' variant='h5'>
             Sign up
           </Typography>
-          {error && <div>Signup failed</div>}
+          {error && (
+            <Alert sx={{ mt: 2 }} variant='outlined' severity='error'>
+              Signup Failed
+            </Alert>
+          )}
           {/* form container */}
           <Box
             component='form'
             noValidate
             onSubmit={handleFormSubmit}
-            sx={{ mt: 3 }}
+            sx={{ mt: 3, minWidth: '280px' }}
           >
             {/* input fields section */}
             <Grid container spacing={2}>
@@ -190,7 +195,7 @@ export default function SignUp() {
             {/* already have an account? section */}
             <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link to='/login' variant='body2' sx={{ cursor: 'pointer' }}>
+                <Link href='/login' variant='body2' sx={{ cursor: 'pointer' }}>
                   Already have an account? Log in
                 </Link>
               </Grid>
