@@ -36,10 +36,14 @@ const Profile = () => {
 
   return (
     <>
-      <Container>
+      <Container sx={{ width: '70%' }}>
         <Grid container sx={{ mt: 7 }}>
-          <Grid item xs={2}>
-            <Avatar alt='flower' src={img} sx={{ width: 156, height: 156 }} />
+          <Grid sx={{ height: '11vw' }} item xs={2}>
+            <Avatar
+              alt='flower'
+              src={img}
+              sx={{ width: '100%', height: '100%' }}
+            />
           </Grid>
           <Grid item xs={10} sx={{ mt: 1 }}>
             <h4>
