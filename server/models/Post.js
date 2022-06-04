@@ -4,6 +4,12 @@ const dateFormat = require('../utils/dateFormat');
 
 const postSchema = new Schema(
   {
+    postTitle: {
+      type: String,
+      required: 'You did not provide a title for your post!',
+      minlength: 1,
+      maxlength: 280
+    },
     postText: {
       type: String,
       required: 'You did not provide your post!',
