@@ -9,6 +9,7 @@ import NoMatch from './pages/NoMatch';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
+import Forum from './pages/Forum';
 
 import {
   ApolloProvider,
@@ -41,18 +42,20 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Header />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/profile' element={<Profile />} />
-          {/* <Route path='/thought' element={<SingleThought />} /> */}
-          {/* <Route path='/profile/:username' element={<Profile />} /> */}
-          {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
-          <Route path='/signup' element={<Signup />} />
-          <Route path='*' element={<NoMatch />} />
-        </Routes>
-        {/* <Footer /> */}
+          <Header />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              {/* <Route path='/profile' element={<Profile />} /> */}
+              {/* <Route path='/thought' element={<SingleThought />} /> */}
+              {/* <Route path='/profile/:username' element={<Profile />} /> */}
+              {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/forum' element={<Forum />} />
+              <Route path='/signup' element={<Signup />} />
+              <Route path='*' element={<NoMatch />} />
+            </Routes>
+          {/* <Footer /> */}
       </Router>
     </ApolloProvider>
   );
