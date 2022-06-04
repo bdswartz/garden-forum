@@ -105,6 +105,7 @@ export const ME = gql`
 `;
 
 export const QUERY_POSTS = gql`
+
 query QUERY_POSTS {
   posts {
     _id
@@ -143,6 +144,8 @@ query QUERY_POST($id: ID!) {
     createdAt
     username
     commentCount
+
+
     comments {
       _id
       commentBody
@@ -150,4 +153,6 @@ query QUERY_POST($id: ID!) {
       username
     }
   }
+
 }`
+
