@@ -54,6 +54,41 @@ export const ADD_PLANT = gql`
   }
   `;
 
+  export const UPDATE_PLANT = gql`
+  mutation UPDATE_PLANT($plantId: ID!, $usdaZone: String, $pruning: String, $fertilization: String, $water: String, $commonName: String!) {
+  updatePlant(plantId: $plantId, usda_zone: $usdaZone, pruning: $pruning, fertilization: $fertilization, water: $water, common_name: $commonName) {
+    _id
+    createdAt
+    scientific_name
+    common_name
+    image_path
+    usda_zone
+    pruning
+    fertilization
+    water
+  }
+}`
+
+export const REMOVE_PLANT = gql`
+mutation REMOVE_PLANT($plantId: ID!) {
+  removePlant(plantId: $plantId) {
+    _id
+    createdAt
+    scientific_name
+    common_name
+    image_path
+    usda_zone
+    pruning
+    fertilization
+    water
+    plantHistory {
+      _id
+      createdAt
+      note_body
+    }
+  }
+}`
+
 export const ADD_PLANT_HISTORY = gql`
   mutation ADD_PLANT_HISTORY($plantId: ID!, $noteBody: String) {
     addPlantHistory(plantId: $plantId, note_body: $noteBody) {
@@ -73,6 +108,26 @@ export const ADD_PLANT_HISTORY = gql`
     }
   }
   `;
+
+  export const REMOVE_HISTORY = gql`
+  mutation REMOVE_HISTORY($plantId: ID!, $historyId: ID!) {
+  removePlantHistory(plantId: $plantId, historyId: $historyId) {
+    _id
+    createdAt
+    scientific_name
+    common_name
+    image_path
+    usda_zone
+    pruning
+    fertilization
+    water
+    plantHistory {
+      _id
+      createdAt
+      note_body
+    }
+  }
+}`
 
 export const ADD_POST = gql`
   mutation ADD_POST($postText: String!) {
@@ -98,6 +153,47 @@ mutation ADD_COMMENT($postId: ID!, $commentBody: String!) {
       commentBody
       createdAt
       username
+    }
+  }
+}`
+
+
+export const ADD_FRIEND = gql`
+mutation ADD_FRIEND($friendId: ID!) {
+  addFriend(friendId: $friendId) {
+    _id
+    createdAt
+    firstName
+    lastName
+    username
+    email
+    friends {
+      _id
+      createdAt
+      firstName
+      lastName
+      username
+      email
+    }
+  }
+}`
+
+export const REMOVE_FRIEND = gql`
+mutation REMOVE_FRIEND($friendId: ID!) {
+  removeFriend(friendId: $friendId) {
+    _id
+    createdAt
+    firstName
+    lastName
+    username
+    email
+    friends {
+      _id
+      createdAt
+      firstName
+      lastName
+      username
+      email
     }
   }
 }`

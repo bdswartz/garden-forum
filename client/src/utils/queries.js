@@ -116,7 +116,7 @@ query QUERY_POSTS {
 }`
 
 export const QUERY_PLANT = gql`
-query Query($id: ID!) {
+query QUERY_PLANT($id: ID!) {
   plant(_id: $id) {
     _id
     createdAt

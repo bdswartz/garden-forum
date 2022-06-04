@@ -91,10 +91,8 @@ const typeDefs = gql`
       water: String
     ): Plant
     updatePlant(
-      plantID: ID!
-      scientific_name: String!
-      common_name: String!
-      image_path: String!
+      plantId: ID!
+      common_name: String
       usda_zone: String
       pruning: String
       fertilization: String

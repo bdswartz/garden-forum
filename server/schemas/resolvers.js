@@ -134,11 +134,20 @@ const resolvers = {
     },
     updatePlant: async (parent, args, context) => {
       if (context.user) {
+        const {plantId, usda_zone, pruning, fertilization, water, common_name} = args
+        console.log(common_name);
         const plant = await Plant.findByIdAndUpdate(
-          { _id: args.plantId },
-          {args},
+          plantId,
+          { 
+            common_name: common_name,
+            usda_zone: usda_zone,
+            pruning: pruning,
+            fertilization: fertilization,
+            water: water
+          },
           { new: true }
         );
+        console.log(plant);
         return plant;
       }
 
