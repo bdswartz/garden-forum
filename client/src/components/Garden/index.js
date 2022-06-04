@@ -5,12 +5,36 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
+import Chip from '@mui/material/Chip';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function Garden({ plants }) {
+  const handleClick = () => {
+    console.log('You clicked Add Plant');
+  };
+
   return (
     <ImageList>
       <ImageListItem key='Subheader' cols={2}>
-        <ListSubheader component='div'>Your Garden</ListSubheader>
+        <ListSubheader sx={{ fontSize: '40px' }} component='div'>
+          Your Garden
+          <Chip
+            sx={{
+              fontSize: '11px',
+              width: 100,
+              height: 28,
+              cursor: 'pointer',
+              m: 3,
+              ':hover': {
+                borderColor: 'green',
+              },
+            }}
+            icon={<AddIcon />}
+            onClick={handleClick}
+            label='Add Plant'
+            variant='outlined'
+          />
+        </ListSubheader>
       </ImageListItem>
       {plants &&
         plants.map((plant) => (
