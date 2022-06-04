@@ -8,6 +8,7 @@ const typeDefs = gql`
     lastName: String
     username: String
     email: String
+    about: String
     posts: [Post]
     plants: [Plant]
     friends: [User]
@@ -75,6 +76,7 @@ const typeDefs = gql`
       lastName: String
       email: String
       password: String
+      about: String
     ): User
     login(email: String!, password: String!): Auth
     addPost(postText: String!): Post

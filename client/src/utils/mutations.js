@@ -38,6 +38,26 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+mutation UPDATE_USER($about: String, $email: String, $firstName: String, $lastName: String) {
+  updateUser(about: $about, email: $email, firstName: $firstName, lastName: $lastName) {
+    createdAt
+    firstName
+    lastName
+    username
+    email
+    about
+    friends {
+      createdAt
+      firstName
+      lastName
+      username
+      email
+      about
+    }
+  }
+}`
+
 export const ADD_PLANT = gql`
   mutation ADD_PLANT($scientificName: String!, $commonName: String!, $imagePath: String!, $usdaZone: String, $pruning: String, $fertilization: String, $water: String, ) {
     addPlant(scientific_name: $scientificName, common_name: $commonName, image_path: $imagePath, usda_zone: $usdaZone, pruning: $pruning, fertilization: $fertilization, water: $water) {
