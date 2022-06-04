@@ -34,11 +34,11 @@ const resolvers = {
         .populate('plants')
         .populate('posts');
     },
-    posts: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+    // get all posts
+    posts: async () => {
+      return Post.find().sort({ createdAt: -1 });
     },
-    //   get thought by thought id
+    //   get post by post id
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
     },
@@ -179,6 +179,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     addPlantHistory: async (parent, { plantId, note_body }, context) => {
+      if (context.user) {
         const updatedPlant = await Plant.findOneAndUpdate(
           { _id: plantId },
           {
@@ -188,7 +189,11 @@ const resolvers = {
           },
           { new: true, runValidators: true }
         );
+      
         return updatedPlant;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
     },
     removePlantHistory: async (parent, { plantId, historyId }, context) => {
       const updatedPlant = await Plant.findOneAndUpdate(
