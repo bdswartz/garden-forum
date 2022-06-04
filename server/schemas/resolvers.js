@@ -34,14 +34,17 @@ const resolvers = {
         .populate('plants')
         .populate('posts');
     },
-    posts: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+    // get all posts
+    posts: async () => {
+      return Post.find().sort({ createdAt: -1 });
     },
-    //   get thought by thought id
+    //   get post by post id
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
     },
+    plant: async (parent, {_id}) => {
+      return Plant.findOne({_id});
+    }
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -129,6 +132,44 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
+    updatePlant: async (parent, args, context) => {
+      if (context.user) {
+        const {plantId, usda_zone, pruning, fertilization, water, common_name} = args
+        console.log(common_name);
+        const plant = await Plant.findByIdAndUpdate(
+          plantId,
+          { 
+            common_name: common_name,
+            usda_zone: usda_zone,
+            pruning: pruning,
+            fertilization: fertilization,
+            water: water
+          },
+          { new: true }
+        );
+        console.log(plant);
+        return plant;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removePlant: async (parent, {plantId}, context) => {
+      if (context.user) {
+        const plant = await Plant.findByIdAndDelete(
+          plantId,
+          function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+              console.log("Deleted : ", docs);
+            }
+          });
+        return plant;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
     addComment: async (parent, { postId, commentBody }, context) => {
       if (context.user) {
         const updatedPost = await Post.findOneAndUpdate(
@@ -147,6 +188,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     addPlantHistory: async (parent, { plantId, note_body }, context) => {
+      if (context.user) {
         const updatedPlant = await Plant.findOneAndUpdate(
           { _id: plantId },
           {
@@ -156,7 +198,11 @@ const resolvers = {
           },
           { new: true, runValidators: true }
         );
+      
         return updatedPlant;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
     },
     removePlantHistory: async (parent, { plantId, historyId }, context) => {
       const updatedPlant = await Plant.findOneAndUpdate(

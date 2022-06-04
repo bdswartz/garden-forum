@@ -8,6 +8,7 @@ const typeDefs = gql`
     lastName: String
     username: String
     email: String
+    about: String
     posts: [Post]
     plants: [Plant]
     friends: [User]
@@ -28,6 +29,7 @@ const typeDefs = gql`
 
   type Post {
     _id: ID
+    postTitle: String
     postText: String
     createdAt: String
     username: String
@@ -57,9 +59,9 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
-    posts(username: String): [Post]
+    posts: [Post]
     post(_id: ID!): Post
-    plants(username: String): [Plant]
+    plant(_id: ID!): Plant
   }
 
   type Mutation {
@@ -75,17 +77,31 @@ const typeDefs = gql`
       lastName: String
       email: String
       password: String
+      about: String
     ): User
     login(email: String!, password: String!): Auth
-    addPost(postText: String!): Post
+    addPost(postTitle: String! postText: String!): Post
     addComment(postId: ID!, commentBody: String!): Post
     addPlantHistory(plantId: ID!, note_body:String): Plant
-    removePlantHistory(plantId:ID!, historyId:ID!): Plant
+    removePlantHistory(plantId: ID!, historyId:ID!): Plant
     addPlant(
       scientific_name: String!
       common_name: String!
       image_path: String!
+      usda_zone: String
+      pruning: String
+      fertilization: String
+      water: String
     ): Plant
+    updatePlant(
+      plantId: ID!
+      common_name: String
+      usda_zone: String
+      pruning: String
+      fertilization: String
+      water: String
+    ): Plant
+    removePlant(plantId:ID!): Plant
     addFriend(friendId: ID!): User
     removeFriend(friendId: ID!): User
   }
