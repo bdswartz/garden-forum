@@ -70,22 +70,27 @@ const People = () => {
         </Grid>
       </Box>
       {/* search bar end */}
-      <List>
+      <List style={{ width: '50%', margin: 'auto' }}>
         {users.map((user) => (
-          <ListItem
-            component={Link}
-            href={`/profile/${user.username}`}
-            to={`/profile/${user.username}`}
-            style={{ textDecoration: 'none' }}
-            sx={{ curser: 'pointer', color: 'black' }}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={user.username} />
-          </ListItem>
+          <>
+            <Box>
+              <Divider style={{ width: '100%' }} />
+            </Box>
+            <ListItem
+              component={Link}
+              href={`/profile/${user.username}`}
+              to={`/profile/${user.username}`}
+              style={{ textDecoration: 'none' }}
+              sx={{ curser: 'pointer', color: 'black' }}
+            >
+              <ListItemAvatar>
+                <Avatar>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={user.username} />
+            </ListItem>
+          </>
         ))}
         <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
           {/* <Typography
@@ -109,3 +114,6 @@ const People = () => {
 };
 
 export default People;
+
+// if search bar is empty and search is clicked query all users
+// if search bar has text in it query all users and return people that have that text as a username, or first or last name
