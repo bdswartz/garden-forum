@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import NoMatch from "./pages/NoMatch";
 // import SingleThought from './pages/SingleThought';
 import Profile from "./pages/Profile";
+import Plant from "./pages/Plant";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Forum from "./pages/Forum";
@@ -64,6 +65,7 @@ function App() {
               {/* <Route path='/thought/:id' element={<SingleThought />} /> */}
               <Route path='/profile' element={<Profile />} />
               <Route path='/forum' element={<Forum />} />
+              <Route path='/plant/:id' element={<Plant />} />
               <Route path='/signup' element={<Signup />} />
               <Route path='*' element={<NoMatch />} />
               <Route path="/:id" element={<Post />} />
