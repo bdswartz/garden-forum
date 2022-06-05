@@ -42,9 +42,29 @@ const resolvers = {
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
     },
-    plant: async (parent, {_id}) => {
-      return Plant.findOne({_id});
-    }
+    plant: async (parent, { _id }) => {
+      return Plant.findOne({ _id });
+    },
+    getUsers: async (parent, args) => {
+      const { search } = args;
+      let searchQuery = {};
+
+      if (search) {
+        searchQuery = {
+          $or: [
+            { firstName: { $regex: search, $options: 'i' } },
+            { lastName: { $regex: search, $options: 'i' } },
+            { userName: { $regex: search, $options: 'i' } },
+          ],
+        };
+      }
+
+      const users = await User.find(searchQuery);
+
+      return {
+        users,
+      };
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -134,16 +154,23 @@ const resolvers = {
     },
     updatePlant: async (parent, args, context) => {
       if (context.user) {
-        const {plantId, usda_zone, pruning, fertilization, water, common_name} = args
+        const {
+          plantId,
+          usda_zone,
+          pruning,
+          fertilization,
+          water,
+          common_name,
+        } = args;
         console.log(common_name);
         const plant = await Plant.findByIdAndUpdate(
           plantId,
-          { 
+          {
             common_name: common_name,
             usda_zone: usda_zone,
             pruning: pruning,
             fertilization: fertilization,
-            water: water
+            water: water,
           },
           { new: true }
         );
@@ -153,18 +180,18 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
-    removePlant: async (parent, {plantId}, context) => {
+    removePlant: async (parent, { plantId }, context) => {
       if (context.user) {
         const plant = await Plant.findByIdAndDelete(
           plantId,
           function (err, docs) {
-            if (err){
-                console.log(err)
+            if (err) {
+              console.log(err);
+            } else {
+              console.log('Deleted : ', docs);
             }
-            else{
-              console.log("Deleted : ", docs);
-            }
-          });
+          }
+        );
         return plant;
       }
 
@@ -198,7 +225,7 @@ const resolvers = {
           },
           { new: true, runValidators: true }
         );
-      
+
         return updatedPlant;
       }
 
@@ -209,13 +236,13 @@ const resolvers = {
         { _id: plantId },
         {
           $pull: {
-            plantHistory: {_id: historyId },
+            plantHistory: { _id: historyId },
           },
         },
         { new: true, runValidators: true }
       );
       return updatedPlant;
-   },
+    },
     addFriend: async (parent, { friendId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
@@ -223,12 +250,12 @@ const resolvers = {
           { $addToSet: { friends: friendId } },
           { new: true }
         ).populate('friends');
-    
+
         return updatedUser;
       }
-    
+
       throw new AuthenticationError('You need to be logged in!');
-  },
+    },
     removeFriend: async (parent, { friendId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
@@ -236,12 +263,12 @@ const resolvers = {
           { $pull: { friends: friendId } },
           { new: true }
         ).populate('friends');
-    
+
         return updatedUser;
       }
-    
+
       throw new AuthenticationError('You need to be logged in!');
-  },
+    },
   },
 };
 

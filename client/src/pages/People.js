@@ -20,9 +20,7 @@ import { QUERY_ALL_USERS } from '../utils/queries';
 
 const People = () => {
   const { loading, data } = useQuery(QUERY_ALL_USERS);
-
   const users = data?.users || [];
-  console.log(users);
 
   return (
     <>
@@ -92,22 +90,6 @@ const People = () => {
             </ListItem>
           </>
         ))}
-        <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          {/* <Typography
-            component={Link}
-            // style={{ textDecoration: 'none' }}
-            to='/'
-            sx={{
-              m: 1,
-              mr: 4,
-              fontWeight: 'bold',
-              color: 'black',
-              cursor: 'pointer',
-            }}
-          >
-            View all
-          </Typography> */}
-        </Box>
       </List>
     </>
   );
