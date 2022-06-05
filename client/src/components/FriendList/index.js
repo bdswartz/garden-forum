@@ -60,6 +60,22 @@ const FriendList = ({ friendCount, username, friends }) => {
             <ListItemText primary={friend.username} />
           </ListItem>
         ))}
+        <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
+          <Typography
+            component={Link}
+            // style={{ textDecoration: 'none' }}
+            to='/'
+            sx={{
+              m: 1,
+              mr: 4,
+              fontWeight: 'bold',
+              color: 'black',
+              cursor: 'pointer',
+            }}
+          >
+            View all
+          </Typography>
+        </Box>
       </List>
     </div>
   );
