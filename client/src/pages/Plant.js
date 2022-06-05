@@ -7,17 +7,20 @@ import PlantCard from '../components/PlantCard';
 import {QUERY_PLANT} from '../utils/queries';
 import Auth from '../utils/auth';
 import PlantHistoryForm from '../components/PlantHistoryForm';
+import PlantHistory from '../components/PlantHistory'
 
 const Plant = () => {
     // get the plant id from the url parameters
     const {id: plantId} = useParams();
+    console.log(plantId);
     // query the plant using the plantId as the query variable
-    const { loading, queryData } = useQuery(QUERY_PLANT, {
-        variables: { id: plantId }
+    const { loading, data } = useQuery(QUERY_PLANT, {
+        variables: { id: plantId },
       });
     // when query returns data, send it to the plant variable
     // note: plantHistory is an array inside the plant model
-    const plant = queryData?.plant
+    const plant = data?.plant || {}
+    console.log(plant);
     // while waiting for data, let the user know
     if (loading) {
         return <div>Loading...</div>;

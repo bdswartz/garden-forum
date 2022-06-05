@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Plant from '../../pages/Plant';
 
-export default function PlantCard(plantInfo) {
+export default function PlantCard({plantInfo}) {
+  console.log(plantInfo);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea sx={{display: "flex", flexDirection:"row"}}>

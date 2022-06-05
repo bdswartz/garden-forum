@@ -4,13 +4,13 @@ const PlantHistory = ({ history }) => {
   return (
     <div className="card mb-3">
         <div className="card-header">
-        <span className="text-light">Reactions</span>
+        <span className="text-light">Plant History</span>
          </div>
         <div className="card-body">
         {history &&
-            history.map(reaction => (
+            history.map(history => (
             <p className="pill mb-3" key={history._id}>
-                {history.createdAt}:  ${history.note_body}
+                {history.createdAt}:  {history.note_body}
             </p>
             ))}
         </div>

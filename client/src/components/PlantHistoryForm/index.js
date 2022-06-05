@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Igor from '../../assets/images/igor.jpg';
 import Box from '@mui/material/Box';
-import { ADD_PLANT_HISTORY } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
+import { ADD_PLANT_HISTORY } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 
@@ -25,27 +25,22 @@ const NewItem = styled(Paper)(({ theme }) => ({
 
 
 
-export default function PlantHistoryForm(plantId) {
-  const [formState, setFormState] = useState({ plantId: plantId, noteBody: '' });
-  const { noteBody } = formState;
-
+const PlantHistoryForm = ({plantId}) => {
   const [addPlantHistory, { error }] = useMutation(ADD_PLANT_HISTORY);
+  const [noteBody, setNoteBody] = useState('');
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    setNoteBody(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
+    event.preventDefault();
     try {
-      const { data } = await addPlantHistory({
-        variables: { ...formState },
+      const data = await addPlantHistory({
+        variables: { plantId, noteBody },
       });
       Auth.loggedIn();
+      setNoteBody('');
     } catch (e) {
       console.error(e);
     }
@@ -83,7 +78,7 @@ export default function PlantHistoryForm(plantId) {
                         onChange={handleChange}
                         id="noteBody" 
                         name="noteBody" 
-                        value={formState.postTitle} 
+                        value={noteBody} 
                         label="Plant History Entry Text" 
                         variant="outlined" 
                     />
@@ -95,5 +90,7 @@ export default function PlantHistoryForm(plantId) {
             </Grid>
             </Grid>
         </Box>
-    )
+    ) 
 };
+
+export default PlantHistoryForm;
