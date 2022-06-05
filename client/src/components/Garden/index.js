@@ -9,6 +9,7 @@ import Chip from '@mui/material/Chip';
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import AddPlantDialog from '../AddPlantDialog';
+import { Link } from 'react-router-dom';
 
 export default function Garden({ plants, user }) {
   // const handleClick = () => {
@@ -53,7 +54,7 @@ export default function Garden({ plants, user }) {
       </ImageListItem>
       {plants &&
         plants.map((plant) => (
-          <ImageListItem key={plant.img}>
+          <ImageListItem key={plant._id}>
             <img
               src={`${plant.image_path}?w=248&fit=crop&auto=format`}
               srcSet={`${plant.image_path}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -67,6 +68,8 @@ export default function Garden({ plants, user }) {
                 <IconButton
                   sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                   aria-label={`info about ${plant.title}`}
+                  component={Link}
+                  to={`/plant/${plant._id}`}
                 >
                   <InfoIcon />
                 </IconButton>

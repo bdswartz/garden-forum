@@ -6,8 +6,7 @@ import Auth from '../utils/auth';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import img from '../assets/images/igor.jpg';
-// import img2 from '../assets/images/malvestida.jpg';
-import { Container, Grid, Box } from '@mui/material';
+import { Container, Grid, Box, Typography } from '@mui/material';
 import Garden from '../components/Garden';
 import FriendList from '../components/FriendList';
 
@@ -71,12 +70,12 @@ const Profile = () => {
             {/* User name and joined info */}
             <Grid item xs={8} sx={{ mt: 1 }}>
               <Container sx={{ ml: 1 }}>
-                <h4>
+                <Typography variant='h5'>
                   <strong>{user.username}</strong>.
-                </h4>
-                <h6>
+                </Typography>
+                <Typography variant='p'>
                   <strong>Joined:</strong> {user.createdAt}
-                </h6>
+                </Typography>
               </Container>
             </Grid>
           </Grid>

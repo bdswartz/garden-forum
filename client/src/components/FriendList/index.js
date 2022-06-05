@@ -16,7 +16,7 @@ const FriendList = ({ friendCount, username, friends }) => {
     return (
       <>
         <Typography
-          varient='h4'
+          variant='h6'
           sx={{ p: 2, p: 1, bgcolor: green[500], color: 'white' }}
         >
           Friend List
@@ -37,7 +37,7 @@ const FriendList = ({ friendCount, username, friends }) => {
   return (
     <div>
       <Typography
-        varient='h4'
+        variant='h6'
         sx={{ p: 2, p: 1, bgcolor: green[500], color: 'white' }}
       >
         Friend List
