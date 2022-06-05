@@ -3,9 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { QUERY_POSTS } from '../utils/queries'
 import {useQuery} from '@apollo/client';
 import ForumPosts from '../components/ForumPosts';
-import Jumbotron from "../components/Jumbotron";
 import Search from "../components/ForumPosts/Search";
-import Carousel from '../components/Carousel';
 const theme = createTheme({
   palette: {
     primary: {
@@ -28,7 +26,8 @@ const Forum = () => {
           {loading ? (
           <div>Loading....</div>
           ) : (
-          <ForumPosts posts={posts}></ForumPosts>
+          <ForumPosts posts={posts}>
+          </ForumPosts>
           )}
   </ThemeProvider>
 
