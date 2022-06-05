@@ -27,7 +27,7 @@ export default function AddPlantDialog({ open, handleClose }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const timer = React.useRef();
-
+  //loading icon special effects
   const buttonSx = {
     ...(success && {
       bgcolor: green[500],
@@ -36,12 +36,13 @@ export default function AddPlantDialog({ open, handleClose }) {
       },
     }),
   };
+  //loading icon useEffect
   React.useEffect(() => {
     return () => {
       clearTimeout(timer.current);
     };
   }, []);
-
+  //starts timer for load icon
   const handleButtonClick = () => {
     if (!loading) {
       setSuccess(false);
@@ -52,19 +53,35 @@ export default function AddPlantDialog({ open, handleClose }) {
       }, 2000);
     }
   };
-
-  // const [toggle, setToggle] = useState(false)
+  //plant search setup
   const plantFile = useRef();
   const [plantImg, setPlantImg] = useState([]);
-  // const [plantArr, setPlantArr] = useState([]);
   const [plantName, setplantName] = useState();
   const [sciencePlant, setSciencePlant] = useState();
   const [plantPic, setPlantPic] = useState();
 
+  //upload plant file
   const onFileChange = (event) => {
     setPlantImg(event.target.files);
   };
+  //send plant file to API
+  const handleSearch = () => {
+    const plantArr = Object.values(plantImg);
+    searchPlants(plantArr).then((res) => {
+      setplantName(res.suggestions[0].plant_details.common_names[0]);
+      setSciencePlant(res.suggestions[0].plant_details.scientific_name);
+      setPlantPic(res.suggestions[0].similar_images[0].url);
 
+      // console.log(plant_name);
+      // console.log(res.suggestions[0].plant_details.scientific_name);
+      // console.log(res.suggestions[0].similar_images[0].url);
+    });
+    console.log(plantName);
+    console.log(sciencePlant);
+    console.log(plantPic);
+  };
+
+  //take queries/mutations and preps for user input for db
   const [addPlant, { error }] = useMutation(ADD_PLANT, {
     update(
       cache,
@@ -93,21 +110,7 @@ export default function AddPlantDialog({ open, handleClose }) {
     },
   });
 
-  const handleSearch = () => {
-    const plantArr = Object.values(plantImg);
-    searchPlants(plantArr).then((res) => {
-      setplantName(res.suggestions[0].plant_details.common_names[0]);
-      setSciencePlant(res.suggestions[0].plant_details.scientific_name);
-      setPlantPic(res.suggestions[0].similar_images[0].url);
-
-      // console.log(plant_name);
-      // console.log(res.suggestions[0].plant_details.scientific_name);
-      // console.log(res.suggestions[0].similar_images[0].url);
-    });
-    console.log(plantName);
-    console.log(sciencePlant);
-    console.log(plantPic);
-  };
+  //pushes user info into the db
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -167,7 +170,7 @@ export default function AddPlantDialog({ open, handleClose }) {
             // key={common_name}
             fullWidth
             variant="standard"
-            value={plantName}
+            value={plantName || ""}
           />
           <TextField
             autoFocus
@@ -178,7 +181,7 @@ export default function AddPlantDialog({ open, handleClose }) {
             // key={scientific_name}
             fullWidth
             variant="standard"
-            value={sciencePlant}
+            value={sciencePlant || ""}
           />
           <TextField
             autoFocus
