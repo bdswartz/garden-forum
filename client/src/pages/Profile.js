@@ -20,6 +20,16 @@ const styles = {
 };
 
 const Profile = () => {
+  const [open, setOpen] = React.useState(false);
+
+  // //button open/close
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const { username: userParam } = useParams();
   const { loading, data } = useQuery(userParam ? QUERY_USER : ME, {
     variables: { username: userParam },

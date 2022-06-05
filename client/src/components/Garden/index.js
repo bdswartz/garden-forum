@@ -6,11 +6,22 @@ import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import Chip from '@mui/material/Chip';
+import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import AddPlantDialog from '../AddPlantDialog';
 
 export default function Garden({ plants, user }) {
-  const handleClick = () => {
-    console.log('You clicked Add Plant');
+  // const handleClick = () => {
+  //   console.log("You clicked Add Plant");
+  // };
+  const [open, setOpen] = React.useState(false);
+
+  // //button open/close
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -30,10 +41,14 @@ export default function Garden({ plants, user }) {
               },
             }}
             icon={<AddIcon />}
-            onClick={handleClick}
+            onClick={handleClickOpen}
             label='Add Plant'
             variant='outlined'
           />
+          {/* <Button variant="outlined" onClick={handleClickOpen}>
+            Add your OWN plant!
+          </Button>{" "} */}
+          <AddPlantDialog open={open} handleClose={handleClose} />
         </ListSubheader>
       </ImageListItem>
       {plants &&
