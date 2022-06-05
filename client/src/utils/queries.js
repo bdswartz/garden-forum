@@ -109,6 +109,7 @@ export const QUERY_POSTS = gql`
 query QUERY_POSTS {
   posts {
     _id
+    postTitle
     postText
     createdAt
     username
