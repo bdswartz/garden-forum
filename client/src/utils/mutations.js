@@ -224,7 +224,7 @@ export const ADD_COMMENT = gql`
 `;
 
 export const ADD_FRIEND = gql`
-  mutation ADD_FRIEND($friendId: ID!) {
+  mutation AddFriend($friendId: ID!) {
     addFriend(friendId: $friendId) {
       _id
       createdAt
@@ -232,14 +232,7 @@ export const ADD_FRIEND = gql`
       lastName
       username
       email
-      friends {
-        _id
-        createdAt
-        firstName
-        lastName
-        username
-        email
-      }
+      about
     }
   }
 `;

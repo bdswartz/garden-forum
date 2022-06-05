@@ -47,6 +47,7 @@ const resolvers = {
     },
     getUsers: async (parent, args) => {
       const { search } = args;
+
       let searchQuery = {};
 
       if (search) {
