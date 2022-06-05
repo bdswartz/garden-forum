@@ -11,9 +11,6 @@ import AddIcon from "@mui/icons-material/Add";
 import AddPlantDialog from "../AddPlantDialog";
 
 export default function Garden({ plants }) {
-  // const handleClick = () => {
-  //   console.log("You clicked Add Plant");
-  // };
   const [open, setOpen] = React.useState(false);
 
   // //button open/close
@@ -45,9 +42,6 @@ export default function Garden({ plants }) {
             label="Add Plant"
             variant="outlined"
           />
-          {/* <Button variant="outlined" onClick={handleClickOpen}>
-            Add your OWN plant!
-          </Button>{" "} */}
           <AddPlantDialog open={open} handleClose={handleClose} />
         </ListSubheader>
       </ImageListItem>
