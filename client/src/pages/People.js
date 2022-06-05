@@ -21,11 +21,8 @@ import { QUERY_ALL_USERS, SEARCH_USER_QUERY } from '../utils/queries';
 const People = () => {
   const { loading: allLoading, data: allData } = useQuery(QUERY_ALL_USERS);
   const [searchInput, setSearchInput] = useState('');
-  // const [clicked, setClicked] = useState(false);
-  // console.log(clicked);
 
   const allUsers = allData?.users || {};
-  // console.log(allUsers);
 
   const [searchUser, { loading, data }] = useLazyQuery(SEARCH_USER_QUERY, {
     variables: { search: searchInput },
@@ -89,29 +86,56 @@ const People = () => {
         </Grid>
       </Box>
       {/* search bar end */}
-      <List style={{ width: '50%', margin: 'auto' }}>
-        {allUsers.map((user) => (
-          <>
-            <Box>
-              <Divider style={{ width: '100%' }} />
-            </Box>
-            <ListItem
-              component={Link}
-              href={`/profile/${user.username}`}
-              to={`/profile/${user.username}`}
-              style={{ textDecoration: 'none' }}
-              sx={{ curser: 'pointer', color: 'black' }}
-            >
-              <ListItemAvatar>
-                <Avatar>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={user.username} />
-            </ListItem>
-          </>
-        ))}
-      </List>
+      {users.length < 200 ? (
+        <List style={{ width: '50%', margin: 'auto' }}>
+          {users.map((user) => (
+            <>
+              <Box>
+                <Divider style={{ width: '100%' }} />
+              </Box>
+              <ListItem
+                component={Link}
+                href={`/profile/${user.username}`}
+                to={`/profile/${user.username}`}
+                style={{ textDecoration: 'none' }}
+                sx={{ curser: 'pointer', color: 'black' }}
+              >
+                <ListItemAvatar>
+                  <Avatar>
+                    <PersonIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={user.username} />
+                <ListItemText primary={user.firstName + ' ' + user.lastName} />
+              </ListItem>
+            </>
+          ))}
+        </List>
+      ) : (
+        <List style={{ width: '50%', margin: 'auto' }}>
+          {allUsers.map((user) => (
+            <>
+              <Box>
+                <Divider style={{ width: '100%' }} />
+              </Box>
+              <ListItem
+                component={Link}
+                href={`/profile/${user.username}`}
+                to={`/profile/${user.username}`}
+                style={{ textDecoration: 'none' }}
+                sx={{ curser: 'pointer', color: 'black' }}
+              >
+                <ListItemAvatar>
+                  <Avatar>
+                    <PersonIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={user.username} />
+              </ListItem>
+            </>
+          ))}
+        </List>
+      )}
     </>
   );
 };

@@ -73,7 +73,7 @@ const Profile = () => {
                 <Typography variant='h5'>
                   <strong>{user.username}</strong>.
                 </Typography>
-                <Typography variant='p'>
+                <Typography>
                   <strong>Joined:</strong> {user.createdAt}
                 </Typography>
               </Container>
