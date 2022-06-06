@@ -81,6 +81,7 @@ export default function AddPlantDialog({ open, handleClose }) {
     console.log(scientificName);
     console.log(imagePath);
   };
+  //handle change- allow users to change
 
   const [addPlant, { error }] = useMutation(ADD_PLANT);
 
