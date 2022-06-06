@@ -1,29 +1,104 @@
 import * as React from "react";
 import { useState, useRef } from "react";
 //destructure all the items from "@mui/material"
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Box,
+  CircularProgress,
+  Fab,
+} from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import SaveIcon from "@mui/icons-material/Save";
+
+import { green } from "@mui/material/colors";
 import { searchPlants } from "../../utils/API";
+import { useMutation } from "@apollo/client";
+import { QUERY_PLANT, ME } from "../../utils/queries";
+import { ADD_PLANT } from "../../utils/mutations";
 
 export default function AddPlantDialog({ open, handleClose }) {
-  // const [toggle, setToggle] = useState(false)
+  //loading bar items
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const timer = React.useRef();
+  //loading icon special effects
+  const buttonSx = {
+    ...(success && {
+      bgcolor: green[500],
+      "&:hover": {
+        bgcolor: green[700],
+      },
+    }),
+  };
+  //loading icon useEffect
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
+  //starts timer for load icon
+  const handleButtonClick = () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+      timer.current = window.setTimeout(() => {
+        setSuccess(true);
+        setLoading(false);
+      }, 2000);
+    }
+  };
+  //plant search setup
   const plantFile = useRef();
   const [plantImg, setPlantImg] = useState([]);
+  //change these to proper names below
+  const [commonName, setcommonName] = useState();
+  const [scientificName, setscientificName] = useState();
+  const [imagePath, setImagePath] = useState();
 
+  //upload plant file
   const onFileChange = (event) => {
     setPlantImg(event.target.files);
   };
-
+  //send plant file to API
   const handleSearch = () => {
     const plantArr = Object.values(plantImg);
     searchPlants(plantArr).then((res) => {
-      console.log(res);
+      setcommonName(res.suggestions[0].plant_details.common_names[0]);
+      setscientificName(res.suggestions[0].plant_details.scientific_name);
+      setImagePath(res.suggestions[0].similar_images[0].url);
+
+      // console.log(plant_name);
+      // console.log(res.suggestions[0].plant_details.scientific_name);
+      // console.log(res.suggestions[0].similar_images[0].url);
     });
+    console.log(commonName);
+    console.log(scientificName);
+    console.log(imagePath);
+  };
+
+  const [addPlant, { error }] = useMutation(ADD_PLANT);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const data = await addPlant({
+        variables: {
+          scientificName,
+          commonName,
+          imagePath,
+        },
+      });
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -42,7 +117,27 @@ export default function AddPlantDialog({ open, handleClose }) {
               multiple
             />
             <DialogActions align="center">
-              <Button onClick={handleSearch}>Identify Plant</Button>
+              <Button
+                onClick={() => {
+                  handleSearch();
+                  handleButtonClick();
+                }}
+              >
+                {success ? <CheckIcon /> : <SaveIcon />}
+                Identify Plant
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={68}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: -6,
+                    left: -6,
+                    zIndex: 1,
+                  }}
+                />
+              )}
             </DialogActions>
           </div>
         </DialogContent>
@@ -52,8 +147,10 @@ export default function AddPlantDialog({ open, handleClose }) {
             margin="dense"
             label="Common Plant Name"
             type="text"
+            // key={common_name}
             fullWidth
             variant="standard"
+            value={commonName || ""}
           />
           <TextField
             autoFocus
@@ -61,8 +158,10 @@ export default function AddPlantDialog({ open, handleClose }) {
             id="name"
             label="Scientific Plant Name"
             type="text"
+            // key={scientific_name}
             fullWidth
             variant="standard"
+            value={scientificName || ""}
           />
           <TextField
             autoFocus
@@ -94,7 +193,7 @@ export default function AddPlantDialog({ open, handleClose }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Add Plant!</Button>
+          <Button onClick={handleSubmit}>Add Plant!</Button>
         </DialogActions>
       </Dialog>
     </div>

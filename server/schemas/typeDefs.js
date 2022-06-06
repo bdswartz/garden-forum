@@ -14,6 +14,10 @@ const typeDefs = gql`
     friends: [User]
   }
 
+  type UsersResult {
+    users: [User]
+  }
+
   type Plant {
     _id: ID
     createdAt: String
@@ -59,6 +63,7 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
+    getUsers(search: String): UsersResult
     posts: [Post]
     post(_id: ID!): Post
     plant(_id: ID!): Plant
@@ -80,10 +85,10 @@ const typeDefs = gql`
       about: String
     ): User
     login(email: String!, password: String!): Auth
-    addPost(postTitle: String! postText: String!): Post
+    addPost(postTitle: String!, postText: String!): Post
     addComment(postId: ID!, commentBody: String!): Post
-    addPlantHistory(plantId: ID!, note_body:String): Plant
-    removePlantHistory(plantId: ID!, historyId:ID!): Plant
+    addPlantHistory(plantId: ID!, note_body: String): Plant
+    removePlantHistory(plantId: ID!, historyId: ID!): Plant
     addPlant(
       scientific_name: String!
       common_name: String!
@@ -101,7 +106,7 @@ const typeDefs = gql`
       fertilization: String
       water: String
     ): Plant
-    removePlant(plantId:ID!): Plant
+    removePlant(plantId: ID!): Plant
     addFriend(friendId: ID!): User
     removeFriend(friendId: ID!): User
   }
@@ -115,4 +120,3 @@ module.exports = typeDefs;
 // need to add mutations to
 // update plant
 // delete plant
-

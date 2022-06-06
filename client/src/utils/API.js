@@ -56,7 +56,7 @@ export const searchPlants = (files) => {
       const reader = new FileReader();
       reader.onload = (event) => {
         const res = event.target.result;
-        console.log(res);
+        // console.log(res);
         resolve(res);
       };
       reader.readAsDataURL(file);
@@ -64,7 +64,7 @@ export const searchPlants = (files) => {
   });
 
   return Promise.all(promises).then((base64files) => {
-    console.log(base64files);
+    // console.log(base64files);
 
     const data = {
       api_key: "eVh7gMTn4ySBkcg5XnOz13qsTPkurS35JZGG9b9sFHEPajraHT",
@@ -93,7 +93,7 @@ export const searchPlants = (files) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data);
+          // console.log("Success:", data);
           resolve(data);
         })
         .catch((error) => {
