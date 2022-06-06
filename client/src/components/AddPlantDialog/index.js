@@ -50,7 +50,7 @@ export default function AddPlantDialog({ open, handleClose }) {
       timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
-      }, 2000);
+      }, 4000);
     }
   };
   //plant search setup
@@ -144,7 +144,7 @@ export default function AddPlantDialog({ open, handleClose }) {
               multiple
             />
             <DialogActions align="center">
-              <Button
+              <Button variant="contained"
                 onClick={() => {
                   handleSearch();
                   handleButtonClick();
@@ -162,6 +162,8 @@ export default function AddPlantDialog({ open, handleClose }) {
                     top: -6,
                     left: -6,
                     zIndex: 1,
+                    marginTop: 8,
+                    marginLeft: 3
                   }}
                 />
               )}
@@ -225,8 +227,8 @@ export default function AddPlantDialog({ open, handleClose }) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-          <Button onClick={handleSubmit}>Add Plant!</Button>
+          <Button variant="outlined" onClick={handleClose}>Close</Button>
+          <Button variant="outlined" onClick={handleSubmit}>Add Plant</Button>
         </DialogActions>
       </Dialog>
     </div>
