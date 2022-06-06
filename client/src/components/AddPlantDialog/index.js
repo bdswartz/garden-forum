@@ -81,8 +81,9 @@ export default function AddPlantDialog({ open, handleClose }) {
     console.log(scientificName);
     console.log(imagePath);
   };
-  //handle change- allow users to change
 
+  //handle change- allow users to change
+  //
   const [addPlant, { error }] = useMutation(ADD_PLANT);
 
   const handleSubmit = async (event) => {
@@ -152,6 +153,7 @@ export default function AddPlantDialog({ open, handleClose }) {
             fullWidth
             variant="standard"
             value={commonName || ""}
+            // onChange={handleChange || ""}
           />
           <TextField
             autoFocus
