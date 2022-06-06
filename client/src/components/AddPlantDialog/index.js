@@ -193,7 +193,7 @@ export default function AddPlantDialog({ open, handleClose }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Add Plant!</Button>
+          <Button onClick={(handleSubmit, handleClose)}>Add Plant!</Button>
         </DialogActions>
       </Dialog>
     </div>
