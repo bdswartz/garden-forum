@@ -25,7 +25,6 @@ const Profile = () => {
   const [addFriend, { error }] = useMutation(ADD_FRIEND);
   const handleClick = async () => {
     try {
-      console.log(user._id);
       await addFriend({
         variables: { friendId: user._id },
       });
@@ -50,6 +49,19 @@ const Profile = () => {
   });
 
   const user = data?.me || data?.user || {};
+  // console.log(user);
+
+  // const { loading: friendLoading, data: friendData } = useQuery(ME);
+  // const friendCheck = friendData?.me || {};
+  // console.log(friendCheck);
+
+  // if (friendCheck) {
+  //   for (const checked of friendCheck.friends) {
+  //     if (checked === useParams) {
+  //       console.log('dwad');
+  //     }
+  //   }
+  // }
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to='/profile' />;
