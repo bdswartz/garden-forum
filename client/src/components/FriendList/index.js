@@ -30,7 +30,7 @@ const FriendList = ({ friendCount, username, friends }) => {
 
   if (friends.length > 10) {
     const tenFriendsArray = friends.slice(0, 10);
-    console.log(tenFriendsArray);
+    // console.log(tenFriendsArray);
     friends = tenFriendsArray;
   }
 
