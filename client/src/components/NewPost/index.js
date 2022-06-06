@@ -45,11 +45,14 @@ export default function NewPost() {
       const { data } = await addPost({
         variables: { ...formState },
       });
-      Auth.loggedIn();
+      Auth.loggedIn(data.login.token);
     } catch (e) {
       console.error(e);
     }
-    
+    if (Auth.loggedIn === false) {
+      console.log('heyyyyyy')
+      window.alert("You must sign in to create a post!")
+    }
    
   };
 
@@ -82,6 +85,7 @@ sx={{
     m: 7,
     pt: 1.5,
   flexDirection: 'column',
+  alignItems: 'flex-end',
 }}
 noValidate
 autoComplete="off">

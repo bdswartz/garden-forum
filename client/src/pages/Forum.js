@@ -4,6 +4,7 @@ import { QUERY_POSTS } from '../utils/queries'
 import {useQuery} from '@apollo/client';
 import ForumPosts from '../components/ForumPosts';
 import Search from "../components/ForumPosts/Search";
+import NewPost from "../components/NewPost";
 const theme = createTheme({
   palette: {
     primary: {
@@ -26,7 +27,8 @@ const Forum = () => {
           {loading ? (
           <div>Loading....</div>
           ) : (
-          <ForumPosts posts={posts}>
+            <ForumPosts posts={posts}>
+
           </ForumPosts>
           )}
   </ThemeProvider>
