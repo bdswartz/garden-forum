@@ -1,4 +1,4 @@
-import 'dotenv/config';
+
 
 //user info
 export const getMe = (token) => {
