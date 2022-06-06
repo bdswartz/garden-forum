@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useState, useRef } from "react";
+import * as React from 'react';
+import { useState, useRef } from 'react';
 //destructure all the items from "@mui/material"
 import {
   Button,
@@ -12,15 +12,15 @@ import {
   Box,
   CircularProgress,
   Fab,
-} from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
-import SaveIcon from "@mui/icons-material/Save";
+} from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
+import SaveIcon from '@mui/icons-material/Save';
 
-import { green } from "@mui/material/colors";
-import { searchPlants } from "../../utils/API";
-import { useMutation } from "@apollo/client";
-import { QUERY_PLANT, ME } from "../../utils/queries";
-import { ADD_PLANT } from "../../utils/mutations";
+import { green } from '@mui/material/colors';
+import { searchPlants } from '../../utils/API';
+import { useMutation } from '@apollo/client';
+import { QUERY_PLANT, ME } from '../../utils/queries';
+import { ADD_PLANT } from '../../utils/mutations';
 
 export default function AddPlantDialog({ open, handleClose }) {
   //loading bar items
@@ -31,7 +31,7 @@ export default function AddPlantDialog({ open, handleClose }) {
   const buttonSx = {
     ...(success && {
       bgcolor: green[500],
-      "&:hover": {
+      '&:hover': {
         bgcolor: green[700],
       },
     }),
@@ -103,7 +103,7 @@ export default function AddPlantDialog({ open, handleClose }) {
 
   return (
     <div>
-      <Dialog align="center" open={open} onClose={handleClose}>
+      <Dialog align='center' open={open} onClose={handleClose}>
         <DialogTitle>Add a New Plant</DialogTitle>
 
         <DialogContent>
@@ -111,12 +111,12 @@ export default function AddPlantDialog({ open, handleClose }) {
             <label>Upload an image to identify a new plant!</label>
             <input
               ref={plantFile}
-              type="file"
+              type='file'
               // style={{ display: "none" }}
               onChange={onFileChange}
               multiple
             />
-            <DialogActions align="center">
+            <DialogActions align='center'>
               <Button
                 onClick={() => {
                   handleSearch();
@@ -131,7 +131,7 @@ export default function AddPlantDialog({ open, handleClose }) {
                   size={68}
                   sx={{
                     color: green[500],
-                    position: "absolute",
+                    position: 'absolute',
                     top: -6,
                     left: -6,
                     zIndex: 1,
@@ -144,56 +144,56 @@ export default function AddPlantDialog({ open, handleClose }) {
         <DialogContent>
           <TextField
             autoFocus
-            margin="dense"
-            label="Common Plant Name"
-            type="text"
+            margin='dense'
+            label='Common Plant Name'
+            type='text'
             // key={common_name}
             fullWidth
-            variant="standard"
-            value={commonName || ""}
+            variant='standard'
+            value={commonName || ''}
           />
           <TextField
             autoFocus
-            margin="dense"
-            id="name"
-            label="Scientific Plant Name"
-            type="text"
+            margin='dense'
+            id='name'
+            label='Scientific Plant Name'
+            type='text'
             // key={scientific_name}
             fullWidth
-            variant="standard"
-            value={scientificName || ""}
+            variant='standard'
+            value={scientificName || ''}
           />
           <TextField
             autoFocus
-            margin="dense"
-            id="name"
-            label="Pruning Info"
-            type="text"
+            margin='dense'
+            id='name'
+            label='Pruning Info'
+            type='text'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
           <TextField
             autoFocus
-            margin="dense"
-            id="name"
-            label="Watering Info"
-            type="text"
+            margin='dense'
+            id='name'
+            label='Watering Info'
+            type='text'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
           <TextField
             autoFocus
-            margin="dense"
-            id="name"
-            label="Fertilizing Info"
-            type="text"
+            margin='dense'
+            id='name'
+            label='Fertilizing Info'
+            type='text'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Add Plant!</Button>
+          <Button onClick={(handleSubmit, handleClose)}>Add Plant!</Button>
         </DialogActions>
       </Dialog>
     </div>
