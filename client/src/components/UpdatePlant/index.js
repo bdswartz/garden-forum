@@ -15,6 +15,7 @@ import {
   import { UPDATE_PLANT } from "../../utils/mutations";
 
 const UpdatePlant = ({ open, handleClose, plantInfo }) => {
+    // set form state with the plant prop information
     const [formState, setFormState] = useState({
         plantId: plantInfo._id,
         commonName: plantInfo.common_name,
@@ -23,15 +24,15 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
         water: plantInfo.water,
         pruning: plantInfo.pruning
     })
-
+// deconstruct for convenience
     const { scientificName, commonName , usdaZone, fertilization, water, pruning } = formState;
-
+// define the mutation
     const [updatePlant, { error }] = useMutation(UPDATE_PLANT);
-
+// handle changes to the form to keep state up to date
     const handleChange = event => {
         setFormState({ ...formState, [event.target.name]: event.target.value });
     };
-  
+//   submit form info and close the dialog
     const handleSubmit = async (event) => {
       event.preventDefault();
       handleClose();
@@ -39,13 +40,6 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
       try {
         const data = await updatePlant({
           variables: formState
-        //   {
-            // commonName,
-            // usdaZone,
-            // fertilization,
-            // water,
-            // pruning
-        //   },
         });
         console.log(data);
       } catch (e) {
