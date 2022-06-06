@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import { useMutation } from '@apollo/client';
 import { ADD_PLANT_HISTORY } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import UpdatePlant from '../UpdatePlant';
 
 
 
