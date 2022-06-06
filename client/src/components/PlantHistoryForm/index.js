@@ -82,7 +82,7 @@ const PlantHistoryForm = ({plantId}) => {
                         label="Plant History Entry Text" 
                         variant="outlined" 
                     />
-                    <Button type='submit' variant="contained" size="large" sx={{mb: 2, width: 345,}}>
+                    <Button type='submit' variant="contained" size="large" sx={{mb: 2, width: '90%',}}>
                         Add Plant History Entry
                     </Button>
                 </NewItem>

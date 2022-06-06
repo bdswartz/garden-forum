@@ -9,6 +9,9 @@ import Auth from '../utils/auth';
 import PlantHistoryForm from '../components/PlantHistoryForm';
 import PlantHistory from '../components/PlantHistory'
 
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+
 const Plant = () => {
     // get the plant id from the url parameters
     const {id: plantId} = useParams();
@@ -27,15 +30,19 @@ const Plant = () => {
       }
 
       return (
-        <div>
-          <PlantCard plantInfo={plant}/>
-          <div>
-            {plant.plantHistory && <PlantHistory history={plant.plantHistory} />}
-          </div>
-          <div>
+        <Paper sx={{display: 'flex' , flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Box sx={{width:'75%', display: 'flex', flexDirection:'column'}}>
+            <Box sx={{width:'100%'}}>
+              <PlantCard plantInfo={plant}/>
+            </Box>
+            <Box sx={{width: '100%'}}>
+              {plant.plantHistory && <PlantHistory history={plant.plantHistory} />}
+            </Box>
+          </Box>
+          <Box sx={{width:"20%"}}>
             {Auth.loggedIn() && <PlantHistoryForm plantId={plant._id} />}
-          </div>
-        </div>
+          </Box>
+        </Paper>
       );    
 
 }

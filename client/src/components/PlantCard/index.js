@@ -3,38 +3,36 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import Plant from '../../pages/Plant';
+import Paper from '@mui/material/Paper';
 
 export default function PlantCard({plantInfo}) {
   console.log(plantInfo);
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea sx={{display: "flex", flexDirection:"row"}}>
-        <CardMedia
+    <Paper sx={{ mx:'20px', my:'20px', display: 'flex', flexDirection: 'row', width:'100%', justifyContent:'space-between' }}>
+        <CardMedia sx={{width:'30%'}}
           component="img"
-          height="140"
+          height="auto"
           image={`${plantInfo.image_path}`}
           alt={`picture of ${plantInfo.common_name}`}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+        <CardContent sx={{width:'60%'}} >
+          <Typography gutterBottom variant="h4" component="div">
             {plantInfo.scientific_name}
           </Typography>
-          <Typography gutterBottom variant="h7" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             {plantInfo.common_name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body1" color="text.secondary">
             Pruning: {plantInfo.pruning}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body1" color="text.secondary">
             Fertilization: {plantInfo.fertilization}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body1" color="text.secondary">
             Water: {plantInfo.water}
           </Typography>
         </CardContent>
-      </CardActionArea>
-    </Card>
+    </Paper>
   );
 }
