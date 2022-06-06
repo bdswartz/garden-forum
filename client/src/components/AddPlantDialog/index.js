@@ -56,9 +56,10 @@ export default function AddPlantDialog({ open, handleClose }) {
   //plant search setup
   const plantFile = useRef();
   const [plantImg, setPlantImg] = useState([]);
-  const [plantName, setplantName] = useState();
-  const [sciencePlant, setSciencePlant] = useState();
-  const [plantPic, setPlantPic] = useState();
+  //change these to proper names below
+  const [commonName, setcommonName] = useState();
+  const [scientificName, setscientificName] = useState();
+  const [imagePath, setImagePath] = useState();
 
   //upload plant file
   const onFileChange = (event) => {
@@ -68,54 +69,33 @@ export default function AddPlantDialog({ open, handleClose }) {
   const handleSearch = () => {
     const plantArr = Object.values(plantImg);
     searchPlants(plantArr).then((res) => {
-      setplantName(res.suggestions[0].plant_details.common_names[0]);
-      setSciencePlant(res.suggestions[0].plant_details.scientific_name);
-      setPlantPic(res.suggestions[0].similar_images[0].url);
+      setcommonName(res.suggestions[0].plant_details.common_names[0]);
+      setscientificName(res.suggestions[0].plant_details.scientific_name);
+      setImagePath(res.suggestions[0].similar_images[0].url);
 
       // console.log(plant_name);
       // console.log(res.suggestions[0].plant_details.scientific_name);
       // console.log(res.suggestions[0].similar_images[0].url);
     });
-    console.log(plantName);
-    console.log(sciencePlant);
-    console.log(plantPic);
+    console.log(commonName);
+    console.log(scientificName);
+    console.log(imagePath);
   };
 
-  //take queries/mutations and preps for user input for db
-  const [addPlant, { error }] = useMutation(ADD_PLANT, {
-    update(
-      cache,
-      {
-        data: {
-          commonName,
-          ScientificName,
-          imagePath,
-          pruning,
-          watering,
-          fertilization,
-        },
-      }
-    ) {
-      try {
-        const { me } = cache.readQuery({
-          query: ME,
-        });
-        cache.writeQuery({
-          query: ME,
-          data: { me: { ...me, plants: [...me.plants, addPlant] } },
-        });
-      } catch (e) {
-        console.warn("First plant by user!");
-      }
-    },
-  });
+  const [addPlant, { error }] = useMutation(ADD_PLANT);
 
-  //pushes user info into the db
-  const handleFormSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await addPlant();
+      const data = await addPlant({
+        variables: {
+          scientificName,
+          commonName,
+          imagePath,
+        },
+      });
+      console.log(data);
     } catch (e) {
       console.error(e);
     }
@@ -170,7 +150,7 @@ export default function AddPlantDialog({ open, handleClose }) {
             // key={common_name}
             fullWidth
             variant="standard"
-            value={plantName || ""}
+            value={commonName || ""}
           />
           <TextField
             autoFocus
@@ -181,7 +161,7 @@ export default function AddPlantDialog({ open, handleClose }) {
             // key={scientific_name}
             fullWidth
             variant="standard"
-            value={sciencePlant || ""}
+            value={scientificName || ""}
           />
           <TextField
             autoFocus
@@ -213,7 +193,7 @@ export default function AddPlantDialog({ open, handleClose }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onSubmit={handleFormSubmit}>Add Plant!</Button>
+          <Button onSubmit={handleSubmit}>Add Plant!</Button>
         </DialogActions>
       </Dialog>
     </div>
