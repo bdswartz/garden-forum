@@ -6,8 +6,9 @@ import Grid from '@mui/material/Grid';
 import GotIt from './yougot_it.gif';
 import Igor from '../../assets/images/igor.jpg';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import NewPost from '../NewPost';
+import Link from '@mui/material/Link';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -16,20 +17,12 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
   textAlign: 'left',
   border: 2,
-  overflow: 'hidden',
+  // overflow: 'hidden',
   height: 300,
+  // maxWidth: 400,
   color: theme.palette.text.secondary,
 }));
-const RightItem = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
-   ...theme.typography.body1,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  overflow: 'hidden',
-  height: 200,
-  width: 450,
-  color: theme.palette.text.secondary,
-}));
+
 
 // Page that appears when no posts are present
 const ForumPosts = ({ posts, postText }) => {
@@ -76,29 +69,39 @@ const ForumPosts = ({ posts, postText }) => {
 <Grid container direction='column' alignContent='flex-start'>
 <Grid container 
 spacing={3}
+
 sx={{
   marginLeft: 4,
-  width: 900,
-  p: 8,
+   width: 900,
+  p: 3,
 }}
 >
-{posts && posts.map(posts => (
-  <Grid item zeroMinWidth key={posts._id} xs={6}>
+{posts && posts.slice(0, 8).map(posts => (
+  <Grid item key={posts._id} xs={6}>
       <Item elevation={24}
  sx={{
-        border: 2,
-        borderColor: '#4caf50', 
-      }}>
-<Typography noWrap variant="h3">Post Title</Typography>
-      <Typography noWrap variant="body1">
+   border: 2,
+   '& > :not(style) + :not(style)': {
+     ml: 2,
+   },
+   borderColor: '#4caf50', 
+  }}>
+        <Link href={posts._id} underline="none" style={{ textDecoration: 'none'}}>
+        <Grid>
+<Typography noWrap variant="h4" gutterBottom sx={{fontSize: 35, pb: 4,}}>{posts.postTitle}</Typography>
+</Grid>
+<Grid item>
+      <Typography noWrap sx={{fontSize: 20, pb: 10,}}>
                {posts.postText}
            </Typography>
-           <Typography variant="body1">
+           </Grid>
+           <Typography variant="body2">
                  Created by: {posts.username}
                </Typography>
-               <Typography variant='body1'>
+               <Typography variant='body2'>
                on {posts.createdAt}
                </Typography>
+    </Link>
       </Item>
   </Grid>
     ))}
@@ -109,33 +112,9 @@ sx={{
 {/* Begin Right Side of Page */}
 <Grid item xs={6}>
 <Grid container direction='column' alignContent='flex-end'>
-<Grid container component="form"
-
-sx={{
-  display: 'grid',
-  gap: 4,
-  width: 'auto',
-  '& .MuiTextField-root': { m: 1, width: '45ch' },
-    m: 7,
-  flexDirection: 'column',
-}}
-noValidate
-autoComplete="off">
-      <Button variant="contained" size="large" href="#contained-buttons">
-    Create New Post
-      </Button>
-
-  <RightItem elevation={2}>
-  <TextField
-          id="outlined-multiline-static"
-          label="New Post"
-          multiline
-          rows={4}
-          defaultValue=""
-        />
-  </RightItem>
-  </Grid>
-  </Grid>
+  
+<NewPost />
+</Grid>
 </Grid>
 </Grid>
 </Box>

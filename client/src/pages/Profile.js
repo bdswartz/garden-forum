@@ -1,24 +1,38 @@
-import React from "react";
-import { Navigate, useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { ME, QUERY_USER } from "../utils/queries";
-import Auth from "../utils/auth";
-import Paper from "@mui/material/Paper";
-import Avatar from "@mui/material/Avatar";
-import img from "../assets/images/igor.jpg";
-// import img2 from '../assets/images/malvestida.jpg';
-import { Container, Grid, Box } from "@mui/material";
-import Garden from "../components/Garden";
+import React from 'react';
+import { Navigate, useParams } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/client';
+import { ME, QUERY_USER } from '../utils/queries';
+import { ADD_FRIEND } from '../utils/mutations';
+import Auth from '../utils/auth';
+import Paper from '@mui/material/Paper';
+import Avatar from '@mui/material/Avatar';
+import img from '../assets/images/igor.jpg';
+import { Container, Grid, Box, Typography } from '@mui/material';
+import Garden from '../components/Garden';
+import FriendList from '../components/FriendList';
+import Chip from '@mui/material/Chip';
+import AddIcon from '@mui/icons-material/Add';
 
 const styles = {
   headerContainer: {
     // backgroundColor: `url(${img2})`,
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
   },
 };
 
 const Profile = () => {
+  const [addFriend, { error }] = useMutation(ADD_FRIEND);
+  const handleClick = async () => {
+    try {
+      await addFriend({
+        variables: { friendId: user._id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const [open, setOpen] = React.useState(false);
 
   // //button open/close
@@ -35,10 +49,22 @@ const Profile = () => {
   });
 
   const user = data?.me || data?.user || {};
-  console.log(user);
+  // console.log(user);
+
+  // const { loading: friendLoading, data: friendData } = useQuery(ME);
+  // const friendCheck = friendData?.me || {};
+  // console.log(friendCheck);
+
+  // if (friendCheck) {
+  //   for (const checked of friendCheck.friends) {
+  //     if (checked === useParams) {
+  //       console.log('dwad');
+  //     }
+  //   }
+  // }
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/profile" />;
+    return <Navigate to='/profile' />;
   }
 
   if (loading) {
@@ -56,35 +82,71 @@ const Profile = () => {
 
   return (
     <>
-      <Container sx={{ width: "70%" }}>
+      <Container sx={{ width: '100%' }}>
         {/* user top card start */}
         <Paper
           style={styles.headerContainer}
-          sx={{ p: 5, borderRadius: "0px" }}
+          sx={{ p: 5, borderRadius: '0px' }}
         >
           <Grid container sx={{ mt: 3 }}>
             {/* Profile Picture */}
             <Grid item>
-              <Avatar alt="flower" src={img} sx={{ width: 156, height: 156 }} />
+              <Avatar alt='flower' src={img} sx={{ width: 156, height: 156 }} />
             </Grid>
             {/* User name and joined info */}
             <Grid item xs={8} sx={{ mt: 1 }}>
               <Container sx={{ ml: 1 }}>
-                <h4>
+                <Typography variant='h5'>
                   <strong>{user.username}</strong>.
-                </h4>
-                <h6>
+                </Typography>
+                <Typography>
                   <strong>Joined:</strong> {user.createdAt}
-                </h6>
+                </Typography>
+                {userParam && (
+                  <Chip
+                    sx={{
+                      fontSize: '11px',
+                      width: 120,
+                      height: 28,
+                      cursor: 'pointer',
+                      mt: 1,
+                      ':hover': {
+                        borderColor: 'green',
+                      },
+                    }}
+                    icon={<AddIcon />}
+                    label='Add Friend'
+                    variant='outlined'
+                    onClick={handleClick}
+                  />
+                )}
               </Container>
             </Grid>
           </Grid>
         </Paper>
         {/* user top card end */}
-
-        <Paper sx={{ p: 0, mt: 5, borderRadius: "0px" }}>
-          <Garden plants={user.plants}></Garden>
-        </Paper>
+        <Grid container>
+          {/* left container */}
+          <Grid item xs={8}>
+            {/* garden section start */}
+            <Paper sx={{ p: 0, mt: 5, borderRadius: '0px' }}>
+              <Garden plants={user.plants} user={user.username}></Garden>
+            </Paper>
+            {/* garden section end */}
+          </Grid>
+          {/* right container */}
+          <Grid item xs={4}>
+            {/* friend list start */}
+            <Paper sx={{ ml: 5, p: 0, mt: 5, borderRadius: '0px' }}>
+              <FriendList
+                username={user.username}
+                friendCount={user.friendCount}
+                friends={user.friends}
+              />
+            </Paper>
+            {/* friend list end */}
+          </Grid>
+        </Grid>
       </Container>
     </>
   );
