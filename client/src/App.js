@@ -16,6 +16,7 @@ import Home from './pages/Home';
 import Forum from './pages/Forum';
 import Post from './pages/Post';
 import People from './pages/People';
+import Plant from './pages/Plant'
 
 import {
   ApolloProvider,
@@ -71,7 +72,7 @@ function App() {
           <Route path='/forum' element={<Forum />} />
           <Route path='/signup' element={<Signup />} />
           {/* <Route path='/:id' element={<Post />} /> */}
-
+          <Route path='/plant/:id' element={<Plant />} />
           <Route path='*' element={<NoMatch />} />
         </Routes>
         {/* <Footer /> */}
