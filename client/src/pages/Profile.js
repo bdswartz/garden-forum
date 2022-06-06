@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { ME, QUERY_USER } from '../utils/queries';
+import { ADD_FRIEND } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
@@ -9,6 +10,8 @@ import img from '../assets/images/igor.jpg';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import Garden from '../components/Garden';
 import FriendList from '../components/FriendList';
+import Chip from '@mui/material/Chip';
+import AddIcon from '@mui/icons-material/Add';
 
 const styles = {
   headerContainer: {
@@ -19,6 +22,17 @@ const styles = {
 };
 
 const Profile = () => {
+  const [addFriend, { error }] = useMutation(ADD_FRIEND);
+  const handleClick = async () => {
+    try {
+      await addFriend({
+        variables: { friendId: user._id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const [open, setOpen] = React.useState(false);
 
   // //button open/close
@@ -35,7 +49,19 @@ const Profile = () => {
   });
 
   const user = data?.me || data?.user || {};
-  console.log(user);
+  // console.log(user);
+
+  // const { loading: friendLoading, data: friendData } = useQuery(ME);
+  // const friendCheck = friendData?.me || {};
+  // console.log(friendCheck);
+
+  // if (friendCheck) {
+  //   for (const checked of friendCheck.friends) {
+  //     if (checked === useParams) {
+  //       console.log('dwad');
+  //     }
+  //   }
+  // }
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to='/profile' />;
@@ -73,9 +99,27 @@ const Profile = () => {
                 <Typography variant='h5'>
                   <strong>{user.username}</strong>.
                 </Typography>
-                <Typography variant='p'>
+                <Typography>
                   <strong>Joined:</strong> {user.createdAt}
                 </Typography>
+                {userParam && (
+                  <Chip
+                    sx={{
+                      fontSize: '11px',
+                      width: 120,
+                      height: 28,
+                      cursor: 'pointer',
+                      mt: 1,
+                      ':hover': {
+                        borderColor: 'green',
+                      },
+                    }}
+                    icon={<AddIcon />}
+                    label='Add Friend'
+                    variant='outlined'
+                    onClick={handleClick}
+                  />
+                )}
               </Container>
             </Grid>
           </Grid>

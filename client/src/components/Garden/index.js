@@ -11,6 +11,8 @@ import AddIcon from '@mui/icons-material/Add';
 import AddPlantDialog from '../AddPlantDialog';
 import { Link } from 'react-router-dom';
 
+
+
 export default function Garden({ plants, user }) {
   // const handleClick = () => {
   //   console.log("You clicked Add Plant");
@@ -46,9 +48,6 @@ export default function Garden({ plants, user }) {
             label='Add Plant'
             variant='outlined'
           />
-          {/* <Button variant="outlined" onClick={handleClickOpen}>
-            Add your OWN plant!
-          </Button>{" "} */}
           <AddPlantDialog open={open} handleClose={handleClose} />
         </ListSubheader>
       </ImageListItem>

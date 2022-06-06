@@ -56,7 +56,7 @@ export const searchPlants = (files) => {
       const reader = new FileReader();
       reader.onload = (event) => {
         const res = event.target.result;
-        console.log(res);
+        // console.log(res);
         resolve(res);
       };
       reader.readAsDataURL(file);
@@ -64,10 +64,10 @@ export const searchPlants = (files) => {
   });
 
   return Promise.all(promises).then((base64files) => {
-    console.log(base64files);
-
+    // console.log(base64files);
+    const API_KEY = process.env.REACT_APP_API_KEY;
     const data = {
-      api_key: "eVh7gMTn4ySBkcg5XnOz13qsTPkurS35JZGG9b9sFHEPajraHT",
+      api_key: API_KEY,
       images: base64files,
       // modifiers docs: https://github.com/flowerchecker/Plant-id-API/wiki/Modifiers
       modifiers: ["crops_fast", "similar_images"],
@@ -93,7 +93,7 @@ export const searchPlants = (files) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data);
+          // console.log("Success:", data);
           resolve(data);
         })
         .catch((error) => {
