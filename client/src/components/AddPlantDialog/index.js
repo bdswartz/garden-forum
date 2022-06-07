@@ -50,7 +50,7 @@ export default function AddPlantDialog({ open, handleClose }) {
       timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
-      }, 2000);
+      }, 4000);
     }
   };
   //plant search setup
@@ -60,6 +60,10 @@ export default function AddPlantDialog({ open, handleClose }) {
   const [commonName, setcommonName] = useState();
   const [scientificName, setscientificName] = useState();
   const [imagePath, setImagePath] = useState();
+  // Add Pruning, Watering and Fertilization
+  const [pruning, setPruning] = useState('');
+  const [water, setWatering] = useState('');
+  const [fertilization, setFertilization] = useState('');
 
   //upload plant file
   const onFileChange = (event) => {
@@ -82,6 +86,18 @@ export default function AddPlantDialog({ open, handleClose }) {
     console.log(imagePath);
   };
 
+  const handlePruning = (event) => {
+    setPruning(event.target.value);
+  };
+
+  const handleWatering = (event) => {
+    setWatering(event.target.value);
+  };
+
+  const handleFertilization = (event) => {
+    setFertilization(event.target.value);
+  };
+
   const [addPlant, { error }] = useMutation(ADD_PLANT);
 
   const handleSubmit = async (event) => {
@@ -93,9 +109,20 @@ export default function AddPlantDialog({ open, handleClose }) {
           scientificName,
           commonName,
           imagePath,
+          pruning,
+          fertilization,
+          water
         },
       });
       console.log(data);
+      // clear form values
+      setPlantImg('');
+      setImagePath('');
+      setcommonName('');
+      setscientificName('');
+      setPruning('');
+      setWatering('');
+      setFertilization('');
     } catch (e) {
       console.error(e);
     }
@@ -117,7 +144,7 @@ export default function AddPlantDialog({ open, handleClose }) {
               multiple
             />
             <DialogActions align="center">
-              <Button
+              <Button variant="contained"
                 onClick={() => {
                   handleSearch();
                   handleButtonClick();
@@ -135,6 +162,8 @@ export default function AddPlantDialog({ open, handleClose }) {
                     top: -6,
                     left: -6,
                     zIndex: 1,
+                    marginTop: 8,
+                    marginLeft: 3
                   }}
                 />
               )}
@@ -171,6 +200,8 @@ export default function AddPlantDialog({ open, handleClose }) {
             type="text"
             fullWidth
             variant="standard"
+            value={pruning}
+            onChange={handlePruning}
           />
           <TextField
             autoFocus
@@ -180,6 +211,8 @@ export default function AddPlantDialog({ open, handleClose }) {
             type="text"
             fullWidth
             variant="standard"
+            value={water}
+            onChange={handleWatering}
           />
           <TextField
             autoFocus
@@ -189,11 +222,13 @@ export default function AddPlantDialog({ open, handleClose }) {
             type="text"
             fullWidth
             variant="standard"
+            value={fertilization}
+            onChange={handleFertilization}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={(handleSubmit, handleClose)}>Add Plant!</Button>
+          <Button variant="outlined" onClick={handleClose}>Close</Button>
+          <Button variant="outlined" onClick={handleSubmit}>Add Plant</Button>
         </DialogActions>
       </Dialog>
     </div>
