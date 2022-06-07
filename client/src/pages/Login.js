@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -48,6 +49,7 @@ const theme = createTheme({
 export default function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);
+  const navigate = useNavigate();
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -69,9 +71,11 @@ export default function Login() {
       });
 
       Auth.login(data.login.token);
+      if (data.login.token) navigate('/profile');
     } catch (e) {
       console.error(e);
     }
+
   };
 
   return (

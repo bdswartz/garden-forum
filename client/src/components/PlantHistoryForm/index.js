@@ -48,17 +48,7 @@ const PlantHistoryForm = ({plantId}) => {
   };
 
     return(
-        <Box
-            className="image"
-            style={{
-            backgroundImage: `url(${Igor})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-            backgroundSize: "cover",
-            // height: "100vh",
-            color: "#f5f5f5",
-            backgroundPosition: 'left', 
-        }}>
+        <>
             <Grid item xs={6}>
             <Grid container direction='column' alignContent='flex-end' onSubmit={handleSubmit}>
             <Grid container component="form"
@@ -90,7 +80,7 @@ const PlantHistoryForm = ({plantId}) => {
             </Grid>
             </Grid>
             </Grid>
-        </Box>
+        </>
     ) 
 };
 
