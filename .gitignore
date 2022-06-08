@@ -1,4 +1,5 @@
 DS_Store/
+.env
 
 # Logs
 logs
@@ -105,5 +106,5 @@ dist
 # TernJS port file
 .tern-port
 
-
-.vscode
+# misc
+.DS_Store

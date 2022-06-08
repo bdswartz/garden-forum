@@ -1,4 +1,5 @@
-import React from "react";
+import * as React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -10,8 +11,19 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import { green } from "@mui/material/colors";
+import ViewAllFriends from "../ViewAllFriends";
+import Button from "@mui/material/Button";
 
 const FriendList = ({ friendCount, username, friends }) => {
+  // button open/close
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   if (!friends || !friends.length) {
     return (
       <>
@@ -66,9 +78,8 @@ const FriendList = ({ friendCount, username, friends }) => {
         ))}
         <Box sx={{ display: "flex", flexDirection: "row-reverse", p: "1" }}>
           <Typography
-            component={Link}
-            // style={{ textDecoration: 'none' }}
-            to="/"
+            component={Button}
+            onClick={handleClickOpen}
             sx={{
               m: 1,
               mr: 4,
@@ -79,6 +90,11 @@ const FriendList = ({ friendCount, username, friends }) => {
           >
             View all
           </Typography>
+          <ViewAllFriends
+            sx={{ width: "100%" }}
+            open={open}
+            handleClose={handleClose}
+          />
         </Box>
       </List>
     </Box>

@@ -9,6 +9,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_PLANT_HISTORY } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 import "../../index.css";
+import UpdatePlant from "../UpdatePlant";
 
 const NewItem = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#f3f3f5",
@@ -44,13 +45,6 @@ const PlantHistoryForm = ({ plantId }) => {
 
   return (
     <>
-      {/* <Box> */}
-      {/* <Box
-        container
-        direction="column"
-        alignContent="flex-end"
-        onSubmit={handleSubmit}
-      > */}
       <Grid
         container
         direction="column"
@@ -60,12 +54,10 @@ const PlantHistoryForm = ({ plantId }) => {
         sx={{
           display: "grid",
           gap: 4,
-          // width: '120',
           "& .MuiTextField-root": { m: 1, width: "45ch" },
           m: 7,
           pt: 1.5,
           px: 2,
-          // flexDirection: "column",
         }}
         noValidate
         autoComplete="off"
@@ -89,8 +81,6 @@ const PlantHistoryForm = ({ plantId }) => {
           </Button>
         </NewItem>
       </Grid>
-      {/* </Box> */}
-      {/* </Box> */}
     </>
   );
 };

@@ -71,7 +71,7 @@ function App() {
           <Route path='/people' element={<People />} />
           <Route path='/forum' element={<Forum />} />
           <Route path='/signup' element={<Signup />} />
-          {/* <Route path='/:id' element={<Post />} /> */}
+          <Route path='/forum/:id' element={<Post />} />
           <Route path='/plant/:id' element={<Plant />} />
           <Route path='*' element={<NoMatch />} />
         </Routes>
