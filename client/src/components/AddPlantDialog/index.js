@@ -50,7 +50,7 @@ export default function AddPlantDialog({ open, handleClose }) {
       timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
-      }, 4000);
+      }, 6000);
     }
   };
   //plant search setup
