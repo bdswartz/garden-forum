@@ -54,7 +54,7 @@ const PlantHistoryForm = ({ plantId }) => {
       <Grid
         container
         direction="column"
-        alignContent="flex-end"
+        justifyContent="center"
         onSubmit={handleSubmit}
         component="form"
         sx={{
