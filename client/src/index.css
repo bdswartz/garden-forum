@@ -208,3 +208,21 @@ input:focus {
     width: 100%;
   }
 }
+
+
+/* plant history css */
+.plantHistory {
+  display: flex;
+  min-height: 100vh;
+  min-width: 25%;
+
+}
+.plantUpdate {
+padding: 2rem;
+min-width: 25%;
+}
+
+.plantList {
+  background-color: gainsboro;
+  color: black;
+}
