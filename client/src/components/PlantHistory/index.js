@@ -14,7 +14,7 @@ import { green, grey } from "@mui/material/colors";
 
 const PlantHistory = ({ history }) => {
   return (
-    <Box justifyContent="center">
+    <Box sx={{ width: "100vw" }}>
       <Typography
         variant="h6"
         sx={{ p: 2, bgcolor: green[500], color: "white" }}
