@@ -1,3 +1,5 @@
+
+
 //user info
 export const getMe = (token) => {
   return fetch("/api/users/me", {
@@ -67,7 +69,7 @@ export const searchPlants = (files) => {
     // console.log(base64files);
     const API_KEY = process.env.REACT_APP_API_KEY;
     const data = {
-      api_key: API_KEY,
+      api_key: process.env.API_KEY,
       images: base64files,
       // modifiers docs: https://github.com/flowerchecker/Plant-id-API/wiki/Modifiers
       modifiers: ["crops_fast", "similar_images"],

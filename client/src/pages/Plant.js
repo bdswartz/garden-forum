@@ -11,6 +11,7 @@ import PlantHistory from '../components/PlantHistory'
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import Malvestida from '../assets/images/malvestida.jpg';
 
 const Plant = () => {
     // get the plant id from the url parameters
@@ -30,8 +31,19 @@ const Plant = () => {
       }
 
       return (
-        <Paper sx={{display: 'flex' , flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Box sx={{width:'75%', display: 'flex', flexDirection:'column'}}>
+        <Box
+          className="image"
+          style={{
+          backgroundImage: `url(${Malvestida})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundSize: "cover",
+          height: "100vh",
+          color: "#f5f5f5",
+          backgroundPosition: 'left',
+        }}>
+        <Paper sx={{display: 'flex' , flexDirection: 'row', justifyContent: 'space-around ', backgroundColor: 'transparent'}}>
+          <Box sx={{width:'60%', display: 'flex', flexDirection:'column'}}>
             <Box sx={{width:'100%'}}>
               <PlantCard plantInfo={plant}/>
             </Box>
@@ -43,6 +55,7 @@ const Plant = () => {
             {Auth.loggedIn() && <PlantHistoryForm plantId={plant._id} />}
           </Box>
         </Paper>
+        </Box>
       );    
 
 }
