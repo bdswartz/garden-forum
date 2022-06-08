@@ -1,5 +1,3 @@
-
-
 //user info
 export const getMe = (token) => {
   return fetch("/api/users/me", {
@@ -67,7 +65,8 @@ export const searchPlants = (files) => {
 
   return Promise.all(promises).then((base64files) => {
     // console.log(base64files);
-    const API_KEY = process.env.REACT_APP_API_KEY;
+    // const API_KEY = process.env.REACT_APP_API_KEY;
+    const API_KEY = "eVh7gMTn4ySBkcg5XnOz13qsTPkurS35JZGG9b9sFHEPajraHT";
     const data = {
       api_key: API_KEY,
       images: base64files,
