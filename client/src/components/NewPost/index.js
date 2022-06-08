@@ -41,7 +41,6 @@ export default function NewPost() {
   };
 
   const handleSubmit = async (event) => {
-
     try {
       const { data } = await addPost({
         variables: { ...formState },

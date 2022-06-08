@@ -131,9 +131,9 @@ const Header = () => {
               <MenuItem component={Link} to='/people'>
                 People
               </MenuItem>
-              <MenuItem component={Link} to='/plants'>
+              {/* <MenuItem component={Link} to='/plants'>
                 Plants
-              </MenuItem>
+              </MenuItem> */}
               <Divider />
               <MenuItem component={Link} to='/about'>
                 About
