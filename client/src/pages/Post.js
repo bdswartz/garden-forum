@@ -4,7 +4,8 @@ import {useQuery} from '@apollo/client';
 import Onepost from '../components/Onepost';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Navigate, useParams } from 'react-router-dom';
-
+import Auth from '../utils/auth';
+import CommentPost from '../components/CommentPost';
 
 const theme = createTheme({
     palette: {
@@ -30,16 +31,26 @@ const Singlepost = () => {
 
 
     const post = data?.post
-    console.log(post);
+    if (Auth.loggedIn()) {
       return <ThemeProvider theme={theme}>
     {loading ? (
           <div>Loading....</div>
           ) : (
-            <Onepost post={post}>
-            </Onepost>
+            <CommentPost post={post}>
+            </CommentPost>
           )}
     </ThemeProvider>
-  
+    }
+    if (!Auth.loggedIn()) {
+      return <ThemeProvider theme={theme}>
+      {loading ? (
+            <div>Loading....</div>
+            ) : (
+              <Onepost post={post}>
+              </Onepost>
+            )}
+      </ThemeProvider>
+    }
   };
     
     export default Singlepost;

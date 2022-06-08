@@ -44,6 +44,11 @@ const ForumPosts = ({ posts, postText }) => {
         <img src={GotIt} alt="Gif" height="100"/>
         </Grid>
         </Grid>
+        <Grid item xs={6}>
+<Grid container direction='column' alignContent='flex-end'>
+  <NewPost />
+</Grid>
+</Grid>
         </div>
         );
     }
@@ -86,7 +91,7 @@ sx={{
    },
    borderColor: '#4caf50', 
   }}>
-        <Link href={posts._id} underline="none" style={{ textDecoration: 'none'}}>
+        <Link href={`/forum/${posts._id}`} underline="none" style={{ textDecoration: 'none'}}>
         <Grid>
 <Typography noWrap variant="h4" gutterBottom sx={{fontSize: 35, pb: 4,}}>{posts.postTitle}</Typography>
 </Grid>
@@ -101,6 +106,9 @@ sx={{
                <Typography variant='body2'>
                on {posts.createdAt}
                </Typography>
+               <Typography variant='body2'>
+               Number of comments: {posts.commentCount}
+               </Typography>
     </Link>
       </Item>
   </Grid>
@@ -112,8 +120,7 @@ sx={{
 {/* Begin Right Side of Page */}
 <Grid item xs={6}>
 <Grid container direction='column' alignContent='flex-end'>
-  
-<NewPost />
+  <NewPost />
 </Grid>
 </Grid>
 </Grid>

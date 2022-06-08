@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { ME, QUERY_USER } from '../utils/queries';
 import { ADD_FRIEND } from '../utils/mutations';
 import Auth from '../utils/auth';
-import Paper from '@mui/material/Paper';
-import Avatar from '@mui/material/Avatar';
 import img from '../assets/images/igor.jpg';
-import { Container, Grid, Box, Typography } from '@mui/material';
+import {
+  Container,
+  Grid,
+  Typography,
+  Paper,
+  Avatar,
+  Chip,
+} from '@mui/material';
 import Garden from '../components/Garden';
 import FriendList from '../components/FriendList';
-import Chip from '@mui/material/Chip';
 import AddIcon from '@mui/icons-material/Add';
 
 const styles = {
@@ -22,6 +26,7 @@ const styles = {
 };
 
 const Profile = () => {
+  // this handles adding a friend when you click on the add friend button
   const [addFriend, { error }] = useMutation(ADD_FRIEND);
   const handleClick = async () => {
     try {
@@ -33,9 +38,8 @@ const Profile = () => {
     }
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  // //button open/close
+  // button open/close
+  const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -43,25 +47,28 @@ const Profile = () => {
     setOpen(false);
   };
 
+  // this queries the DB for user data to be displayed in the profile component return statement
   const { username: userParam } = useParams();
   const { loading, data } = useQuery(userParam ? QUERY_USER : ME, {
     variables: { username: userParam },
   });
-
   const user = data?.me || data?.user || {};
-  // console.log(user);
 
-  // const { loading: friendLoading, data: friendData } = useQuery(ME);
-  // const friendCheck = friendData?.me || {};
-  // console.log(friendCheck);
-
-  // if (friendCheck) {
-  //   for (const checked of friendCheck.friends) {
-  //     if (checked === useParams) {
-  //       console.log('dwad');
-  //     }
-  //   }
-  // }
+  // this checks if someone is your friend when you go to their page
+  const [isfriend, setIsFriend] = useState();
+  const { loading: friendLoading, data: friendData } = useQuery(ME);
+  const friendCheck = friendData?.me || {};
+  const { username } = useParams();
+  useEffect(() => {
+    if (friendCheck.friends) {
+      for (let i = 0; i < friendCheck.friends.length; i++) {
+        if (friendCheck.friends[i].username === username) {
+          setIsFriend(true);
+          console.log(isfriend);
+        }
+      }
+    }
+  });
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to='/profile' />;
@@ -102,7 +109,7 @@ const Profile = () => {
                 <Typography>
                   <strong>Joined:</strong> {user.createdAt}
                 </Typography>
-                {userParam && (
+                {userParam && !isfriend && (
                   <Chip
                     sx={{
                       fontSize: '11px',
