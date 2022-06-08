@@ -54,7 +54,7 @@ const Carousel = () => {
           display:'flex',   
           flexDirection:'column', 
           width:'50%',
-          backgroundColor: 'rgba(255, 255, 255, .4)',
+          backgroundColor: 'rgba(255, 255, 255, .7)',
           borderRadius: '20px',
           border:'5px double black' 
         }}>
