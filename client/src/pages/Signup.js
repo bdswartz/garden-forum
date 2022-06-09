@@ -75,9 +75,10 @@ export default function SignUp() {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
       Auth.login(data.addUser.token);
-      if (data.addUser.token) navigate('/profile');
+      if (data.addUser.token) {
+        navigate('/profile');
+      }
     } catch (e) {
       console.error(e);
     }
