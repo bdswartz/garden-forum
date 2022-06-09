@@ -75,6 +75,7 @@ export default function SignUp() {
       });
 
       Auth.login(data.addUser.token);
+      if (data.addUser.token) navigate('/profile');
     } catch (e) {
       console.error(e);
     }
