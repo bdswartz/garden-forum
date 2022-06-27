@@ -110,6 +110,7 @@ export const UPDATE_PLANT = gql`
     $usdaZone: String
     $pruning: String
     $fertilization: String
+    $imagePath: String
     $water: String
     $commonName: String!
     $description: String
@@ -118,6 +119,7 @@ export const UPDATE_PLANT = gql`
       plantId: $plantId
       usda_zone: $usdaZone
       pruning: $pruning
+      image_path: $imagePath
       fertilization: $fertilization
       water: $water
       common_name: $commonName
@@ -127,6 +129,7 @@ export const UPDATE_PLANT = gql`
       createdAt
       scientific_name
       common_name
+      image_path
       description
       image_path
       usda_zone

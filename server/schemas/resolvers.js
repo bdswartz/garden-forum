@@ -158,6 +158,7 @@ const resolvers = {
         const {
           plantId,
           usda_zone,
+          image_path,
           pruning,
           fertilization,
           water,
@@ -170,6 +171,7 @@ const resolvers = {
           {
             common_name: common_name,
             description: description,
+            image_path: image_path,
             usda_zone: usda_zone,
             pruning: pruning,
             fertilization: fertilization,

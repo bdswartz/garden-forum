@@ -20,6 +20,7 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
         plantId: plantInfo._id,
         commonName: plantInfo.common_name,
         scientificName: plantInfo.scientific_name,
+        imagePath: plantInfo.image_path,
         description: plantInfo.description,
         usdaZone: plantInfo.usda_zone,
         fertilization: plantInfo.fertilization,
@@ -27,7 +28,7 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
         pruning: plantInfo.pruning
     })
 // deconstruct for convenience
-    const { scientificName, commonName , description, usdaZone, fertilization, water, pruning } = formState;
+    const { scientificName, commonName , imagePath, description, usdaZone, fertilization, water, pruning } = formState;
 // define the mutation
     const [updatePlant, { error }] = useMutation(UPDATE_PLANT);
 // handle changes to the form to keep state up to date
@@ -86,6 +87,17 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
               fullWidth
               variant="standard"
               value={description || ""}
+              onChange={handleChange}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Plant Image Path"
+              name="imagePath"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={imagePath || ""}
               onChange={handleChange}
             />
             <TextField

@@ -104,6 +104,7 @@ const typeDefs = gql`
       plantId: ID!
       common_name: String
       usda_zone: String
+      image_path: String
       description: String
       pruning: String
       fertilization: String
