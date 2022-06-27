@@ -19,6 +19,7 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
     const [formState, setFormState] = useState({
         plantId: plantInfo._id,
         commonName: plantInfo.common_name,
+        scientificName: plantInfo.scientific_name,
         description: plantInfo.description,
         usdaZone: plantInfo.usda_zone,
         fertilization: plantInfo.fertilization,
@@ -37,12 +38,10 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
     const handleSubmit = async (event) => {
       event.preventDefault();
       handleClose();
-      console.log(formState);
       try {
         const data = await updatePlant({
           variables: formState
         });
-        console.log(data);
       } catch (e) {
         console.error(e);
       }

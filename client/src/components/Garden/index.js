@@ -61,8 +61,8 @@ export default function Garden({ plants, user }) {
               loading='lazy'
             />
             <ImageListItemBar
-              title={plant.scientific_name}
-              subtitle={plant.common_name}
+              title={plant.common_name}
+              subtitle={plant.scientific_name}
               actionIcon={
                 <IconButton
                   sx={{ color: 'rgba(255, 255, 255, 0.54)' }}

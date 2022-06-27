@@ -55,17 +55,32 @@ export default function AddPlantDialog({ open, handleClose }) {
   };
   //plant search setup
   const plantFile = useRef();
-  const [plantImg, setPlantImg] = useState([]);
-  //change these to proper names below
-  const [commonName, setcommonName] = useState();
-  const [scientificName, setscientificName] = useState();
-  const [imagePath, setImagePath] = useState();
-  // Add Pruning, Watering and Fertilization
-  const [description, setDescription] = useState("");
-  const [pruning, setPruning] = useState("");
-  const [water, setWatering] = useState("");
-  const [fertilization, setFertilization] = useState("");
 
+  // set form state with the plant prop information
+  const [formState, setFormState] = useState({
+    commonName: '',
+    scientificName:'',
+    imagePath:'',
+    description: '',
+    usdaZone: '',
+    fertilization: '',
+    water: '',
+    pruning: ''
+  })
+  // deconstruct for convenience
+  const { scientificName, commonName, imagePath, description, usdaZone, fertilization, water, pruning } = formState;
+
+  // //change these to proper names below
+  // const [commonName, setcommonName] = useState();
+  // const [scientificName, setscientificName] = useState();
+  // const [imagePath, setImagePath] = useState();
+  // // Add Pruning, Watering and Fertilization
+  // const [description, setDescription] = useState("");
+  // const [pruning, setPruning] = useState("");
+  // const [water, setWatering] = useState("");
+  // const [fertilization, setFertilization] = useState("");
+  
+  const [plantImg, setPlantImg] = useState([]);
   //upload plant file
   const onFileChange = (event) => {
     setPlantImg(event.target.files);
@@ -74,9 +89,14 @@ export default function AddPlantDialog({ open, handleClose }) {
   const handleSearch = () => {
     const plantArr = Object.values(plantImg);
     searchPlants(plantArr).then((res) => {
-      setcommonName(res.suggestions[0].plant_details.common_names[0]);
-      setscientificName(res.suggestions[0].plant_details.scientific_name);
-      setImagePath(res.suggestions[0].similar_images[0].url);
+      setFormState ({...formState, 
+        commonName: res.suggestions[0].plant_details.common_names[0],
+        scientificName: res.suggestions[0].plant_details.scientific_name,
+        imagePath: res.suggestions[0].similar_images[0].url
+      })
+      // setcommonName(res.suggestions[0].plant_details.common_names[0]);
+      // setscientificName(res.suggestions[0].plant_details.scientific_name);
+      // setImagePath(res.suggestions[0].similar_images[0].url);
 
       // console.log(plant_name);
       // console.log(res.suggestions[0].plant_details.scientific_name);
@@ -87,21 +107,26 @@ export default function AddPlantDialog({ open, handleClose }) {
     console.log(imagePath);
   };
 
-  const handlePruning = (event) => {
-    setPruning(event.target.value);
-  };
+  // handle changes to the form to keep state up to date
+  const handleChange = event => {
+    setFormState({ ...formState, [event.target.name]: event.target.value });
+};
 
-  const handleWatering = (event) => {
-    setWatering(event.target.value);
-  };
+  // const handlePruning = (event) => {
+  //   setPruning(event.target.value);
+  // };
 
-  const handleDescription = (event) => {
-    setDescription(event.target.value);
-  };
+  // const handleWatering = (event) => {
+  //   setWatering(event.target.value);
+  // };
 
-  const handleFertilization = (event) => {
-    setFertilization(event.target.value);
-  };
+  // const handleDescription = (event) => {
+  //   setDescription(event.target.value);
+  // };
+
+  // const handleFertilization = (event) => {
+  //   setFertilization(event.target.value);
+  // };
 
   const [addPlant, { error }] = useMutation(ADD_PLANT);
 
@@ -110,25 +135,36 @@ export default function AddPlantDialog({ open, handleClose }) {
 
     try {
       const data = await addPlant({
-        variables: {
-          scientificName,
-          commonName,
-          imagePath,
-          description,
-          pruning,
-          fertilization,
-          water,
-        },
+        variables: formState
+        // {
+        //   scientificName,
+        //   commonName,
+        //   imagePath,
+        //   description,
+        //   pruning,
+        //   fertilization,
+        //   water,
+        // },
       });
       console.log(data);
       // clear form values
-      setPlantImg("");
-      setImagePath("");
-      setcommonName("");
-      setscientificName("");
-      setPruning("");
-      setWatering("");
-      setFertilization("");
+      // setFormState({
+      //   commonName: '',
+      //   scientificName:'',
+      //   imagePath:'',
+      //   description: '',
+      //   usdaZone: '',
+      //   fertilization: '',
+      //   water: '',
+      //   pruning: ''
+      // })
+      // setPlantImg("");
+      // setImagePath("");
+      // setcommonName("");
+      // setscientificName("");
+      // setPruning("");
+      // setWatering("");
+      // setFertilization("");
     } catch (e) {
       console.error(e);
     }
@@ -184,10 +220,12 @@ export default function AddPlantDialog({ open, handleClose }) {
             margin="dense"
             label="Common Plant Name"
             type="text"
+            name='commonName'
             // key={common_name}
             fullWidth
             variant="standard"
             value={commonName || ""}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
@@ -195,54 +233,81 @@ export default function AddPlantDialog({ open, handleClose }) {
             id="name"
             label="Scientific Plant Name"
             type="text"
+            name='scientificName'
             // key={scientific_name}
             fullWidth
             variant="standard"
             value={scientificName || ""}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
             id="name"
+            label="Plant Image Path"
+            name='imagePath'
+            type="text"
+            fullWidth
+            variant="standard"
+            value={imagePath}
+            onChange={handleChange}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
             label="Plant Description"
+            name='description'
             type="text"
             fullWidth
             variant="standard"
             value={description}
-            onChange={handleDescription}
+            onChange={handleChange}
           />
+          <TextField
+              autoFocus
+              margin="dense"
+              name="usdaZone"
+              label="USDA Zone"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={usdaZone || ""}
+              onChange={handleChange}
+            />
           <TextField
             autoFocus
             margin="dense"
-            id="name"
             label="Pruning Info"
+            name='pruning'
             type="text"
             fullWidth
             variant="standard"
             value={pruning}
-            onChange={handlePruning}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
             id="name"
             label="Watering Info"
+            name='water'
             type="text"
             fullWidth
             variant="standard"
             value={water}
-            onChange={handleWatering}
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             margin="dense"
             id="name"
             label="Fertilizing Info"
+            name='fertilization'
             type="text"
             fullWidth
             variant="standard"
             value={fertilization}
-            onChange={handleFertilization}
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
