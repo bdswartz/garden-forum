@@ -23,6 +23,7 @@ const typeDefs = gql`
     createdAt: String
     scientific_name: String
     common_name: String
+    description: String
     image_path: String
     usda_zone: String
     pruning: String
@@ -94,6 +95,7 @@ const typeDefs = gql`
       common_name: String!
       image_path: String!
       usda_zone: String
+      description: String
       pruning: String
       fertilization: String
       water: String
@@ -102,6 +104,7 @@ const typeDefs = gql`
       plantId: ID!
       common_name: String
       usda_zone: String
+      description: String
       pruning: String
       fertilization: String
       water: String
@@ -113,10 +116,3 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
-
-// need to add these for Query
-// plant(_id: ID!): Plant
-
-// need to add mutations to
-// update plant
-// delete plant

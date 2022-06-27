@@ -19,13 +19,14 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
     const [formState, setFormState] = useState({
         plantId: plantInfo._id,
         commonName: plantInfo.common_name,
+        description: plantInfo.description,
         usdaZone: plantInfo.usda_zone,
         fertilization: plantInfo.fertilization,
         water: plantInfo.water,
         pruning: plantInfo.pruning
     })
 // deconstruct for convenience
-    const { scientificName, commonName , usdaZone, fertilization, water, pruning } = formState;
+    const { scientificName, commonName , description, usdaZone, fertilization, water, pruning } = formState;
 // define the mutation
     const [updatePlant, { error }] = useMutation(UPDATE_PLANT);
 // handle changes to the form to keep state up to date
@@ -53,6 +54,18 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
           <DialogTitle>Update Your Plant</DialogTitle>
   
           <DialogContent>
+          <TextField
+              autoFocus
+              margin="dense"
+              label="Common Plant Name"
+              name="commonName"
+              type="text"
+              // key={common_name}
+              fullWidth
+              variant="standard"
+              value={commonName || ""}
+              onChange={handleChange}
+            />
               <TextField
                 autoFocus
                 margin="dense"
@@ -67,13 +80,13 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
             <TextField
               autoFocus
               margin="dense"
-              label="Common Plant Name"
-              name="commonName"
+              label="Description"
+              name="desciption"
               type="text"
               // key={common_name}
               fullWidth
               variant="standard"
-              value={commonName || ""}
+              value={description || ""}
               onChange={handleChange}
             />
             <TextField

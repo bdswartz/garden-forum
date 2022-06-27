@@ -61,6 +61,7 @@ export default function AddPlantDialog({ open, handleClose }) {
   const [scientificName, setscientificName] = useState();
   const [imagePath, setImagePath] = useState();
   // Add Pruning, Watering and Fertilization
+  const [description, setDescription] = useState("");
   const [pruning, setPruning] = useState("");
   const [water, setWatering] = useState("");
   const [fertilization, setFertilization] = useState("");
@@ -94,6 +95,10 @@ export default function AddPlantDialog({ open, handleClose }) {
     setWatering(event.target.value);
   };
 
+  const handleDescription = (event) => {
+    setDescription(event.target.value);
+  };
+
   const handleFertilization = (event) => {
     setFertilization(event.target.value);
   };
@@ -109,6 +114,7 @@ export default function AddPlantDialog({ open, handleClose }) {
           scientificName,
           commonName,
           imagePath,
+          description,
           pruning,
           fertilization,
           water,
@@ -198,6 +204,17 @@ export default function AddPlantDialog({ open, handleClose }) {
             autoFocus
             margin="dense"
             id="name"
+            label="Plant Description"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={description}
+            onChange={handleDescription}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
             label="Pruning Info"
             type="text"
             fullWidth
@@ -211,6 +228,7 @@ export default function AddPlantDialog({ open, handleClose }) {
             id="name"
             label="Watering Info"
             type="text"
+            fullWidth
             variant="standard"
             value={water}
             onChange={handleWatering}

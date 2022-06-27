@@ -1,7 +1,7 @@
 {
   "name": "mern-shopping",
   "version": "1.0.0",
-  "description": "",
+  "description": "#### The Garden Forum is a MERN full-stack website that gives everyday gardeners and home landscapers a manage their plants.",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -15,5 +15,14 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdswartz/garden-forum.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bdswartz/garden-forum/issues"
+  },
+  "homepage": "https://github.com/bdswartz/garden-forum#readme"
 }

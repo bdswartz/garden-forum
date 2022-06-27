@@ -65,10 +65,11 @@ export const searchPlants = (files) => {
 
   return Promise.all(promises).then((base64files) => {
     // console.log(base64files);
-    // const API_KEY = process.env.REACT_APP_API_KEY;
-    // const API_KEY = "eVh7gMTn4ySBkcg5XnOz13qsTPkurS35JZGG9b9sFHEPajraHT";
+    const API_KEY = process.env.REACT_APP_API_KEY;
+    console.log("🚀 ~ file: API.js ~ line 69 ~ returnPromise.all ~ API_KEY", API_KEY)
+    
     const data = {
-      api_key: "eVh7gMTn4ySBkcg5XnOz13qsTPkurS35JZGG9b9sFHEPajraHT",
+      api_key: API_KEY,
       images: base64files,
       // modifiers docs: https://github.com/flowerchecker/Plant-id-API/wiki/Modifiers
       modifiers: ["crops_fast", "similar_images"],
@@ -105,4 +106,3 @@ export const searchPlants = (files) => {
   });
 };
 
-// ("eVh7gMTn4ySBkcg5XnOz13qsTPkurS35JZGG9b9sFHEPajraHT");
