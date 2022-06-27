@@ -8,7 +8,6 @@ import Chip from "@mui/material/Chip";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function PlantCard({ plantInfo }) {
-  console.log(plantInfo);
 
   const [open, setOpen] = React.useState(false);
 
@@ -32,7 +31,7 @@ export default function PlantCard({ plantInfo }) {
       }}
     >
       <CardMedia
-        sx={{ width: "30%" }}
+        sx={{ width: 350}}
         component="img"
         height="auto"
         image={`${plantInfo.image_path}`}
@@ -40,10 +39,13 @@ export default function PlantCard({ plantInfo }) {
       />
       <CardContent sx={{ width: "60%" }}>
         <Typography gutterBottom variant="h4" component="div">
-          {plantInfo.scientific_name}
+          {plantInfo.common_name}
         </Typography>
         <Typography gutterBottom variant="h6" component="div">
-          {plantInfo.common_name}
+          {plantInfo.scientific_name}
+        </Typography>
+        <Typography gutterBottom variant="body1" component="div">
+          {plantInfo.description}
         </Typography>
         <Typography variant="body1" color="text.secondary">
           Pruning: {plantInfo.pruning}

@@ -18,6 +18,7 @@ export const QUERY_USER = gql`
       plants {
         scientific_name
         common_name
+        description
         image_path
         usda_zone
         pruning
@@ -48,6 +49,7 @@ export const QUERY_ALL_USERS = gql`
         _id
         scientific_name
         common_name
+        description
         image_path
         usda_zone
         pruning
@@ -97,6 +99,7 @@ export const ME = gql`
         createdAt
         scientific_name
         common_name
+        description
         image_path
         usda_zone
         pruning
@@ -136,6 +139,7 @@ export const QUERY_PLANT = gql`
       createdAt
       scientific_name
       common_name
+      description
       image_path
       usda_zone
       pruning

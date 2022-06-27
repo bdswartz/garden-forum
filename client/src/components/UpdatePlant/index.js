@@ -19,13 +19,16 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
     const [formState, setFormState] = useState({
         plantId: plantInfo._id,
         commonName: plantInfo.common_name,
+        scientificName: plantInfo.scientific_name,
+        imagePath: plantInfo.image_path,
+        description: plantInfo.description,
         usdaZone: plantInfo.usda_zone,
         fertilization: plantInfo.fertilization,
         water: plantInfo.water,
         pruning: plantInfo.pruning
     })
 // deconstruct for convenience
-    const { scientificName, commonName , usdaZone, fertilization, water, pruning } = formState;
+    const { scientificName, commonName , imagePath, description, usdaZone, fertilization, water, pruning } = formState;
 // define the mutation
     const [updatePlant, { error }] = useMutation(UPDATE_PLANT);
 // handle changes to the form to keep state up to date
@@ -36,12 +39,10 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
     const handleSubmit = async (event) => {
       event.preventDefault();
       handleClose();
-      console.log(formState);
       try {
         const data = await updatePlant({
           variables: formState
         });
-        console.log(data);
       } catch (e) {
         console.error(e);
       }
@@ -53,6 +54,18 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
           <DialogTitle>Update Your Plant</DialogTitle>
   
           <DialogContent>
+          <TextField
+              autoFocus
+              margin="dense"
+              label="Common Plant Name"
+              name="commonName"
+              type="text"
+              // key={common_name}
+              fullWidth
+              variant="standard"
+              value={commonName || ""}
+              onChange={handleChange}
+            />
               <TextField
                 autoFocus
                 margin="dense"
@@ -67,13 +80,24 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
             <TextField
               autoFocus
               margin="dense"
-              label="Common Plant Name"
-              name="commonName"
+              label="Description"
+              name="desciption"
               type="text"
               // key={common_name}
               fullWidth
               variant="standard"
-              value={commonName || ""}
+              value={description || ""}
+              onChange={handleChange}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Plant Image Path"
+              name="imagePath"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={imagePath || ""}
               onChange={handleChange}
             />
             <TextField

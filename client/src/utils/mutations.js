@@ -74,6 +74,7 @@ export const ADD_PLANT = gql`
     $scientificName: String!
     $commonName: String!
     $imagePath: String!
+    $description: String
     $usdaZone: String
     $pruning: String
     $fertilization: String
@@ -82,6 +83,7 @@ export const ADD_PLANT = gql`
     addPlant(
       scientific_name: $scientificName
       common_name: $commonName
+      description: $description
       image_path: $imagePath
       usda_zone: $usdaZone
       pruning: $pruning
@@ -92,6 +94,7 @@ export const ADD_PLANT = gql`
       createdAt
       scientific_name
       common_name
+      description
       image_path
       water
       fertilization
@@ -107,21 +110,27 @@ export const UPDATE_PLANT = gql`
     $usdaZone: String
     $pruning: String
     $fertilization: String
+    $imagePath: String
     $water: String
     $commonName: String!
+    $description: String
   ) {
     updatePlant(
       plantId: $plantId
       usda_zone: $usdaZone
       pruning: $pruning
+      image_path: $imagePath
       fertilization: $fertilization
       water: $water
       common_name: $commonName
+      description: $description
     ) {
       _id
       createdAt
       scientific_name
       common_name
+      image_path
+      description
       image_path
       usda_zone
       pruning
@@ -138,6 +147,7 @@ export const REMOVE_PLANT = gql`
       createdAt
       scientific_name
       common_name
+      description
       image_path
       usda_zone
       pruning
@@ -159,6 +169,7 @@ export const ADD_PLANT_HISTORY = gql`
       createdAt
       scientific_name
       common_name
+      description
       image_path
       plantHistory {
         createdAt
@@ -179,6 +190,7 @@ export const REMOVE_HISTORY = gql`
       createdAt
       scientific_name
       common_name
+      description
       image_path
       usda_zone
       pruning

@@ -17,6 +17,10 @@ const plantSchema = new Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+      maxlength: 500
+    },
     image_path: {
       type: String,
       required: true,
