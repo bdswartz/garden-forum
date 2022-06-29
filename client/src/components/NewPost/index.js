@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { ADD_POST } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 
 
 
@@ -62,26 +63,17 @@ export default function NewPost() {
       <>
         {/* <Grid container direction='column'  > */}
         <Grid container component="form"
-              sx={{
-                // display: 'grid',
-                // gap: 4,
-                // width: '95%',
-                // '& .MuiTextField-root': { m: 1, width: '45ch' },
-                // m: 2,
-                // pt: 1.5,
-                // flexDirection: 'column',
-              }}
               noValidate
               autoComplete="off"
               onSubmit={handleSubmit}>
-          <NewItem elevation={6}>
+          <NewItem elevation={6} sx={{mt:'10px'}}>
                   <TextField
                   sx={textFieldStyle}
                   onChange={handleChange}
                   id="postTitle" 
                   name="postTitle" 
                   value={formState.postTitle} 
-                  label="Create a New Post Title" 
+                  label="Create a Title for Your New Post" 
                   variant="outlined" 
                   >
                   </TextField>
@@ -96,6 +88,7 @@ export default function NewPost() {
                       sx={textFieldStyle}
                     />}
               <Button type='submit' variant="contained" size="large" sx={{mb: 2, width: 'auto',}}>
+              <AddCommentIcon sx={{fontSize: 'medium', mr:'5px'}}/>
             Create New Post
               </Button>
           </NewItem>

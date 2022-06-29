@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import Search from "../components/ForumPosts/Search";
 import NewPost from "../components/NewPost";
 import Box from '@mui/material/Box';
+import { Typography } from "@mui/material";
+import { textAlign } from "@mui/system";
 
 const theme = createTheme({
   palette: {
@@ -35,6 +37,10 @@ const postContainerStyle = {
   width: 'auto',
   m: 0,
 }
+const columnTitleStyle = {
+  fontWeight: 'bold',
+  textAlign: 'center'
+}
 
 const Forum = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
@@ -43,9 +49,11 @@ const Forum = () => {
     return (
       <ThemeProvider theme={theme}>
         <Box sx={pageStyle}>
+        <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
+        <Typography variant="h5" sx={columnTitleStyle}>Post Forum</Typography>
         <Grid container sx={containerStyle}>
           {/* Left Column Contains Posts */}
-          <Grid xs={8}>
+          <Grid xs={9}>
             {loading ? (
                <div>Loading....</div>
             ) : (
@@ -65,7 +73,7 @@ const Forum = () => {
           )}
           </Grid>
           {/* Right Column Add New Posts */}
-          <Grid xs={4} sx={postContainerStyle}>
+          <Grid xs={3} sx={postContainerStyle}>
               <NewPost></NewPost>
           </Grid>
         </Grid>

@@ -3,20 +3,20 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-import Igor from '../../assets/images/igor.jpg';
 import Box from '@mui/material/Box';
 import NewPost from '../NewPost';
 import Link from '@mui/material/Link';
+import ChatIcon from '@mui/icons-material/Chat';
 
 const postTitleStyle = {
-  fontSize: 32,
+  fontSize: 24,
   py: 2,
   color: 'black'
 }
 const postBodyStyle = {
-  color: 'black',
-  fontSize: 20, 
-  pb: 3,
+  color: 'black', 
+  fontSize: 16, 
+  pb: 1,
 }
 
 const postCardStyle = {
@@ -56,15 +56,15 @@ const ForumPosts = ({ posts, postText }) => {
               <Typography variant="body2" sx={postTagStyle}>
                  Created by: {posts.username} on {posts.createdAt}
                </Typography>
-            <Typography noWrap variant="h4" gutterBottom sx={postTitleStyle}>{posts.postTitle}</Typography>
+            <Typography noWrap variant="h7" gutterBottom sx={postTitleStyle}>{posts.postTitle}</Typography>
             </Grid>
             <Grid item>
-              <Typography noWrap sx={postBodyStyle}>
+              <Typography variant="body1" noWrap sx={postBodyStyle}>
                {posts.postText}
               </Typography>
            </Grid>
-               <Typography variant='body2'>
-                 Number of comments: {posts.commentCount}
+               <Typography variant='body2'><ChatIcon sx={{fontSize: 'small', mr:'5px'}}/>
+                 Comments: {posts.commentCount}
                </Typography>
           </Link>
           </Paper>
