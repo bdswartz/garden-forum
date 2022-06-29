@@ -28,15 +28,6 @@ const postTagStyle = {
   color: '#878787'
 }
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFE7E2',
-//   ...theme.typography.body1,
-//   padding: theme.spacing(4),
-//   textAlign: 'left',
-//   // border: 2,
-//   height: 'auto',
-// }));
-
 
 // Page that appears when no posts are present
 const ForumPosts = ({ posts, postText }) => {

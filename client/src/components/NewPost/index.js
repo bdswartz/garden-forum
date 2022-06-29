@@ -25,7 +25,7 @@ const NewItem = styled(Paper)(({theme}) => ({
 
 const textFieldStyle = {
   width: '95%',
-  my: 2
+  my: 2,
 }
 
 export default function NewPost() {
