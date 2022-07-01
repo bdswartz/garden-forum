@@ -128,7 +128,9 @@ export default function AddPlantDialog({ open, handleClose }) {
   //   setFertilization(event.target.value);
   // };
 
-  const [addPlant, { error }] = useMutation(ADD_PLANT);
+  const [addPlant, { error }] = useMutation(ADD_PLANT, {
+    refetchQueries: [{ query: ME }],
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();

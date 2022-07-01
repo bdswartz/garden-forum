@@ -45,9 +45,7 @@ const Singlepost = () => {
     });
 
   const post = data?.post
-  console.log("🚀 ~ file: Post.js ~ line 30 ~ Singlepost ~ post", post)
   
-  if (!Auth.loggedIn()) {
     return (
       <ThemeProvider theme={theme}>
           <Box sx={pageStyle}>
@@ -67,5 +65,24 @@ const Singlepost = () => {
       </ThemeProvider>
   )}
 
-};
+  // if (Auth.loggedIn()) {
+  //   return (
+  //     <ThemeProvider theme={theme}>
+  //         <Box sx={pageStyle}>
+  //           <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
+  //           <Typography variant="h5" sx={columnTitleStyle}>Post Thread</Typography>
+  //           <Grid container sx={containerStyle}>
+  //             <Grid xs={9} sx={containerStyle}>
+  //               {loading ? (
+  //                 <div>Loading....</div>
+  //               ) : (
+  //                 <CommentPost post={post}>
+  //                 </CommentPost>)
+  //               }
+  //             </Grid>
+  //         </Grid>
+  //         </Box>
+  //     </ThemeProvider>
+  // )}
+;
 export default Singlepost;

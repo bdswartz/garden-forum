@@ -10,10 +10,8 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 
-
-
 const NewItem = styled(Paper)(({theme}) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'white',
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
  ...theme.typography.body1,
   padding: theme.spacing(2), 
   textAlign: 'center',

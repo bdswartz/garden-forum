@@ -25,6 +25,11 @@ const containerStyle = {
   display:'flex',
   flexDirection: 'row',
 }
+const flexContainer = {
+  display:'flex',
+  flexDirection: 'row',
+  justifyContent:'center'
+}
 const pageStyle = {
   backgroundColor: '#f3f3f5',
   minHeight: '100vh',
@@ -51,9 +56,10 @@ const Forum = () => {
         <Box sx={pageStyle}>
         <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
         <Typography variant="h5" sx={columnTitleStyle}>Post Forum</Typography>
-        <Grid container sx={containerStyle}>
+        <Box container sx={flexContainer}>
+        <Grid container xs={11} sx={containerStyle}>
           {/* Left Column Contains Posts */}
-          <Grid xs={9}>
+          <Grid xs={8}>
             {loading ? (
                <div>Loading....</div>
             ) : (
@@ -72,11 +78,12 @@ const Forum = () => {
               </Grid>
           )}
           </Grid>
-          {/* Right Column Add New Posts */}
-          <Grid xs={3} sx={postContainerStyle}>
+          {/* Right Column Add New Posts */}  
+          <Grid xs={4} sx={postContainerStyle}>
               <NewPost></NewPost>
           </Grid>
         </Grid>
+        </Box>
         </Box>
       </ThemeProvider>
    )};

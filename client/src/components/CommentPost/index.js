@@ -7,11 +7,11 @@ import NewComment from '../NewComment';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Auth from '../../utils/auth';
-import { ADD_COMMENT } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import { ME, QUERY_POST, QUERY_POSTS } from '../../utils/queries';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { ADD_COMMENT } from '../../utils/mutations';
 
 
 

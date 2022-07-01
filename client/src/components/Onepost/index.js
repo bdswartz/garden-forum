@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { Typography } from '@mui/material';
 import { Paper } from '@mui/material';
@@ -9,6 +9,10 @@ import { useQuery } from '@apollo/client';
 import { ME, QUERY_USER } from '../../utils/queries';
 import Auth from '../../utils/auth';
 import ChatIcon from '@mui/icons-material/Chat';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { ADD_COMMENT } from '../../utils/mutations';
+import { useMutation } from '@apollo/client';
 
 const postTitleStyle = {
   fontSize: 24,
@@ -30,30 +34,66 @@ const postTagStyle = {
   color: '#878787'
 }
 
-const Leftitem = styled(Paper)(({ theme }) => ({
-    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFE7E2',
-    ...theme.typography.body1,
-    padding: theme.spacing(4),
-    textAlign: 'left',
-    border: 2,
-    // overflow: 'hidden',
-    // height: 300,
-    width: 800,
-    // maxWidth: 400,
-    color: theme.palette.text.secondary,
-  }));
-
+// const Leftitem = styled(Paper)(({ theme }) => ({
+//     // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFE7E2',
+//     ...theme.typography.body1,
+//     padding: theme.spacing(4),
+//     textAlign: 'left',
+//     border: 2,
+//     // overflow: 'hidden',
+//     // height: 300,
+//     width: 800,
+//     // maxWidth: 400,
+//     color: theme.palette.text.secondary,
+//   }));
+  // const NewItem = styled(Paper)(({ theme }) => ({
+  //    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f3f3f5',
+  //   ...theme.typography.body1,
+  //   padding: theme.spacing(4),
+  //   textAlign: 'center',
+  //   overflow: 'hidden',
+  //   height: 450,
+  //   width: 450,
+  //   color: theme.palette.text.secondary,
+  // }));
 
 
 const OnePost = ({ post, postText}) => {
     const [value, setValue] = React.useState('Controlled');
+    const [formState, setFormState] = useState({ commentBody: '' });
     const { username: userParam } = useParams();
+    const postId = post._id
+
     const { loading, data } = useQuery(userParam ? QUERY_USER : ME, {
       variables: { username: userParam },
     });
   
     const user = data?.me || data?.user || {};
     console.log(user);
+    
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+  
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
+    };
+
+    const [addComment, { error }] = useMutation(ADD_COMMENT);
+
+    const handleFormSubmit = async (event) => {
+      //   event.preventDefault();
+        try {
+          const { data } = await addComment({
+            variables: { postId, ...formState },
+          });
+          Auth.loggedIn();
+        } catch (e) {
+          console.error(e);
+        }
+      };
+  
   
     return (
       <Grid key={post._id} xs={12}>
@@ -72,9 +112,42 @@ const OnePost = ({ post, postText}) => {
              <Typography variant='body2'><ChatIcon sx={{fontSize: 'small', mr:'5px'}}/>
                Comments: {post.commentCount}
              </Typography>
-        </Paper>
+        <Grid item xs={12}
+          component='form'
+          sx={{
+            display: 'grid',
+            gap: 2,
+            '& .MuiTextField-root': { m: 1, width: '45ch' },
+            m: 2,}}>
+          <TextField
+            onChange={handleChange}
+            value={formState.commentBody}
+            id="commentBody"
+            name="commentBody"
+            label="Type comment here..."
+            multiline
+            rows={4}
+            />
+          <Button type='submit' variant="contained" size="large" sx={{mb: 2}}>
+            Create New Comment
+          </Button>
         </Grid>
-    )
-};
+        <Grid container justifyContent='space-between' sx={{p: 1}}>
+        <Grid item xs={12}>
+          {post.comments.map((comments, index) => {
+            if (post.comments.length) {
+              return (
+                <div key={index}>
+                <Typography variant='h6'>{comments.commentBody}</Typography>
+                <Typography variant='body2' sx={{pb: 1}}>{comments.createdAt} by: {comments.username} </Typography>
+              </div>
+            )}           
+          })}
+        </Grid>
+        </Grid>
+          </Paper>
+        </Grid>
+      )
+  };
 
 export default OnePost;
