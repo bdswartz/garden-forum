@@ -59,7 +59,7 @@ const postTagStyle = {
 
 
 const OnePost = ({ post, postText}) => {
-    const [value, setValue] = React.useState('Controlled');
+    // const [value, setValue] = React.useState('Controlled');
     const [formState, setFormState] = useState({ commentBody: '' });
     const { username: userParam } = useParams();
     const postId = post._id
@@ -69,7 +69,7 @@ const OnePost = ({ post, postText}) => {
     });
   
     const user = data?.me || data?.user || {};
-    console.log(user);
+    // console.log(user);
     
     const handleChange = (event) => {
       const { name, value } = event.target;
@@ -114,11 +114,13 @@ const OnePost = ({ post, postText}) => {
              </Typography>
         <Grid item xs={12}
           component='form'
+          onSubmit={handleFormSubmit}
           sx={{
             display: 'grid',
             gap: 2,
-            '& .MuiTextField-root': { m: 1, width: '45ch' },
-            m: 2,}}>
+            '& .MuiTextField-root': { m: 0, width: '100%' },
+            m: 6}}
+            >
           <TextField
             onChange={handleChange}
             value={formState.commentBody}
@@ -133,7 +135,7 @@ const OnePost = ({ post, postText}) => {
           </Button>
         </Grid>
         <Grid container justifyContent='space-between' sx={{p: 1}}>
-        <Grid item xs={12}>
+        <Grid xs={12}>
           {post.comments.map((comments, index) => {
             if (post.comments.length) {
               return (
