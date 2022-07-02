@@ -14,11 +14,6 @@ import TextField from '@mui/material/TextField';
 import { ADD_COMMENT } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 
-const postTitleStyle = {
-  fontSize: 24,
-  py: 2,
-  color: 'black'
-}
 const postBodyStyle = {
   color: 'black', 
   fontSize: 16, 
@@ -26,12 +21,35 @@ const postBodyStyle = {
 }
 
 const postCardStyle = {
-  mt: '10px',
+  mt: '30px',
   height: 'auto',
-  padding: 2
+  px: 4,
+  py: 2
 }
 const postTagStyle = {
   color: '#878787'
+
+}
+
+const postTitleStyle = {
+  fontSize: 24,
+  py: 2,
+  color: 'black',
+  mb: 30
+}
+const commentFormStyle = {
+  width:'100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  // alignItems: 'center',
+  // gap: 2,
+  mt: 2,
+  p: 1
+}
+
+const commentTextStyle = {
+  mb:3
 }
 
 // const Leftitem = styled(Paper)(({ theme }) => ({
@@ -69,7 +87,7 @@ const OnePost = ({ post, postText}) => {
     });
   
     const user = data?.me || data?.user || {};
-    // console.log(user);
+    console.log(user);
     
     const handleChange = (event) => {
       const { name, value } = event.target;
@@ -98,57 +116,62 @@ const OnePost = ({ post, postText}) => {
     return (
       <Grid key={post._id} xs={12}>
       <Paper elevation={6} sx={postCardStyle}>
-          <Grid>
-            <Typography variant="body2" sx={postTagStyle}>
-               Created by: {post.username} on {post.createdAt}
-             </Typography>
-          <Typography noWrap variant="h7" gutterBottom sx={postTitleStyle}>{post.postTitle}</Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="body1" noWrap sx={postBodyStyle}>
-             {post.postText}
+        <Grid sx={{mb:'20px'}}>
+        <Grid>
+          <Typography variant="body2" sx={postTagStyle}>
+              Posted by {post.username} on {post.createdAt}
             </Typography>
-         </Grid>
-             <Typography variant='body2'><ChatIcon sx={{fontSize: 'small', mr:'5px'}}/>
-               Comments: {post.commentCount}
-             </Typography>
-        <Grid item xs={12}
-          component='form'
-          onSubmit={handleFormSubmit}
-          sx={{
-            display: 'grid',
-            gap: 2,
-            '& .MuiTextField-root': { m: 0, width: '100%' },
-            m: 6}}
-            >
-          <TextField
-            onChange={handleChange}
-            value={formState.commentBody}
-            id="commentBody"
-            name="commentBody"
-            label="Type comment here..."
-            multiline
-            rows={4}
-            />
-          <Button type='submit' variant="contained" size="large" sx={{mb: 2}}>
-            Create New Comment
-          </Button>
+          <Typography noWrap variant="h7" gutterBottom sx={postTitleStyle}>{post.postTitle}</Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="body1" noWrap sx={postBodyStyle}>
+            {post.postText}
+          </Typography>
+        </Grid>
+        <Grid >
+          <Typography color='primary' variant='body3'><ChatIcon sx={{fontSize: 'small', mr:'5px'}}/>
+            Comments: {post.commentCount}
+          </Typography>
+        </Grid>
         </Grid>
         <Grid container justifyContent='space-between' sx={{p: 1}}>
-        <Grid xs={12}>
-          {post.comments.map((comments, index) => {
-            if (post.comments.length) {
-              return (
-                <div key={index}>
-                <Typography variant='h6'>{comments.commentBody}</Typography>
-                <Typography variant='body2' sx={{pb: 1}}>{comments.createdAt} by: {comments.username} </Typography>
-              </div>
-            )}           
-          })}
-        </Grid>
-        </Grid>
-          </Paper>
-        </Grid>
+          <Grid xs={12}>
+            {post.comments.map((comments, index) => {
+              if (post.comments.length) {
+                return (
+                  <div key={index}>
+                  <Typography variant='body2' sx={postTagStyle}>Comment by {comments.username} on {comments.createdAt}  </Typography>
+                  <Typography variant='body1'>{comments.commentBody}</Typography>
+                </div>
+              )}           
+            })}
+          </Grid>
+           </Grid>
+        {Auth.loggedIn() &&
+          <Grid xs={12}
+            component='form'
+            onSubmit={handleFormSubmit}
+            sx={commentFormStyle}
+              >
+              <Typography variant='h7' sx={{mb:1}}>Add a Comment...</Typography>
+              <Typography variant='body2' sx={postTagStyle}>Commenting as {user.username} </Typography>
+              <TextField
+                sx={commentTextStyle}
+                onChange={handleChange}
+                value={formState.commentBody}
+                id="commentBody"
+                name="commentBody"
+                label="Type comment here..."
+                multiline
+                rows={4}
+                />
+              <Button type='submit' variant="contained" size="large" sx={{mb: 2}}>
+                Create New Comment
+              </Button>
+          </Grid>
+        }
+      </Paper>
+      </Grid>
       )
   };
 

@@ -31,11 +31,11 @@ const postTagStyle = {
 
 // Page that appears when no posts are present
 const ForumPosts = ({ posts, postText }) => {
-  const [value, setValue] = React.useState('Controlled');
+  // const [value, setValue] = React.useState('Controlled');
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setValue(event.target.value);
+  // };
 
     return (
       <>

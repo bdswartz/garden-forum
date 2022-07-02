@@ -8,7 +8,6 @@ import Search from "../components/ForumPosts/Search";
 import NewPost from "../components/NewPost";
 import Box from '@mui/material/Box';
 import { Typography } from "@mui/material";
-import { textAlign } from "@mui/system";
 
 const theme = createTheme({
   palette: {
@@ -18,7 +17,7 @@ const theme = createTheme({
     secondary: {
       main: '#64dd20',
     },
-  },
+  }
 });
 
 const containerStyle = {

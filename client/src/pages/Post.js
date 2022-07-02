@@ -1,11 +1,9 @@
 import React from "react";
 import { QUERY_POST } from '../utils/queries'
 import {useQuery} from '@apollo/client';
-import OnePost from '../components/Onepost';
+import PostComment from '../components/PostComment';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useParams } from 'react-router-dom';
-import Auth from '../utils/auth';
-import CommentPost from '../components/CommentPost';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Typography } from "@mui/material";
@@ -19,7 +17,6 @@ const theme = createTheme({
         main: '#64dd20',
       },
     },
-   
   });
 
   const containerStyle = {
@@ -34,9 +31,14 @@ const theme = createTheme({
 
   const columnTitleStyle = {
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    pt:4
   }
   
+  const columnSubTitleStyle = {
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }
 
 const Singlepost = () => {
     const { id } = useParams();
@@ -50,14 +52,14 @@ const Singlepost = () => {
       <ThemeProvider theme={theme}>
           <Box sx={pageStyle}>
             <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
-            <Typography variant="h5" sx={columnTitleStyle}>Post Thread</Typography>
+            <Typography variant="h5" sx={columnSubTitleStyle}>Post Thread</Typography>
             <Grid container sx={containerStyle}>
               <Grid xs={9} sx={containerStyle}>
                 {loading ? (
                   <div>Loading....</div>
                 ) : (
-                  <OnePost post={post}>
-                  </OnePost>)
+                  <PostComment post={post}>
+                  </PostComment>)
                 }
               </Grid>
           </Grid>
