@@ -17,13 +17,22 @@ import Garden from '../components/Garden';
 import FriendList from '../components/FriendList';
 import AddIcon from '@mui/icons-material/Add';
 
+// Page CSS Styles
+
 const styles = {
   headerContainer: {
-    // backgroundColor: `url(${img2})`,
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
+    p: 5,
+    m: 0  
+  },
+  pageStyle: {
+    backgroundColor: '#f3f3f5',
+    minHeight: '100vh',
+    width: '100vw',
+    p:5
   },
 };
+
+
 
 const Profile = () => {
   // this handles adding a friend when you click on the add friend button
@@ -74,9 +83,9 @@ const Profile = () => {
     return <Navigate to='/profile' />;
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (!user?.username) {
     return (
@@ -89,11 +98,16 @@ const Profile = () => {
 
   return (
     <>
-      <Container sx={{ width: '100%' }}>
+      <Grid sx={styles.pageStyle}>
+      {loading && <div>Loading...</div>}
+      {(!user?.username) &&
+      <h4>
+        You need to be logged in to see this page. Use the navigation links
+        above to sign up or log in!
+      </h4>}
         {/* user top card start */}
         <Paper
-          style={styles.headerContainer}
-          sx={{ p: 5, borderRadius: '0px' }}
+          sx={styles.headerContainer}
         >
           <Grid container sx={{ mt: 3 }}>
             {/* Profile Picture */}
@@ -154,7 +168,7 @@ const Profile = () => {
             {/* friend list end */}
           </Grid>
         </Grid>
-      </Container>
+      </Grid>
     </>
   );
 };

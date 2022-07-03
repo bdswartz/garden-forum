@@ -2,22 +2,10 @@ import React from "react";
 import { QUERY_POST } from '../utils/queries'
 import {useQuery} from '@apollo/client';
 import PostComment from '../components/PostComment';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Typography } from "@mui/material";
-
-const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#4caf50',
-      },
-      secondary: {
-        main: '#64dd20',
-      },
-    },
-  });
 
   const containerStyle = {
     display:'flex',
@@ -49,7 +37,6 @@ const Singlepost = () => {
   const post = data?.post
   
     return (
-      <ThemeProvider theme={theme}>
           <Box sx={pageStyle}>
             <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
             <Typography variant="h5" sx={columnSubTitleStyle}>Post Thread</Typography>
@@ -64,7 +51,6 @@ const Singlepost = () => {
               </Grid>
           </Grid>
           </Box>
-      </ThemeProvider>
   )}
 
   // if (Auth.loggedIn()) {

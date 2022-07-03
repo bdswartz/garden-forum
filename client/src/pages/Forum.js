@@ -1,5 +1,4 @@
 import React from "react";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { QUERY_POSTS } from '../utils/queries'
 import {useQuery} from '@apollo/client';
 import ForumPosts from '../components/ForumPosts';
@@ -9,16 +8,6 @@ import NewPost from "../components/NewPost";
 import Box from '@mui/material/Box';
 import { Typography } from "@mui/material";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4caf50',
-    },
-    secondary: {
-      main: '#64dd20',
-    },
-  }
-});
 
 const containerStyle = {
   display:'flex',
@@ -51,7 +40,6 @@ const Forum = () => {
   const posts = data?.posts || [];
   console.log(posts);
     return (
-      <ThemeProvider theme={theme}>
         <Box sx={pageStyle}>
         <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
         <Typography variant="h5" sx={columnTitleStyle}>Post Forum</Typography>
@@ -84,7 +72,6 @@ const Forum = () => {
         </Grid>
         </Box>
         </Box>
-      </ThemeProvider>
    )};
 
   export default Forum;
