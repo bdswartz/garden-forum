@@ -7,26 +7,26 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Typography } from "@mui/material";
 
-  const containerStyle = {
+const styles = {
+  container: {
     display:'flex',
     justifyContent: 'center'  
-  }
-  const pageStyle = {
+  },
+  page: {
     backgroundColor: '#f3f3f5',
     minHeight: '100vh',
     width: '100%'
-  }
-
-  const columnTitleStyle = {
+  },
+  columnTitle: {
     fontWeight: 'bold',
     textAlign: 'center',
     pt:4
-  }
-  
-  const columnSubTitleStyle = {
+  },
+  columnSubTitle: {
     fontWeight: 'bold',
     textAlign: 'center'
   }
+}
 
 const Singlepost = () => {
     const { id } = useParams();
@@ -37,11 +37,11 @@ const Singlepost = () => {
   const post = data?.post
   
     return (
-          <Box sx={pageStyle}>
-            <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
-            <Typography variant="h5" sx={columnSubTitleStyle}>Post Thread</Typography>
-            <Grid container sx={containerStyle}>
-              <Grid xs={9} sx={containerStyle}>
+          <Box sx={styles.page}>
+            <Typography variant="h4" sx={styles.columnTitle}>The Garden Forum Community</Typography>
+            <Typography variant="h5" sx={styles.columnSubTitle}>Post Thread</Typography>
+            <Grid container sx={styles.container}>
+              <Grid xs={9} sx={styles.container}>
                 {loading ? (
                   <div>Loading....</div>
                 ) : (
@@ -51,26 +51,5 @@ const Singlepost = () => {
               </Grid>
           </Grid>
           </Box>
-  )}
-
-  // if (Auth.loggedIn()) {
-  //   return (
-  //     <ThemeProvider theme={theme}>
-  //         <Box sx={pageStyle}>
-  //           <Typography variant="h4" sx={columnTitleStyle}>The Garden Forum Community</Typography>
-  //           <Typography variant="h5" sx={columnTitleStyle}>Post Thread</Typography>
-  //           <Grid container sx={containerStyle}>
-  //             <Grid xs={9} sx={containerStyle}>
-  //               {loading ? (
-  //                 <div>Loading....</div>
-  //               ) : (
-  //                 <CommentPost post={post}>
-  //                 </CommentPost>)
-  //               }
-  //             </Grid>
-  //         </Grid>
-  //         </Box>
-  //     </ThemeProvider>
-  // )}
-;
+  )};
 export default Singlepost;

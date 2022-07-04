@@ -70,7 +70,7 @@ export default function NewPost() {
                   onChange={handleChange}
                   id="postTitle" 
                   name="postTitle" 
-                  value={formState.postTitle} 
+                  value={postTitle} 
                   label="Create a Title for Your New Post" 
                   variant="outlined" 
                   >
@@ -79,7 +79,7 @@ export default function NewPost() {
                       onChange={handleChange}
                       id="postText"
                       name="postText"
-                      value={formState.postText}
+                      value={postText}
                       label="Create a New Post"
                       multiline
                       rows={4}

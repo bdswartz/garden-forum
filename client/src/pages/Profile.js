@@ -18,7 +18,6 @@ import FriendList from '../components/FriendList';
 import AddIcon from '@mui/icons-material/Add';
 
 // Page CSS Styles
-
 const styles = {
   headerContainer: {
     p: 5,
@@ -32,9 +31,8 @@ const styles = {
   },
 };
 
-
-
 const Profile = () => {
+
   // this handles adding a friend when you click on the add friend button
   const [addFriend, { error }] = useMutation(ADD_FRIEND);
   const handleClick = async () => {
@@ -49,6 +47,7 @@ const Profile = () => {
 
   // button open/close
   const [open, setOpen] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -58,6 +57,7 @@ const Profile = () => {
 
   // this queries the DB for user data to be displayed in the profile component return statement
   const { username: userParam } = useParams();
+
   const { loading, data } = useQuery(userParam ? QUERY_USER : ME, {
     variables: { username: userParam },
   });
@@ -82,10 +82,6 @@ const Profile = () => {
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to='/profile' />;
   }
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
 
   if (!user?.username) {
     return (
