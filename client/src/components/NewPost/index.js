@@ -10,21 +10,33 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 
-const NewItem = styled(Paper)(({theme}) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
- ...theme.typography.body1,
-  padding: theme.spacing(2), 
-  textAlign: 'center',
-  overflow: 'hidden',
-  height: 'auto',
-  width: 'auto',
-  color: theme.palette.text.secondary,
-}));
-
-const textFieldStyle = {
-  width: '95%',
-  my: 2,
+const styles = {
+  formContainer: {
+    backgroundColor: '#fff',
+    padding: 2,
+    textAlign: 'center',
+    overflow: 'hidden',
+    height: 'auto',
+    width: 'auto',
+    color: '#64dd20',
+    mt:'10px'
+  },
+  textField:{
+    width: '95%',
+    my: 2,
+  }
 }
+// const NewItem = styled(Paper)(({theme}) => ({
+//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//  ...theme.typography.body1,
+//   padding: theme.spacing(2), 
+//   textAlign: 'center',
+//   overflow: 'hidden',
+//   height: 'auto',
+//   width: 'auto',
+//   color: theme.palette.text.secondary,
+// }));
+
 
 export default function NewPost() {
   const [formState, setFormState] = useState({ postTitle: '', postText: '' });
@@ -64,9 +76,9 @@ export default function NewPost() {
               noValidate
               autoComplete="off"
               onSubmit={handleSubmit}>
-          <NewItem elevation={6} sx={{mt:'10px'}}>
+          <Paper elevation={6} sx={styles.formContainer}>
                   <TextField
-                  sx={textFieldStyle}
+                  sx={styles.textField}
                   onChange={handleChange}
                   id="postTitle" 
                   name="postTitle" 
@@ -83,13 +95,13 @@ export default function NewPost() {
                       label="Create a New Post"
                       multiline
                       rows={4}
-                      sx={textFieldStyle}
+                      sx={styles.textField}
                     />}
               <Button type='submit' variant="contained" size="large" sx={{mb: 2, width: 'auto',}}>
               <AddCommentIcon sx={{fontSize: 'medium', mr:'5px'}}/>
             Create New Post
               </Button>
-          </NewItem>
+          </Paper>
           </Grid>
           {/* </Grid> */}
          </> 

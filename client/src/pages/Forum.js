@@ -3,7 +3,7 @@ import { QUERY_POSTS } from '../utils/queries'
 import {useQuery} from '@apollo/client';
 import ForumPosts from '../components/ForumPosts';
 import Grid from '@mui/material/Grid';
-import Search from "../components/ForumPosts/Search";
+import Search from "../components/Search";
 import NewPost from "../components/NewPost";
 import Box from '@mui/material/Box';
 import { Typography } from "@mui/material";
@@ -70,6 +70,7 @@ const Forum = () => {
           {/* Right Column Add New Posts */}  
           <Grid xs={4} sx={styles.postContainer}>
               <NewPost></NewPost>
+              <Search></Search>
           </Grid>
         </Grid>
         </Box>
