@@ -43,8 +43,8 @@ const Forum = () => {
   console.log(posts);
     return (
         <Box sx={styles.page}>
-        <Typography variant="h4" sx={styles.columnTitle}>The Garden Forum Community</Typography>
-        <Typography variant="h5" sx={styles.columnTitle}>Post Forum</Typography>
+        <Typography variant="h4" sx={styles.columnTitle}>Forum: Posts</Typography>
+        {/* <Typography variant="h5" sx={styles.columnTitle}>Post Forum</Typography> */}
         <Box container sx={styles.flexContainer}>
         <Grid container xs={11} sx={styles.container}>
           {/* Left Column Contains Posts */}

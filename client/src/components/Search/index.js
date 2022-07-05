@@ -1,9 +1,7 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import Fab from '@mui/material/Fab';
 import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
@@ -14,7 +12,7 @@ const styles = {
     textAlign: 'center',
     overflow: 'hidden',
     height: 'auto',
-    width: 'auto',
+    width: '100%',
     color: '#64dd20',
     mt:'10px'
   },

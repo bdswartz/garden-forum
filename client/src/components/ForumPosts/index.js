@@ -1,10 +1,7 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import NewPost from '../NewPost';
 import Link from '@mui/material/Link';
 import ChatIcon from '@mui/icons-material/Chat';
 

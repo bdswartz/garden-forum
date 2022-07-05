@@ -8,11 +8,37 @@ import { QUERY_PLANT } from "../utils/queries";
 import Auth from "../utils/auth";
 import PlantHistoryForm from "../components/PlantHistoryForm";
 import PlantHistory from "../components/PlantHistory";
-
+import Grid from '@mui/material/Grid';
 import { Box, Divider, Paper } from "@mui/material";
-// import Paper from "@mui/material/Paper";
-import Malvestida from "../assets/images/malvestida.jpg";
+import { Typography } from "@mui/material";
 
+const styles = {
+  container: {
+      display:'flex',
+      flexDirection: 'row',
+    },
+    flexContainer: {
+      display:'flex',
+      flexDirection: 'column',
+      justifyContent:'center'
+    },
+    page: {
+      backgroundColor: '#f3f3f5',
+      minHeight: '100vh',
+      width: '100%'
+    },
+    historyContainer: {
+      backgroundColor: '#f3f3f5',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    columnTitle: {
+      fontWeight: 'bold',
+      textAlign: 'center'
+    }
+  }
+  
 const Plant = () => {
   // get the plant id from the url parameters
   const { id: plantId } = useParams();
@@ -31,37 +57,20 @@ const Plant = () => {
   }
 
   return (
-    <Box
-      className="image"
-      style={{
-        backgroundImage: `url(${Malvestida})`,
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-        backgroundSize: "cover",
-        height: "100vh",
-        color: "#f5f5f5",
-        backgroundPosition: "left",
-        width: "100vw",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center ",
-          backgroundColor: "transparent",
-          width: "100vw",
-        }}
-      >
-        <PlantCard plantInfo={plant} />
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box style={styles.page}>
+      <Typography variant="h4" sx={styles.columnTitle}>Garden: Plant History</Typography>
+      <Grid sx={styles.flexContainer}>
+        <Grid xs={11} sx={styles.plantContainer}>
+          <PlantCard plantInfo={plant} />
+        </Grid>
+        <Grid sx={styles.historyContainer}>
           {plant.plantHistory && <PlantHistory history={plant.plantHistory} />}
           <Divider orientation="vertical" />
           {/* {Auth.loggedIn() && */}
           <PlantHistoryForm plantId={plant._id} />
           {/* //  } */}
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
