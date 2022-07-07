@@ -13,19 +13,20 @@ import { Box, Divider, Paper } from "@mui/material";
 import { Typography } from "@mui/material";
 
 const styles = {
-  container: {
-      display:'flex',
-      flexDirection: 'row',
-    },
+  
     flexContainer: {
       display:'flex',
       flexDirection: 'column',
       justifyContent:'center'
-    },
+    },  
     page: {
       backgroundColor: '#f3f3f5',
-      minHeight: '100vh',
-      width: '100%'
+      minHeight: '100vh'
+      // width: '100%',
+      // display:'flex',
+      // justifyContent: 'center',
+      // flexDirection: 'column',
+      // alignItems: 'center'
     },
     historyContainer: {
       backgroundColor: '#f3f3f5',
@@ -57,19 +58,25 @@ const Plant = () => {
   }
 
   return (
-    <Box style={styles.page}>
-      <Typography variant="h4" sx={styles.columnTitle}>Garden: Plant History</Typography>
-      <Grid sx={styles.flexContainer}>
-        <Grid xs={11} sx={styles.plantContainer}>
-          <PlantCard plantInfo={plant} />
+    <Box sx={styles.page}>
+      <Grid container direction='column' alignItems={'center'}p={3}>
+        <Grid item xs={12} my={3}>
+          <Typography variant="h4">Garden: Plant History</Typography>
         </Grid>
-        <Grid sx={styles.historyContainer}>
-          {plant.plantHistory && <PlantHistory history={plant.plantHistory} />}
-          <Divider orientation="vertical" />
-          {/* {Auth.loggedIn() && */}
-          <PlantHistoryForm plantId={plant._id} />
-          {/* //  } */}
+        <Grid item xs={12}> 
+            <PlantCard plantInfo={plant} />
         </Grid>
+        <Grid container item columns={24} direction='row' justifyContent='space-between' xs={12} mt={6}>
+          <Grid item xs={14}>
+            {plant.plantHistory && <PlantHistory history={plant.plantHistory} />}
+          </Grid>
+          {/* <Divider orientation="vertical" /> */}
+          <Grid item xs={9}>
+            {/* {Auth.loggedIn() && */}
+            <PlantHistoryForm plantId={plant._id} />
+            {/* //  } */}
+          </Grid>
+        </Grid> 
       </Grid>
     </Box>
   );

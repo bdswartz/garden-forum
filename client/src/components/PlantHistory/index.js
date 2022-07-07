@@ -14,7 +14,7 @@ import { green, grey } from "@mui/material/colors";
 
 const PlantHistory = ({ history }) => {
   return (
-    <Box sx={{ width: "100vw" }}>
+    <Paper item elevation={6}>
       <Typography
         variant="h6"
         sx={{ p: 2, bgcolor: green[500], color: "white" }}
@@ -22,19 +22,18 @@ const PlantHistory = ({ history }) => {
         Plant History
       </Typography>
       <Divider />
+      <Grid>
       <List sx={{ width: "100%" }}>
-        {history &&
+        {history && 
           history.map((history) => (
-            <ListItem className="plantList" style={{ textDecoration: "none" }}>
-              <ListItemText>
-                <h6>{history.createdAt}:</h6>
-                <Divider variant="inset" component="li" />
-                {history.note_body}
-              </ListItemText>
-            </ListItem>
+            <Grid container direction='column' mt={2}>
+                <Typography variant='body2' px={2} sx={{bgcolor: green[100]}}>{history.createdAt}:</Typography>
+                <Typography variant='body2' px={2}>{history.note_body}</Typography>
+            </Grid>
           ))}
       </List>
-    </Box>
+      </Grid>
+    </Paper>
 
     // {/*
     //     <Paper className="card mb-3">

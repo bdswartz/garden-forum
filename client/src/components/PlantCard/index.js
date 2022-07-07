@@ -6,6 +6,7 @@ import Paper from "@mui/material/Paper";
 import UpdatePlant from "../UpdatePlant";
 import Chip from "@mui/material/Chip";
 import AddIcon from "@mui/icons-material/Add";
+import Box from '@mui/material/Box';
 
 export default function PlantCard({ plantInfo }) {
 
@@ -22,8 +23,6 @@ export default function PlantCard({ plantInfo }) {
   return (
     <Paper
       sx={{
-        mx: "20px",
-        my: "20px",
         display: "flex",
         flexDirection: "row",
         width: "100%",
@@ -33,28 +32,28 @@ export default function PlantCard({ plantInfo }) {
       <CardMedia
         sx={{ width: 350}}
         component="img"
-        height="auto"
+        height='auto'
         image={`${plantInfo.image_path}`}
         alt={`picture of ${plantInfo.common_name}`}
       />
-      <CardContent sx={{ width: "60%" }}>
-        <Typography gutterBottom variant="h4" component="div">
+      <CardContent sx={{ width: "60%", display:'flex', flexDirection: 'column', justifyContent:'center'}}>
+        <Typography gutterBottom variant="h5" component="div" fontWeight='bold'>
           {plantInfo.common_name}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h6" component="div" fontWeight='bold' color='text.secondary'>
           {plantInfo.scientific_name}
         </Typography>
-        <Typography gutterBottom variant="body1" component="div">
+        <Typography gutterBottom variant="body1" component="div" my={3}>
           {plantInfo.description}
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Pruning: {plantInfo.pruning}
+        <Typography variant="body2" mb={1}>
+          <Typography mb={1} sx={{display:'inline', fontWeight:'bold'}}>Pruning: </Typography>{plantInfo.pruning}
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Fertilization: {plantInfo.fertilization}
+        <Typography variant="body2" mb={1}>
+          <Typography mb={1} sx={{display:'inline', fontWeight:'bold'}}>Fertilization: </Typography>{plantInfo.fertilization}  
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Water: {plantInfo.water}
+        <Typography variant="body2" mb={1}>
+          <Typography mb={1} sx={{display:'inline', fontWeight:'bold'}}>Water: </Typography>{plantInfo.water}
         </Typography>
         <Chip
           sx={{

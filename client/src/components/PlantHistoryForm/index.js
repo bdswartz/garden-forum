@@ -10,17 +10,35 @@ import { ADD_PLANT_HISTORY } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 import "../../index.css";
 import UpdatePlant from "../UpdatePlant";
+import AddCommentIcon from '@mui/icons-material/AddComment';
 
-const NewItem = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#f3f3f5",
-  ...theme.typography.body1,
-  padding: theme.spacing(4),
-  textAlign: "center",
-  overflow: "hidden",
-  height: 450,
-  width: 450,
-  color: theme.palette.text.secondary,
-}));
+// const NewItem = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#f3f3f5",
+//   ...theme.typography.body1,
+//   padding: theme.spacing(4),
+//   textAlign: "center",
+//   overflow: "hidden",
+//   height: 450,
+//   width: 450,
+//   color: theme.palette.text.secondary,
+// }));
+
+const styles = {
+  formContainer: {
+    backgroundColor: '#fff',
+    padding: 2,
+    textAlign: 'center',
+    overflow: 'hidden',
+    height: 'auto',
+    width: 'auto',
+    color: '#64dd20',
+    mt:'10px'
+  },
+  textField:{
+    width: '95%',
+    my: 2,
+  }
+}
 
 const PlantHistoryForm = ({ plantId }) => {
   const [addPlantHistory, { error }] = useMutation(ADD_PLANT_HISTORY);
@@ -46,40 +64,35 @@ const PlantHistoryForm = ({ plantId }) => {
   return (
     <>
       <Grid
+        item
         container
-        direction="column"
-        justifyContent="center"
-        onSubmit={handleSubmit}
         component="form"
-        sx={{
-          display: "grid",
-          gap: 4,
-          "& .MuiTextField-root": { m: 1, width: "45ch" },
-          m: 7,
-          pt: 1.5,
-          px: 2,
-        }}
+        onSubmit={handleSubmit}
+        width='100%'
         noValidate
         autoComplete="off"
       >
-        <NewItem elevation={10}>
+        <Paper sx={styles.formContainer} elevation={6}>
           <TextField
+            item
+            sx={styles.textField}
             onChange={handleChange}
             id="noteBody"
             name="noteBody"
             value={noteBody}
-            label="Plant History Entry Text"
+            label="Enter New Plant History Item"
             variant="outlined"
           />
           <Button
             type="submit"
             variant="contained"
             size="large"
-            sx={{ mb: 2, width: "90%" }}
+            sx={{ mb: 2, width: "auto" }}
           >
+            <AddCommentIcon sx={{fontSize: 'medium', mr:'5px'}}/>
             Add Plant History Entry
           </Button>
-        </NewItem>
+        </Paper>
       </Grid>
     </>
   );
