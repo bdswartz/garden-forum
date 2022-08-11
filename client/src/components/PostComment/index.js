@@ -33,7 +33,7 @@ const styles = {
     fontSize: 24,
     py: 2,
     color: 'black',
-    mb: 30
+    fontWeight: 'bold'
   },
   commentForm: {
     width:'100%',
@@ -97,6 +97,9 @@ const OnePost = ({ post, postText}) => {
           </Link>
         </Grid>
         <Grid item>
+          <Typography variant="h4" noWrap sx={styles.postTitle}>
+            {post.postTitle}
+          </Typography>
           <Typography variant="body1" noWrap sx={styles.postBody}>
             {post.postText}
           </Typography>
