@@ -6,7 +6,6 @@ import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import Chip from '@mui/material/Chip';
-import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import AddPlantDialog from '../AddPlantDialog';
 import { Link } from 'react-router-dom';
@@ -15,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 export default function Garden({ plants, user }) {
   // const handleClick = () => {
-  //   console.log("You clicked Add Plant");
+  console.log(plants);
   // };
   const [open, setOpen] = React.useState(false);
 

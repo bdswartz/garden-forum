@@ -1,10 +1,7 @@
 import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Greenplant from '../../assets/images/greenplant.jpg';
-import Sunflower from '../../assets/images/sunflower.jpg';
-import Malvestida from '../../assets/images/malvestida.jpg';
 import './index.css';
 import Divider from '@mui/material/Divider';
 import { Typography } from '@mui/material';
@@ -23,7 +20,7 @@ const theme = createTheme({
   },
 });
 
-const Carousel = () => {
+const LandingHero = () => {
   return (
     <ThemeProvider theme={theme}>
       {/* <Container
@@ -137,4 +134,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default LandingHero;

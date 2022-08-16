@@ -16,6 +16,7 @@ export const QUERY_USER = gql`
         username
       }
       plants {
+        _id
         scientific_name
         common_name
         description

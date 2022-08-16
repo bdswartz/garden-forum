@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import UpdatePlant from "../UpdatePlant";
 import Chip from "@mui/material/Chip";
 import AddIcon from "@mui/icons-material/Add";
-import Box from '@mui/material/Box';
+
 
 export default function PlantCard({ plantInfo }) {
 

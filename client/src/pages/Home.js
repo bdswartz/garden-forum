@@ -1,6 +1,6 @@
 import React from 'react';
-import Carousel from '../components/Carousel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LandingHero from '../components/LandingHero';
 
 const theme = createTheme({
   palette: {
@@ -16,7 +16,7 @@ const theme = createTheme({
 const Home = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Carousel></Carousel>
+      <LandingHero></LandingHero>
     </ThemeProvider>
   );
 };

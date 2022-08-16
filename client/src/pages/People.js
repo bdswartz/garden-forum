@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
-import { useMutation, useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import SearchIcon from '@mui/icons-material/Search';
@@ -13,7 +12,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@mui/icons-material/Person';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import { QUERY_ALL_USERS, SEARCH_USER_QUERY } from '../utils/queries';
@@ -30,7 +28,6 @@ const People = () => {
   });
 
   const users = data?.getUsers.users || {};
-  console.log(users);
 
   if (allLoading) {
     return <div>Loading...</div>;

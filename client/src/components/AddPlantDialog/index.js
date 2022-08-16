@@ -7,11 +7,8 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  Box,
   CircularProgress,
-  Fab,
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import SaveIcon from "@mui/icons-material/Save";
@@ -19,7 +16,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { green } from "@mui/material/colors";
 import { searchPlants } from "../../utils/API";
 import { useMutation } from "@apollo/client";
-import { QUERY_PLANT, ME } from "../../utils/queries";
+import { ME } from "../../utils/queries";
 import { ADD_PLANT } from "../../utils/mutations";
 
 export default function AddPlantDialog({ open, handleClose }) {
@@ -27,15 +24,7 @@ export default function AddPlantDialog({ open, handleClose }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const timer = React.useRef();
-  //loading icon special effects
-  const buttonSx = {
-    ...(success && {
-      bgcolor: green[500],
-      "&:hover": {
-        bgcolor: green[700],
-      },
-    }),
-  };
+  
   //loading icon useEffect
   React.useEffect(() => {
     return () => {
@@ -69,16 +58,6 @@ export default function AddPlantDialog({ open, handleClose }) {
   })
   // deconstruct for convenience
   const { scientificName, commonName, imagePath, description, usdaZone, fertilization, water, pruning } = formState;
-
-  // //change these to proper names below
-  // const [commonName, setcommonName] = useState();
-  // const [scientificName, setscientificName] = useState();
-  // const [imagePath, setImagePath] = useState();
-  // // Add Pruning, Watering and Fertilization
-  // const [description, setDescription] = useState("");
-  // const [pruning, setPruning] = useState("");
-  // const [water, setWatering] = useState("");
-  // const [fertilization, setFertilization] = useState("");
   
   const [plantImg, setPlantImg] = useState([]);
   //upload plant file
@@ -94,13 +73,7 @@ export default function AddPlantDialog({ open, handleClose }) {
         scientificName: res.suggestions[0].plant_details.scientific_name,
         imagePath: res.suggestions[0].similar_images[0].url
       })
-      // setcommonName(res.suggestions[0].plant_details.common_names[0]);
-      // setscientificName(res.suggestions[0].plant_details.scientific_name);
-      // setImagePath(res.suggestions[0].similar_images[0].url);
 
-      // console.log(plant_name);
-      // console.log(res.suggestions[0].plant_details.scientific_name);
-      // console.log(res.suggestions[0].similar_images[0].url);
     });
     console.log(commonName);
     console.log(scientificName);
@@ -112,21 +85,6 @@ export default function AddPlantDialog({ open, handleClose }) {
     setFormState({ ...formState, [event.target.name]: event.target.value });
 };
 
-  // const handlePruning = (event) => {
-  //   setPruning(event.target.value);
-  // };
-
-  // const handleWatering = (event) => {
-  //   setWatering(event.target.value);
-  // };
-
-  // const handleDescription = (event) => {
-  //   setDescription(event.target.value);
-  // };
-
-  // const handleFertilization = (event) => {
-  //   setFertilization(event.target.value);
-  // };
 
   const [addPlant, { error }] = useMutation(ADD_PLANT, {
     refetchQueries: [{ query: ME }],
@@ -138,35 +96,9 @@ export default function AddPlantDialog({ open, handleClose }) {
     try {
       const data = await addPlant({
         variables: formState
-        // {
-        //   scientificName,
-        //   commonName,
-        //   imagePath,
-        //   description,
-        //   pruning,
-        //   fertilization,
-        //   water,
-        // },
+        
       });
       console.log(data);
-      // clear form values
-      // setFormState({
-      //   commonName: '',
-      //   scientificName:'',
-      //   imagePath:'',
-      //   description: '',
-      //   usdaZone: '',
-      //   fertilization: '',
-      //   water: '',
-      //   pruning: ''
-      // })
-      // setPlantImg("");
-      // setImagePath("");
-      // setcommonName("");
-      // setscientificName("");
-      // setPruning("");
-      // setWatering("");
-      // setFertilization("");
     } catch (e) {
       console.error(e);
     }

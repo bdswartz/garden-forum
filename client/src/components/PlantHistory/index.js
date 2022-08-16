@@ -3,14 +3,10 @@ import {
   Grid,
   Typography,
   Paper,
-  Box,
-  Link,
-  ListItem,
-  ListItemText,
   Divider,
   List,
 } from "@mui/material";
-import { green, grey } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 
 const PlantHistory = ({ history }) => {
   return (

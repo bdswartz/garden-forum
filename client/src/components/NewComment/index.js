@@ -7,11 +7,9 @@ import { styled } from '@mui/material/styles';
 import { ADD_COMMENT } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
-import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { ME, QUERY_POSTS } from '../../utils/queries';
-import Profile from '../../pages/Profile';
-import Forum from '../../pages/Forum';
+
 
 const NewItem = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f3f3f5',

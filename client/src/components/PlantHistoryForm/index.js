@@ -3,25 +3,12 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import { useMutation } from "@apollo/client";
 import { ADD_PLANT_HISTORY } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 import "../../index.css";
-import UpdatePlant from "../UpdatePlant";
 import AddCommentIcon from '@mui/icons-material/AddComment';
 
-// const NewItem = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#f3f3f5",
-//   ...theme.typography.body1,
-//   padding: theme.spacing(4),
-//   textAlign: "center",
-//   overflow: "hidden",
-//   height: 450,
-//   width: 450,
-//   color: theme.palette.text.secondary,
-// }));
 
 const styles = {
   formContainer: {
