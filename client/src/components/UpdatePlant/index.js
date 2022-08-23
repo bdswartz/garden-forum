@@ -76,12 +76,13 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
                 fullWidth
                 variant="standard"
                 value={scientificName || ""}
+                onChange={handleChange}
               />
             <TextField
               autoFocus
               margin="dense"
               label="Description"
-              name="desciption"
+              name="description"
               type="text"
               // key={common_name}
               fullWidth
