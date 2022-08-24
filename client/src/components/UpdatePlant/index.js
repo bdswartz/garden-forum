@@ -81,7 +81,7 @@ const UpdatePlant = ({ open, handleClose, plantInfo }) => {
             <TextField
               autoFocus
               margin="dense"
-              label="Description"
+              label="Plant Description"
               name="description"
               type="text"
               // key={common_name}

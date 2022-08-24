@@ -40,11 +40,10 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    mt: 2,
     p: 1
   },
   commentText: {
-    mb:3
+    mb:4
   }
 }
 
@@ -120,7 +119,7 @@ const OnePost = ({ post, postText}) => {
                     <Typography variant='body2' sx={styles.postTag}>
                       Comment by <Typography variant = 'body2' color = 'primary' sx={{display: 'inline'}}>{comments.username}</Typography> on {comments.createdAt}</Typography>
                   </Link>
-                  <Typography variant='body1'>{comments.commentBody}</Typography>
+                  <Typography variant='body2' sx={styles.commentText}>{comments.commentBody}</Typography>
                 </div>
               )}           
             })}

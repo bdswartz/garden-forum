@@ -3,8 +3,6 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import { ADD_POST } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';

@@ -14,7 +14,9 @@ const styles = {
   postBody: {
     color: 'black', 
     fontSize: 16, 
-    pb: 1,
+    py: 1,
+    px: 3,
+    color: '#565656'
   },
   postCard: {
     mt: '10px',
@@ -49,7 +51,7 @@ console.log("🚀 ~ file: index.js ~ line 35 ~ ForumPosts ~ posts", posts)
             </Grid> 
             <Typography noWrap variant="h7" gutterBottom sx={styles.postTitle}>{posts.postTitle}</Typography>
             <Grid item>
-              <Typography variant="body1" noWrap sx={styles.postBody}>
+              <Typography variant="body1" sx={styles.postBody}>
                {posts.postText}
               </Typography>
            </Grid>
