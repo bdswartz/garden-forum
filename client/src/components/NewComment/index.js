@@ -21,6 +21,24 @@ color: theme.palette.text.secondary,
 }));
 
 
+const styles = {
+  formContainer: {
+    backgroundColor: 'background.paper',
+    padding: 2,
+    textAlign: 'center',
+    overflow: 'hidden',
+    height: 'auto',
+    width: 'auto',
+    color: '#64dd20',
+    mt:'10px'
+  },
+  textField:{
+    width: '95%',
+    my: 2, 
+    border: '1px solid grey'
+  }
+}
+
 export default function NewComment() {
   const { loading, data } = useQuery(QUERY_POSTS);
   const posts = data?.posts || [];
@@ -73,6 +91,7 @@ export default function NewComment() {
 
 
   <TextField
+          sx={styles.textField}
           onChange={handleChange}
           value={formState.commentBody}
           id="commentBody"

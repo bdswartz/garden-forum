@@ -23,7 +23,7 @@ const PlantHistory = ({ history }) => {
         {history && 
           history.map((history) => (
             <Grid container direction='column' mt={2}>
-                <Typography variant='body2' px={2} sx={{bgcolor: green[100]}}>{history.createdAt}:</Typography>
+                <Typography variant='body2' px={2} sx={{bgcolor: green[300]}}>{history.createdAt}:</Typography>
                 <Typography variant='body2' px={2}>{history.note_body}</Typography>
             </Grid>
           ))}

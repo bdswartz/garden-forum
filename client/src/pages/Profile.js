@@ -24,7 +24,7 @@ const styles = {
     m: 0  
   },
   pageStyle: {
-    backgroundColor: '#f3f3f5',
+    backgroundColor: 'background.default',
     minHeight: '100vh',
     width: '100vw',
     p:5

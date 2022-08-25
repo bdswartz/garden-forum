@@ -42,8 +42,10 @@ const styles = {
     justifyContent: 'space-between',
     p: 1
   },
-  commentText: {
-    mb:4
+  textField:{
+    width: '100%',
+    mb: 3, 
+    border: '1px solid grey'
   }
 }
 
@@ -134,7 +136,7 @@ const OnePost = ({ post, postText}) => {
               <Typography variant='h7' sx={{mb:1}}>Add a Comment...</Typography>
               <Typography variant='body2' sx={styles.postTag}>Commenting as {user.username} </Typography>
               <TextField
-                sx={styles.commentText}
+                sx={styles.textField}
                 onChange={handleChange}
                 value={formState.commentBody}
                 id="commentBody"

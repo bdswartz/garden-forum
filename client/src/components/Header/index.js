@@ -128,9 +128,9 @@ const Header = () => {
               <MenuItem component={Link} to='/forum'>
                 Forum
               </MenuItem>
-              <MenuItem component={Link} to='/people'>
+              {/* <MenuItem component={Link} to='/people'>
                 People
-              </MenuItem>
+              </MenuItem> */}
               {/* <MenuItem component={Link} to='/plants'>
                 Plants
               </MenuItem> */}
@@ -198,9 +198,9 @@ const Header = () => {
                     <MenuItem component={Link} to='/profile'>
                       Profile
                     </MenuItem>
-                    <MenuItem component={Link} to='/settings'>
+                    {/* <MenuItem component={Link} to='/settings'>
                       Settings
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem onClick={logout} component={Link} to='/'>
                       logout
                     </MenuItem>

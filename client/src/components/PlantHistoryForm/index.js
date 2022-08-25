@@ -12,7 +12,7 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 
 const styles = {
   formContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: 'background.paper',
     padding: 2,
     textAlign: 'center',
     overflow: 'hidden',
@@ -23,7 +23,8 @@ const styles = {
   },
   textField:{
     width: '95%',
-    my: 2,
+    my: 2, 
+    border: '1px solid grey'
   }
 }
 

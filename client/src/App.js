@@ -72,7 +72,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={lightTheme}>
       <Router>
         <Header />
         <Routes>
@@ -80,7 +80,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/profile/:username' element={<Profile />} />
           <Route path='/profile' element={<Profile />} />
-          <Route path='/people' element={<People />} />
+          {/* <Route path='/people' element={<People />} /> */}
           <Route path='/forum' element={<Forum />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/forum/:id' element={<Post />} />

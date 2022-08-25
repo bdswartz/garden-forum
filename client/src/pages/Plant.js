@@ -20,7 +20,7 @@ const styles = {
       justifyContent:'center'
     },  
     page: {
-      backgroundColor: '#f3f3f5',
+      backgroundColor: 'background.default',
       minHeight: '100vh'
       // width: '100%',
       // display:'flex',
@@ -36,7 +36,8 @@ const styles = {
     },
     columnTitle: {
       fontWeight: 'bold',
-      textAlign: 'center'
+      textAlign: 'center',
+      color: 'text.primary'
     }
   }
   
@@ -61,7 +62,7 @@ const Plant = () => {
     <Box sx={styles.page}>
       <Grid container direction='column' alignItems={'center'}p={3}>
         <Grid item xs={12} my={3}>
-          <Typography variant="h4">Garden: Plant History</Typography>
+          <Typography sx={styles.columnTitle} variant="h4">Garden: Plant History</Typography>
         </Grid>
         <Grid item xs={12}> 
             <PlantCard plantInfo={plant} />
