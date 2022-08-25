@@ -16,7 +16,7 @@ export const lightTheme = createTheme({
         default: '#f3f3f5'
       },
       text: {
-        primary: '#363537',
+        primary: '#141414',
         secondary: 'rgba(0,0,0,0.6)'
       }
     }
@@ -35,11 +35,12 @@ export const lightTheme = createTheme({
       },
       background: {
         paper: '#363537',
-        default: 'rgba(35,35,35,1)'
+        default: 'rgba(35,35,35,1)',
+        opaque: 'rgba(35,35,35,.7)'
       },
       text: {
         primary: '#FFF',
-        secondary: 'rgba(255,255,255,0.7)'
+        secondary: 'rgba(255,255,255,0.6)'
       },
     },
       components: {

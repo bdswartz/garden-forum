@@ -26,7 +26,7 @@ const styles = {
     py: 2
   },
   postTag: {
-    color: '#878787',
+    color: 'text.secondary',
     mb: 1
   },
   postTitle: {
@@ -42,10 +42,9 @@ const styles = {
     justifyContent: 'space-between',
     p: 1
   },
-  textField:{
+  commentText:{
     width: '100%',
-    mb: 3, 
-    border: '1px solid grey'
+    mb: 3,
   }
 }
 

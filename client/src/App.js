@@ -87,7 +87,7 @@ function App() {
       <Router>
         <Header theme={themeValue} themeToggle={themeToggle} />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home theme={themeValue} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/profile/:username' element={<Profile />} />
           <Route path='/profile' element={<Profile />} />
