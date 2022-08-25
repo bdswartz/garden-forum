@@ -1,5 +1,4 @@
 import React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Greenplant from '../../assets/images/greenplant.jpg';
 import Wort from '../../assets/images/large-st-johns-wort.jpg'

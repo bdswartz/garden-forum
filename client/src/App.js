@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -76,10 +76,22 @@ function App() {
   const themeToggle = () => {
     if (themeValue === 'light') {
       setTheme('dark')
+      window.localStorage.setItem('storedTheme', 'dark');
     } else {
       setTheme('light')
+      window.localStorage.setItem('storedTheme', 'light');
     }
   };
+
+  useEffect(() => {
+    const localTheme = window.localStorage.getItem('storedTheme');
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localTheme ?
+      setTheme('dark') :
+      localTheme ?
+        setTheme(localTheme) :
+        setTheme('light');
+      },[]);
+    
 
   return (
     <ApolloProvider client={client}>
