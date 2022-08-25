@@ -16,15 +16,16 @@ container: {
   flexContainer: {
     display:'flex',
     flexDirection: 'row',
-    justifyContent:'center'
+    justifyContent:'center',
+    pb:3
   },
   page: {
-    backgroundColor: '#f3f3f5',
+    backgroundColor: 'background.default',
     minHeight: '100vh',
     width: '100%'
   },
   postContainer: {
-    backgroundColor: '#f3f3f5',
+    backgroundColor: 'background.default',
     px: 1,
     pt: '5px',
     width: 'auto',
@@ -32,7 +33,8 @@ container: {
   },
   columnTitle: {
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'text.primary'
   }
 }
 

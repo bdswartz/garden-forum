@@ -9,22 +9,22 @@ const styles = {
   postTitle: {
     fontSize: 24,
     py: 2,
-    color: 'black'
+    color: 'text.primary'
   },
   postBody: {
-    color: 'black', 
     fontSize: 16, 
     py: 1,
     px: 3,
-    color: '#565656'
+    color: 'text.secondary'
   },
   postCard: {
     mt: '10px',
     height: 'auto',
-    padding: 2
+    padding: 2,
+    bgcolor: 'background.paper'
   },
   postTag:{
-    color: '#878787'
+    color: 'text.secondary'
   }
 }
 
@@ -41,7 +41,7 @@ console.log("🚀 ~ file: index.js ~ line 35 ~ ForumPosts ~ posts", posts)
       <>
       {posts && posts.map(posts => (
         <Grid item key={posts._id} xs={12}>
-        <Paper elevation={6} sx={styles.postCard}>
+        < Grid elevation={6} sx={styles.postCard}>
             <Grid>
             <Link href={`/profile/${posts.username}`} underline="none" style={{ textDecoration: 'none'}}>
               <Typography variant="body2" sx={styles.postTag}>
@@ -60,7 +60,7 @@ console.log("🚀 ~ file: index.js ~ line 35 ~ ForumPosts ~ posts", posts)
                  Comments: {posts.commentCount}
                </Typography>
             </Link>
-          </Paper>
+          </Grid>
           </Grid>
      ))}
       </>

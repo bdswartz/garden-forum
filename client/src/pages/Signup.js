@@ -13,10 +13,22 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
 import { green } from '@mui/material/colors';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
+
+
+const styles = {
+  container: {
+    pb:3,
+  },
+  textField:{
+    width: '95%',
+    my: 2,
+    border: '1px solid grey',
+  
+  }
+  }
 
 function Copyright(props) {
   return (
@@ -36,16 +48,16 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4caf50',
-    },
-    secondary: {
-      main: '#64dd20',
-    },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#4caf50',
+//     },
+//     secondary: {
+//       main: '#64dd20',
+//     },
+//   },
+// });
 
 export default function SignUp() {
   const [formState, setFormState] = useState({
@@ -85,8 +97,11 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='md'>
+      <Container 
+        component='main' 
+        maxWidth='md'
+        sx={styles.container}
+        >
         <CssBaseline />
         <Box
           sx={{
@@ -118,6 +133,7 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  sx={styles.textField}
                   onChange={handleChange}
                   value={formState.firstName}
                   autoComplete='given-name'
@@ -131,6 +147,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  sx={styles.textField}
                   onChange={handleChange}
                   value={formState.lastName}
                   required
@@ -138,11 +155,12 @@ export default function SignUp() {
                   id='lastName'
                   label='Last Name'
                   name='lastName'
-                  autoComplete='family-name'
+                  // autoComplete='family-name'
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  sx={styles.textField}
                   onChange={handleChange}
                   value={formState.username}
                   required
@@ -150,11 +168,12 @@ export default function SignUp() {
                   id='username'
                   label='Username'
                   name='username'
-                  autoComplete='username'
+                  // autoComplete='username'
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  sx={styles.textField}
                   onChange={handleChange}
                   value={formState.email}
                   required
@@ -162,11 +181,12 @@ export default function SignUp() {
                   id='email'
                   label='Email Address'
                   name='email'
-                  autoComplete='email'
+                  // autoComplete='email'
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  sx={styles.textField}
                   onChange={handleChange}
                   value={formState.password}
                   required
@@ -175,7 +195,7 @@ export default function SignUp() {
                   label='Password'
                   type='password'
                   id='password'
-                  autoComplete='new-password'
+                  // autoComplete='new-password'
                 />
               </Grid>
             </Grid>
@@ -208,6 +228,5 @@ export default function SignUp() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
   );
 }

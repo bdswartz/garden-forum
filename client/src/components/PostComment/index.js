@@ -15,7 +15,7 @@ import Link from '@mui/material/Link';
 
 const styles = {
   postBody: {
-    color: 'black', 
+    color: 'text.primary', 
     fontSize: 16, 
     pb: 1,
   },
@@ -32,7 +32,7 @@ const styles = {
   postTitle: {
     fontSize: 24,
     py: 2,
-    color: 'black',
+    color: 'text.primary',
     fontWeight: 'bold'
   },
   commentForm: {
@@ -96,10 +96,10 @@ const OnePost = ({ post, postText}) => {
           </Link>
         </Grid>
         <Grid item>
-          <Typography variant="h4" noWrap sx={styles.postTitle}>
+          <Typography variant="h4" sx={styles.postTitle}>
             {post.postTitle}
           </Typography>
-          <Typography variant="body1" noWrap sx={styles.postBody}>
+          <Typography variant="body1" sx={styles.postBody}>
             {post.postText}
           </Typography>
         </Grid>

@@ -10,18 +10,19 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 
 const styles = {
   formContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: 'background.paper',
     padding: 2,
     textAlign: 'center',
     overflow: 'hidden',
     height: 'auto',
     width: 'auto',
-    color: '#64dd20',
+    color: '',
     mt:'10px'
   },
   textField:{
     width: '95%',
     my: 2,
+    border: '1px solid grey'
   }
 }
 // const NewItem = styled(Paper)(({theme}) => ({

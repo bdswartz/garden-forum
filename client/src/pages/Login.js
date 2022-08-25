@@ -17,6 +17,15 @@ import Alert from '@mui/material/Alert';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
+const styles = {
+  textField:{
+    width: '95%',
+    my: 2,
+    border: '1px solid grey'
+  }
+}
+
 function Copyright(props) {
   return (
     <Typography
@@ -35,16 +44,16 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4caf50',
-    },
-    secondary: {
-      main: '#64dd20',
-    },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#4caf50',
+//     },
+//     secondary: {
+//       main: '#64dd20',
+//     },
+//   },
+// });
 
 export default function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -79,7 +88,7 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='md'>
         <CssBaseline />
         <Box
@@ -110,6 +119,7 @@ export default function Login() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  sx={styles.textField}
                   required
                   fullWidth
                   id='email'
@@ -122,6 +132,7 @@ export default function Login() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  sx={styles.textField}
                   required
                   fullWidth
                   name='password'
@@ -161,6 +172,6 @@ export default function Login() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 }

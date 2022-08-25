@@ -10,21 +10,24 @@ import { Typography } from "@mui/material";
 const styles = {
   container: {
     display:'flex',
-    justifyContent: 'center'  
+    justifyContent: 'center',
+    pb:3
   },
   page: {
-    backgroundColor: '#f3f3f5',
+    backgroundColor: 'background.default',
     minHeight: '100vh',
     width: '100%'
   },
   columnTitle: {
     fontWeight: 'bold',
     textAlign: 'center',
-    pt:4
+    pt:4,
+    color: 'text.primary',
   },
   columnSubTitle: {
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'text.secondary'
   }
 }
 

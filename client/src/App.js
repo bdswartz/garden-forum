@@ -25,7 +25,9 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { lightTheme, darkTheme } from './theme';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -46,16 +48,16 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4caf50',
-    },
-    secondary: {
-      main: '#64dd20',
-    },
-  }
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#4caf50',
+//     },
+//     secondary: {
+//       main: '#64dd20',
+//     },
+//   }
+// });
 // const Child = function Child() {
 //   // We can use the `useParams` hook here to access
 //   // the dynamic pieces of the URL.
@@ -70,7 +72,7 @@ const theme = createTheme({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkTheme}>
       <Router>
         <Header />
         <Routes>
