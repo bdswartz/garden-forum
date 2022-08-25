@@ -8,6 +8,9 @@ export const lightTheme = createTheme({
       secondary: {
         main: '#64dd20',
       },
+      tertiary: {
+        main: '#757575'
+      },
       background: {
         paper: '#fff',
         default: '#f3f3f5'
@@ -27,6 +30,9 @@ export const lightTheme = createTheme({
       secondary: {
         main: '#64dd20',
       },
+      tertiary: {
+        main: '#757575'
+      },
       background: {
         paper: '#363537',
         default: 'rgba(35,35,35,1)'
@@ -41,7 +47,7 @@ export const lightTheme = createTheme({
           styleOverrides: {
             input: {
               "&:-webkit-autofill": {
-                "-webkit-box-shadow": "0 0 0 100px rgba(35,35,35,1) inset",
+                "-webkit-box-shadow": "0 0 0 100px black inset",
                 "-webkit-text-fill-color": 'white',
               },
             },

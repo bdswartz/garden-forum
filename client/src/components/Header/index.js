@@ -8,26 +8,28 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { green } from '@mui/material/colors';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Auth from '../../utils/auth';
 import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@mui/icons-material/Person';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4caf50',
-    },
-    secondary: {
-      main: '#64dd20',
-    },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#4caf50',
+//     },
+//     secondary: {
+//       main: '#64dd20',
+//     },
+//   },
+// });
 
-const Header = () => {
+const Header = ({theme, themeToggle}) => {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -58,7 +60,6 @@ const Header = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1, bgcolor: green[500] }}>
         <AppBar position='static'>
           <Toolbar>
@@ -147,6 +148,19 @@ const Header = () => {
                 flexDirection: 'row-reverse',
               }}
             >
+              {/* Light Mode/Dark Mode switch */}
+              <FormControlLabel
+                value="start"
+                sx={{color:'white'}}
+                control={
+                <Switch 
+                color= "tertiary"
+                onChange={themeToggle}
+                />
+                }
+                label={theme === 'light' ? "Light Mode" : "Dark Mode"}
+                labelPlacement="start"
+                />
               {Auth.loggedIn() ? (
                 <>
                   <Avatar
@@ -244,7 +258,6 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </Box>
-    </ThemeProvider>
   );
 };
 

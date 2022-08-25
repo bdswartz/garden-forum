@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,7 +28,6 @@ import { setContext } from '@apollo/client/link/context';
 import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from './theme';
 
-
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -47,6 +46,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
 
 // const theme = createTheme({
 //   palette: {
@@ -70,11 +70,22 @@ const client = new ApolloClient({
 //   );
 // };
 function App() {
+
+  const [themeValue, setTheme] = useState('light');
+
+  const themeToggle = () => {
+    if (themeValue === 'light') {
+      setTheme('dark')
+    } else {
+      setTheme('light')
+    }
+  };
+
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={themeValue === 'light' ? lightTheme : darkTheme} >
       <Router>
-        <Header />
+        <Header theme={themeValue} themeToggle={themeToggle} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
