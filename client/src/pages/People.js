@@ -15,6 +15,22 @@ import PersonIcon from '@mui/icons-material/Person';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import { QUERY_ALL_USERS, SEARCH_USER_QUERY } from '../utils/queries';
+import { style } from '@mui/system';
+
+const styles = {
+  textStyle: {
+    width: 500, 
+    border: '1px solid grey',
+    mb:3
+  },
+  pageStyle: {
+    backgroundColor: 'background.default',
+    minHeight: '100vh',
+    width: '100vw',
+    p:5
+  },
+}; 
+
 
 const People = () => {
   const { loading: allLoading, data: allData } = useQuery(QUERY_ALL_USERS);
@@ -34,12 +50,12 @@ const People = () => {
   }
 
   return (
-    <>
+    <Box sx={styles.pageStyle}>
       {/* search bar start */}
       <Box
         className='image'
         style={{
-          color: '#f5f5f5',
+          color: 'background.default',
         }}
       >
         <Grid
@@ -58,7 +74,7 @@ const People = () => {
             id='outlined-basic'
             label='Search..'
             variant='outlined'
-            style={{ width: 500 }}
+            sx={styles.textStyle}
             InputProps={{ style: { fontSize: 16 } }}
             InputLabelProps={{ style: { fontSize: 16 } }}
             onChange={(e) => setSearchInput(e.target.value)}
@@ -95,7 +111,7 @@ const People = () => {
                 href={`/profile/${user.username}`}
                 to={`/profile/${user.username}`}
                 style={{ textDecoration: 'none' }}
-                sx={{ curser: 'pointer', color: 'black' }}
+                sx={{ curser: 'pointer', color: 'text.primary' }}
               >
                 <ListItemAvatar>
                   <Avatar>
@@ -120,7 +136,7 @@ const People = () => {
                 href={`/profile/${user.username}`}
                 to={`/profile/${user.username}`}
                 style={{ textDecoration: 'none' }}
-                sx={{ curser: 'pointer', color: 'black' }}
+                sx={{ curser: 'pointer', color: 'text.primary' }}
               >
                 <ListItemAvatar>
                   <Avatar>
@@ -133,7 +149,7 @@ const People = () => {
           ))}
         </List>
       )}
-    </>
+    </Box>
   );
 };
 

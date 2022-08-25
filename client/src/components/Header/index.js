@@ -129,9 +129,9 @@ const Header = ({theme, themeToggle}) => {
               <MenuItem component={Link} to='/forum'>
                 Forum
               </MenuItem>
-              {/* <MenuItem component={Link} to='/people'>
+              <MenuItem component={Link} to='/people'>
                 People
-              </MenuItem> */}
+              </MenuItem>
               {/* <MenuItem component={Link} to='/plants'>
                 Plants
               </MenuItem> */}
