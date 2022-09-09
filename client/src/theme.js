@@ -1,7 +1,10 @@
+
 import { createTheme } from '@mui/material/styles';
 
-export const lightTheme = createTheme({
-    palette: {
+const themeCreator = (themeValue) => {
+  return createTheme({
+    palette: (themeValue === 'light' ?
+    {
       primary: {
         main: '#4caf50',
       },
@@ -18,12 +21,10 @@ export const lightTheme = createTheme({
       text: {
         primary: '#141414',
         secondary: 'rgba(0,0,0,0.6)'
-      }
+      },
     }
-    });
-
-  export const darkTheme = createTheme({
-    palette: {
+    : 
+    {
       primary: {
         main: '#4caf50',
       },
@@ -42,17 +43,26 @@ export const lightTheme = createTheme({
         primary: '#FFF',
         secondary: 'rgba(255,255,255,0.6)'
       },
-    },
+    }),
       components: {
         MuiOutlinedInput: {
           styleOverrides: {
-            input: {
+            input: (themeValue === 'dark' ? { 
               "&:-webkit-autofill": {
                 "-webkit-box-shadow": "0 0 0 100px black inset",
                 "-webkit-text-fill-color": 'white',
+
               },
-            },
+            }
+            : {
+              "&:-webkit-autofill": {
+                "-webkit-box-shadow": "0 0 0 100px white inset",
+                "-webkit-text-fill-color": 'black', 
+              },
+            }),
           },
         },
       },
-    });
+  });
+}
+export default themeCreator;

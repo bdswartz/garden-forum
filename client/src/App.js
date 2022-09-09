@@ -25,8 +25,8 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { ThemeProvider } from '@mui/material/styles';
-import { lightTheme,darkTheme } from './theme';
+import { ThemeProvider,createTheme } from '@mui/material/styles';
+import themeCreator from './theme'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -48,33 +48,13 @@ const client = new ApolloClient({
 });
 
 
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#4caf50',
-//     },
-//     secondary: {
-//       main: '#64dd20',
-//     },
-//   }
-// });
-// const Child = function Child() {
-//   // We can use the `useParams` hook here to access
-//   // the dynamic pieces of the URL.
-//   let { id } = useParams();
-
-//   return (
-//     <div>
-//       <h3>ID: {id}</h3>
-//     </div>
-//   );
-// };
 function App() {
+// theme state variable 
+  const [themePreference, setTheme] = useState('light');
 
-  const [themeValue, setTheme] = useState('light');
-
+// toggle theme based on the switch in Header component
   const themeToggle = () => {
-    if (themeValue === 'light') {
+    if (themePreference === 'light') {
       setTheme('dark')
       window.localStorage.setItem('storedTheme', 'dark');
     } else {
@@ -82,7 +62,7 @@ function App() {
       window.localStorage.setItem('storedTheme', 'light');
     }
   };
-
+// on original render determine if user has a theme preference from operating system
   useEffect(() => {
     const localTheme = window.localStorage.getItem('storedTheme');
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localTheme ?
@@ -92,16 +72,79 @@ function App() {
         setTheme('light');
       },[]);
 
+// set the theme from theme.js
+  const theme = themeCreator(themePreference);
   
-    
+  // createTheme({
+  //   palette: (themeValue === 'light' ?
+  //   {
+  //     primary: {
+  //       main: '#4caf50',
+  //     },
+  //     secondary: {
+  //       main: '#64dd20',
+  //     },
+  //     tertiary: {
+  //       main: '#757575'
+  //     },
+  //     background: {
+  //       paper: '#fff',
+  //       default: '#f3f3f5'
+  //     },
+  //     text: {
+  //       primary: '#141414',
+  //       secondary: 'rgba(0,0,0,0.6)'
+  //     },
+  //   }
+  //   : 
+  //   {
+  //     primary: {
+  //       main: '#4caf50',
+  //     },
+  //     secondary: {
+  //       main: '#64dd20',
+  //     },
+  //     tertiary: {
+  //       main: '#757575'
+  //     },
+  //     background: {
+  //       paper: '#363537',
+  //       default: 'rgba(35,35,35,1)',
+  //       opaque: 'rgba(35,35,35,.7)'
+  //     },
+  //     text: {
+  //       primary: '#FFF',
+  //       secondary: 'rgba(255,255,255,0.6)'
+  //     },
+  //   }),
+  //     components: {
+  //       MuiOutlinedInput: {
+  //         styleOverrides: {
+  //           input: (themeValue === 'dark' ? { 
+  //             "&:-webkit-autofill": {
+  //               "-webkit-box-shadow": "0 0 0 100px black inset",
+  //               "-webkit-text-fill-color": 'white',
 
+  //             },
+  //           }
+  //           : {
+  //             "&:-webkit-autofill": {
+  //               "-webkit-box-shadow": "0 0 0 100px white inset",
+  //               "-webkit-text-fill-color": 'black', 
+  //             },
+  //           }),
+  //         },
+  //       },
+  //     },
+  // });
+  
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={themeValue === 'light' ? lightTheme: darkTheme} >
+      <ThemeProvider theme={theme} >
       <Router>
-        <Header theme={themeValue} themeToggle={themeToggle} />
+        <Header theme={themePreference} themeToggle={themeToggle} />
         <Routes>
-          <Route path='/' element={<Home theme={themeValue} />} />
+          <Route path='/' element={<Home theme={themePreference} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/profile/:username' element={<Profile />} />
           <Route path='/profile' element={<Profile />} />
