@@ -26,7 +26,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { ThemeProvider } from '@mui/material/styles';
-import { lightTheme, darkTheme } from './theme';
+import { lightTheme,darkTheme } from './theme';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -91,11 +91,13 @@ function App() {
         setTheme(localTheme) :
         setTheme('light');
       },[]);
+
+  
     
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={themeValue === 'light' ? lightTheme : darkTheme} >
+      <ThemeProvider theme={themeValue === 'light' ? lightTheme: darkTheme} >
       <Router>
         <Header theme={themeValue} themeToggle={themeToggle} />
         <Routes>
